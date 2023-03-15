@@ -393,7 +393,7 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                       aspectRatio: 16 / 9,
                       child: CachedNetworkImage(
                         imageUrl: CONSTANTS.server +
-                            "/hellojava/assets/notes/subtopic/" +
+                            "/hellojava/assets/notes/subtopics/" +
                             topicList[index].subtopicId.toString() +
                             '.jpg',
                         fit: BoxFit.cover,
