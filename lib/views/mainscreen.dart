@@ -90,12 +90,6 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               if (widget.user.email != "guest@gmail.com")
                 _createDrawerItem(
-                  icon: Icons.contact_support,
-                  text: 'About Us',
-                  onTap: () {},
-                ),
-              if (widget.user.email != "guest@gmail.com")
-                _createDrawerItem(
                   icon: Icons.logout,
                   text: 'Logout',
                   onTap: () {

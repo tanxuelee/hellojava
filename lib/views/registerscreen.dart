@@ -23,7 +23,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordController2 = TextEditingController();
   bool passwordVisible = true;
@@ -210,7 +209,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               const SizedBox(height: 10),
                               TextFormField(
                                 controller: passwordController2,
-                                obscureText: passwordVisible,
+                                obscureText: password2Visible,
                                 decoration: InputDecoration(
                                     isDense: true,
                                     prefixIcon: const Icon(Icons.lock),

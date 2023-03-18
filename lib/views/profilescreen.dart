@@ -29,6 +29,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _oldpasswordController = TextEditingController();
   final TextEditingController _newpasswordController = TextEditingController();
+  bool oldpasswordVisible = true;
+  bool newpasswordVisible = true;
   var val = 50;
 
   @override
@@ -50,66 +52,72 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: screenHeight / 3,
-              child: SizedBox(
-                width: resWidth,
-                child: Card(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            //onTap: () => {_updateImageDialog()},
-                            child: ClipOval(
-                              child: CachedNetworkImage(
-                                imageUrl: CONSTANTS.server +
-                                    '/hellojava/assets/users/${widget.user.id}.jpg' +
-                                    "?v=$val",
-                                fit: BoxFit.cover,
-                                width: resWidth / 2,
-                                placeholder: (context, url) =>
-                                    const LinearProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+            Expanded(
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: screenHeight / 3,
+                  child: SizedBox(
+                    width: resWidth,
+                    child: Card(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                //onTap: () => {_updateImageDialog()},
+                                child: ClipOval(
+                                  child: CachedNetworkImage(
+                                    imageUrl: CONSTANTS.server +
+                                        '/hellojava/assets/users/${widget.user.id}.jpg' +
+                                        "?v=$val",
+                                    fit: BoxFit.cover,
+                                    width: resWidth / 2,
+                                    placeholder: (context, url) =>
+                                        const LinearProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          Expanded(
+                            flex: 6,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.user.name.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.email, size: 20),
+                                      Text(" " + widget.user.email.toString()),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.phone, size: 20),
+                                      Text(" " + widget.user.phone.toString()),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                      Expanded(
-                        flex: 6,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.user.name.toString(),
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(Icons.email, size: 20),
-                                  Text(" " + widget.user.email.toString()),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(Icons.phone, size: 20),
-                                  Text(" " + widget.user.phone.toString()),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -229,61 +237,75 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _updateNameDialog() {
+    final _formKey = GlobalKey<FormState>();
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
-            return SingleChildScrollView(
-              child: AlertDialog(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text(
-                  "Update New Name?",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-                content: TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    isDense: true,
-                    labelText: 'Name',
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0)),
-                    errorStyle: const TextStyle(color: Color(0xFFF7D488)),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                      borderSide: BorderSide.none,
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 300,
+                    child: SingleChildScrollView(
+                      child: AlertDialog(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
+                        title: const Text(
+                          "Update New Name?",
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                        content: SingleChildScrollView(
+                          child: Form(
+                            key: _formKey,
+                            child: TextFormField(
+                              controller: _nameController,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                labelText: 'Name',
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0)),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your new name';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text(
+                              "Yes",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.of(context).pop();
+                                String newname = _nameController.text;
+                                _updateName(newname);
+                              }
+                            },
+                          ),
+                          TextButton(
+                            child: const Text(
+                              "No",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your new name';
-                    }
-                    return null;
-                  },
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text(
-                      "Yes",
-                      style: TextStyle(),
-                    ),
-                    onPressed: () async {
-                      Navigator.of(context).pop();
-                      String newname = _nameController.text;
-                      _updateName(newname);
-                    },
-                  ),
-                  TextButton(
-                    child: const Text(
-                      "No",
-                      style: TextStyle(),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
                   ),
                 ],
               ),
@@ -295,53 +317,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _updatePhoneDialog() {
+    final _formKey = GlobalKey<FormState>();
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
-            return SingleChildScrollView(
-              child: AlertDialog(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text(
-                  "Update New Phone Number?",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-                content: TextFormField(
-                  controller: _phoneController,
-                  keyboardType: const TextInputType.numberWithOptions(),
-                  decoration: InputDecoration(
-                      labelText: 'Phone',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0))),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your new phone';
-                    }
-                    return null;
-                  },
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text(
-                      "Yes",
-                      style: TextStyle(),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 300,
+                    child: SingleChildScrollView(
+                      child: AlertDialog(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
+                        title: const Text(
+                          "Update New Phone Number?",
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                        content: Form(
+                          key: _formKey,
+                          child: TextFormField(
+                            controller: _phoneController,
+                            keyboardType:
+                                const TextInputType.numberWithOptions(),
+                            decoration: InputDecoration(
+                                labelText: 'Phone',
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0))),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your new phone';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text(
+                              "Yes",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.of(context).pop();
+                                String newphone = _phoneController.text;
+                                _updatePhone(newphone);
+                              }
+                            },
+                          ),
+                          TextButton(
+                            child: const Text(
+                              "No",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      String newphone = _phoneController.text;
-                      _updatePhone(newphone);
-                    },
-                  ),
-                  TextButton(
-                    child: const Text(
-                      "No",
-                      style: TextStyle(),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
                   ),
                 ],
               ),
@@ -353,78 +393,126 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _changePasswordDialog() {
+    final _formKey = GlobalKey<FormState>();
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
-            return SingleChildScrollView(
-              child: AlertDialog(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text(
-                  "Change Password?",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
-                content: Column(
-                  children: [
-                    TextFormField(
-                      controller: _oldpasswordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: 'Old Password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0))),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your old password';
-                        }
-                        if (value.length < 6) {
-                          return "Password must be at least 6 characters";
-                        }
-                        return null;
-                      },
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: screenHeight / 1.5,
+                    child: SingleChildScrollView(
+                      child: AlertDialog(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
+                        title: const Text(
+                          "Change Password?",
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                        content: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                controller: _oldpasswordController,
+                                obscureText: oldpasswordVisible,
+                                decoration: InputDecoration(
+                                    labelText: 'Old Password',
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        oldpasswordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          oldpasswordVisible =
+                                              !oldpasswordVisible;
+                                        });
+                                      },
+                                    )),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your old password';
+                                  }
+                                  if (value.length < 6) {
+                                    return "Password must be at least 6 characters";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 5),
+                              TextFormField(
+                                controller: _newpasswordController,
+                                obscureText: newpasswordVisible,
+                                decoration: InputDecoration(
+                                    labelText: 'New Password',
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        newpasswordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          newpasswordVisible =
+                                              !newpasswordVisible;
+                                        });
+                                      },
+                                    )),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your new password';
+                                  }
+                                  if (value.length < 6) {
+                                    return "Password must be at least 6 characters";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text(
+                              "Yes",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.of(context).pop();
+                                String oldpassword =
+                                    _oldpasswordController.text;
+                                String newpassword =
+                                    _newpasswordController.text;
+                                _changePassword(oldpassword, newpassword);
+                              }
+                            },
+                          ),
+                          TextButton(
+                            child: const Text(
+                              "No",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 5),
-                    TextFormField(
-                      controller: _newpasswordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: 'New Password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0))),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your new password';
-                        }
-                        if (value.length < 6) {
-                          return "Password must be at least 6 characters";
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text(
-                      "Yes",
-                      style: TextStyle(),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      String newpassword = _newpasswordController.text;
-                      _changePassword(newpassword);
-                    },
-                  ),
-                  TextButton(
-                    child: const Text(
-                      "No",
-                      style: TextStyle(),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
                   ),
                 ],
               ),
@@ -509,10 +597,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  void _changePassword(String newpassword) {
+  void _changePassword(String oldpassword, String newpassword) {
     http.post(Uri.parse(CONSTANTS.server + "/hellojava/php/update_profile.php"),
         body: {
           "email": widget.user.email,
+          "oldpassword": oldpassword,
           "newpassword": newpassword,
         }).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -526,6 +615,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         setState(() {
           widget.user.password = newpassword;
         });
+      } else if (jsondata['status'] == 'invalid') {
+        Fluttertoast.showToast(
+            msg: "Old password incorrect",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
       } else {
         Fluttertoast.showToast(
             msg: "Failed",
