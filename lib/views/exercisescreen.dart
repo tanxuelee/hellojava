@@ -527,7 +527,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Your score is ${numCorrectAnswers} / ${questionList.length}',
+                'You answered ${numCorrectAnswers} out of ${questionList.length} questions correctly.',
                 style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -622,11 +622,11 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
             backgroundColor: const Color(0xFFF4FAFF),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Text("Hint",
+            title: const Text("Hint:",
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             content: SingleChildScrollView(
                 child: Text(questionList[index].hint.toString(),
-                    style: TextStyle(fontSize: 15, color: Colors.black))),
+                    style: const TextStyle(fontSize: 15, color: Colors.black))),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),

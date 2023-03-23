@@ -103,7 +103,7 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             NoteScreen(user: widget.user),
             ExerciseScreen(user: widget.user),
-            QuizScreen(),
+            QuizScreen(user: widget.user),
             GameScreen(),
             ProfileScreen(user: widget.user),
           ],

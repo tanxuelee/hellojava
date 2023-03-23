@@ -7,17 +7,7 @@ class Topic {
   String? subtopicTitle;
   String? subtopicDescription;
   String? subtopicVideoLink;
-
   List<Exercise>? exercises;
-
-  // String? exerciseId;
-  // String? exerciseTitle;
-  // String? questionId;
-  // String? questionTitle;
-  // String? optionA;
-  // String? optionB;
-  // String? optionC;
-  // String? correctAnswer;
 
   Topic({
     this.topicId,
@@ -27,14 +17,6 @@ class Topic {
     this.subtopicDescription,
     this.subtopicVideoLink,
     this.exercises,
-    // this.exerciseId,
-    // this.exerciseTitle,
-    // this.questionId,
-    // this.questionTitle,
-    // this.optionA,
-    // this.optionB,
-    // this.optionC,
-    // this.correctAnswer,
   });
 
   Topic.fromJson(Map<String, dynamic> json) {
@@ -50,14 +32,6 @@ class Topic {
         exercises!.add(Exercise.fromJson(v));
       });
     }
-    // exerciseId = json['exercise_id'];
-    // exerciseTitle = json['exercise_title'];
-    // questionId = json['question_id'];
-    // questionTitle = json['question_title'];
-    // optionA = json['option_a'];
-    // optionB = json['option_b'];
-    // optionC = json['option_c'];
-    // correctAnswer = json['correct_answer'];
   }
 
   Map<String, dynamic> toJson() {
@@ -71,14 +45,6 @@ class Topic {
     if (exercises != null) {
       data['exercises'] = exercises!.map((v) => v.toJson()).toList();
     }
-    // data['exercise_id'] = exerciseId;
-    // data['exercise_title'] = exerciseTitle;
-    // data['question_id'] = questionId;
-    // data['question_title'] = questionTitle;
-    // data['option_a'] = optionA;
-    // data['option_b'] = optionB;
-    // data['option_c'] = optionC;
-    // data['correct_answer'] = correctAnswer;
     return data;
   }
 }
@@ -157,10 +123,10 @@ class Question {
     optionB = json['option_b'];
     optionC = json['option_c'];
     correctAnswer = json['correct_answer'];
-    buttonColor = Color(0xFF4F646F);
-    buttonColorA = Color(0xFF4F646F);
-    buttonColorB = Color(0xFF4F646F);
-    buttonColorC = Color(0xFF4F646F);
+    buttonColor = const Color(0xFF4F646F);
+    buttonColorA = const Color(0xFF4F646F);
+    buttonColorB = const Color(0xFF4F646F);
+    buttonColorC = const Color(0xFF4F646F);
   }
 
   Map<String, dynamic> toJson() {
