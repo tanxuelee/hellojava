@@ -145,31 +145,35 @@ class _QuizScreenState extends State<QuizScreen> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: const Color(0xFFF4FAFF),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Center(
-              child: Text(
-                "Please login first!",
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-            ),
-            content: SizedBox(
-              height: 50,
-              width: 100,
-              child: ElevatedButton(
-                onPressed: _onLogin,
-                child: const Text(
-                  "Login",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {},
+            child: AlertDialog(
+              backgroundColor: const Color(0xFFF4FAFF),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              title: const Center(
+                child: Text(
+                  "Please login first!",
+                  style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0))),
-                  backgroundColor: MaterialStateProperty.all(
-                    const Color(0xFFF9A03F),
+              ),
+              content: SizedBox(
+                height: 50,
+                width: 100,
+                child: ElevatedButton(
+                  onPressed: _onLogin,
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0))),
+                    backgroundColor: MaterialStateProperty.all(
+                      const Color(0xFFF9A03F),
+                    ),
                   ),
                 ),
               ),
@@ -182,46 +186,50 @@ class _QuizScreenState extends State<QuizScreen> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: const Color(0xFFF4FAFF),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Text(
-              "Start the quiz now?",
-              style: TextStyle(),
-            ),
-            content: const Text(
-              "Please note that the quiz will only have a duration of 15 minutes. Once you click 'Start', the timer will begin and you will have to complete the quiz within the given time.",
-              textAlign: TextAlign.justify,
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text(
-                  "Start",
-                  style: TextStyle(),
-                ),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (content) => QuizQuestionsScreen(
-                                user: widget.user,
-                                index: index,
-                                quizList: quizList,
-                              )));
-                },
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {},
+            child: AlertDialog(
+              backgroundColor: const Color(0xFFF4FAFF),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              title: const Text(
+                "Start the quiz now?",
+                style: TextStyle(),
               ),
-              TextButton(
-                child: const Text(
-                  "Cancel",
-                  style: TextStyle(),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+              content: const Text(
+                "Please note that the quiz will only have a duration of 15 minutes. Once you click 'Start', the timer will begin and you will have to complete the quiz within the given time.",
+                textAlign: TextAlign.justify,
               ),
-            ],
+              actions: <Widget>[
+                TextButton(
+                  child: const Text(
+                    "Start",
+                    style: TextStyle(),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (content) => QuizQuestionsScreen(
+                                  user: widget.user,
+                                  index: index,
+                                  quizList: quizList,
+                                )));
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    "Cancel",
+                    style: TextStyle(),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
           );
         });
   }
@@ -284,6 +292,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
           // Show the dialog that the time is up
           showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (context) => AlertDialog(
               backgroundColor: const Color(0xFFF4FAFF),
               shape: const RoundedRectangleBorder(
@@ -328,6 +337,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
       onWillPop: () async {
         bool confirm = await showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (context) => AlertDialog(
             backgroundColor: const Color(0xFFF4FAFF),
             shape: const RoundedRectangleBorder(
@@ -519,6 +529,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                         _timer.cancel();
                         showDialog(
                           context: context,
+                          barrierDismissible: false,
                           builder: (context) => AlertDialog(
                             backgroundColor: const Color(0xFFF4FAFF),
                             shape: const RoundedRectangleBorder(
@@ -659,34 +670,39 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              backgroundColor: const Color(0xFFF4FAFF),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text('Quiz Score'),
-              content: Text(
-                'Your score is $totalScore / ${quizquestionList.length}',
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuizReviewScreen(
-                        quizQuestions: quizquestionList,
-                      ),
-                    ),
-                  ),
-                  child: const Text('Review'),
+            return GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {},
+              child: AlertDialog(
+                backgroundColor: const Color(0xFFF4FAFF),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                title: const Text('Quiz Score'),
+                content: Text(
+                  'Your score is $totalScore / ${quizquestionList.length}',
                 ),
-                TextButton(
-                  onPressed: () => Navigator.push(
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (content) => MainScreen(user: widget.user))),
-                  child: const Text('Exit'),
-                ),
-              ],
+                        builder: (context) => QuizReviewScreen(
+                          quizQuestions: quizquestionList,
+                        ),
+                      ),
+                    ),
+                    child: const Text('Review'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (content) =>
+                                MainScreen(user: widget.user))),
+                    child: const Text('Exit'),
+                  ),
+                ],
+              ),
             );
           },
         );
@@ -694,19 +710,23 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              backgroundColor: const Color(0xFFF4FAFF),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text('Error'),
-              content: const Text(
-                  'An error occurred while saving your quiz score, please try it again.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('OK'),
-                ),
-              ],
+            return GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {},
+              child: AlertDialog(
+                backgroundColor: const Color(0xFFF4FAFF),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                title: const Text('Error'),
+                content: const Text(
+                    'An error occurred while saving your quiz score, please try it again.'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
             );
           },
         );

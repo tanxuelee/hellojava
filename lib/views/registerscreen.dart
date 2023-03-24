@@ -325,30 +325,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-            title: const Text("Select from",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TextButton.icon(
-                    onPressed: () => {
-                          Navigator.of(context).pop(),
-                          _galleryPicker(),
-                        },
-                    icon: const Icon(Icons.browse_gallery),
-                    label: const Text("Gallery",
-                        style: TextStyle(fontWeight: FontWeight.bold))),
-                TextButton.icon(
-                    onPressed: () => {
-                          Navigator.of(context).pop(),
-                          _cameraPicker(),
-                        },
-                    icon: const Icon(Icons.camera_alt),
-                    label: const Text("Camera",
-                        style: TextStyle(fontWeight: FontWeight.bold))),
-              ],
-            ));
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () {},
+          child: AlertDialog(
+              title: const Text("Select from",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton.icon(
+                      onPressed: () => {
+                            Navigator.of(context).pop(),
+                            _galleryPicker(),
+                          },
+                      icon: const Icon(Icons.browse_gallery),
+                      label: const Text("Gallery",
+                          style: TextStyle(fontWeight: FontWeight.bold))),
+                  TextButton.icon(
+                      onPressed: () => {
+                            Navigator.of(context).pop(),
+                            _cameraPicker(),
+                          },
+                      icon: const Icon(Icons.camera_alt),
+                      label: const Text("Camera",
+                          style: TextStyle(fontWeight: FontWeight.bold))),
+                ],
+              )),
+        );
       },
     );
   }
@@ -406,35 +410,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Text(
-              "Register new account",
-              style: TextStyle(),
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {},
+            child: AlertDialog(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              title: const Text(
+                "Register new account",
+                style: TextStyle(),
+              ),
+              content: const Text("Are you sure?", style: TextStyle()),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text(
+                    "Yes",
+                    style: TextStyle(),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    _registerUser();
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    "No",
+                    style: TextStyle(),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
-            content: const Text("Are you sure?", style: TextStyle()),
-            actions: <Widget>[
-              TextButton(
-                child: const Text(
-                  "Yes",
-                  style: TextStyle(),
-                ),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  _registerUser();
-                },
-              ),
-              TextButton(
-                child: const Text(
-                  "No",
-                  style: TextStyle(),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
           );
         },
       );
