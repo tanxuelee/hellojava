@@ -151,35 +151,31 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4FAFF),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Center(
-                child: Text(
-                  "Please login first!",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
+          return AlertDialog(
+            backgroundColor: const Color(0xFFF4FAFF),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            title: const Center(
+              child: Text(
+                "Please login first!",
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
-              content: SizedBox(
-                height: 50,
-                width: 100,
-                child: ElevatedButton(
-                  onPressed: _onLogin,
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0))),
-                    backgroundColor: MaterialStateProperty.all(
-                      const Color(0xFFF9A03F),
-                    ),
+            ),
+            content: SizedBox(
+              height: 50,
+              width: 100,
+              child: ElevatedButton(
+                onPressed: _onLogin,
+                child: const Text(
+                  "Login",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0))),
+                  backgroundColor: MaterialStateProperty.all(
+                    const Color(0xFFF9A03F),
                   ),
                 ),
               ),

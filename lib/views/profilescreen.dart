@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hellojava/main.dart';
 import 'package:hellojava/views/loginscreen.dart';
+import 'package:hellojava/views/mainscreen.dart';
 import '../constants.dart';
 import '../models/user.dart';
 import 'package:http/http.dart' as http;
@@ -50,23 +51,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       resWidth = screenWidth * 0.75;
     }
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: SingleChildScrollView(
+            SingleChildScrollView(
+              child: SizedBox(
+                height: screenHeight / 3.2,
                 child: SizedBox(
-                  height: screenHeight / 3,
-                  child: SizedBox(
-                    width: resWidth,
-                    child: Card(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
                       child: Row(
                         children: [
                           Expanded(
                             flex: 4,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: GestureDetector(
                                 //onTap: () => {_updateImageDialog()},
                                 child: ClipOval(
@@ -122,28 +129,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            Expanded(
-                child: SizedBox(
-              width: resWidth,
-              child: Column(
-                children: [
-                  if (widget.user.email != "guest@gmail.com")
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Theme.of(context).primaryColor,
-                        child: const Center(
-                          child: Text("PROFILE SETTINGS",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white)),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: resWidth,
+                child: Column(
+                  children: [
+                    if (widget.user.email == "guest@gmail.com")
+                      const Divider(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                    if (widget.user.email != "guest@gmail.com")
+                      const Divider(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                    if (widget.user.email != "guest@gmail.com")
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        child: Container(
+                          color: Theme.of(context).primaryColor,
+                          child: const Center(
+                            child: Text("PROFILE SETTINGS",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                          ),
                         ),
                       ),
-                    ),
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                    ListView(
                       shrinkWrap: true,
                       children: [
                         if (widget.user.email == "guest@gmail.com")
@@ -156,7 +173,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (content) => LoginScreen()));
+                                          builder: (content) =>
+                                              const LoginScreen()));
                                 },
                                 icon: const Icon(Icons.arrow_right)),
                           ),
@@ -166,45 +184,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Colors.grey,
                           ),
                         if (widget.user.email != "guest@gmail.com")
-                          ListTile(
-                            leading: const Icon(Icons.person),
-                            title: const Text("Update Name",
-                                style: TextStyle(fontSize: 15)),
-                            trailing: IconButton(
-                                onPressed: () {
-                                  _updateNameDialog();
-                                },
-                                icon: const Icon(Icons.arrow_right)),
-                          ),
-                        if (widget.user.email != "guest@gmail.com")
                           const Divider(
                             height: 2,
                             color: Colors.grey,
                           ),
                         if (widget.user.email != "guest@gmail.com")
                           ListTile(
-                            leading: const Icon(Icons.phone),
-                            title: const Text("Update Phone Number",
+                            leading: const Icon(Icons.edit),
+                            title: const Text("Edit Profile",
                                 style: TextStyle(fontSize: 15)),
                             trailing: IconButton(
                                 onPressed: () {
-                                  _updatePhoneDialog();
-                                },
-                                icon: const Icon(Icons.arrow_right)),
-                          ),
-                        if (widget.user.email != "guest@gmail.com")
-                          const Divider(
-                            height: 2,
-                            color: Colors.grey,
-                          ),
-                        if (widget.user.email != "guest@gmail.com")
-                          ListTile(
-                            leading: const Icon(Icons.lock),
-                            title: const Text("Change Password",
-                                style: TextStyle(fontSize: 15)),
-                            trailing: IconButton(
-                                onPressed: () {
-                                  _changePasswordDialog();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (content) =>
+                                              EditProfileScreen(
+                                                user: widget.user,
+                                              )));
                                 },
                                 icon: const Icon(Icons.arrow_right)),
                           ),
@@ -224,12 +221,198 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 },
                                 icon: const Icon(Icons.arrow_right)),
                           ),
+                        if (widget.user.email != "guest@gmail.com")
+                          const Divider(
+                            height: 2,
+                            color: Colors.grey,
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _logoutDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child: SingleChildScrollView(
+            child: StatefulBuilder(
+              builder: (context, StateSetter setState) {
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {},
+                  child: AlertDialog(
+                    backgroundColor: const Color(0xFFF4FAFF),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    title: const Text(
+                      "Logout?",
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                    content: const Text("Are your sure want to logout?"),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text(
+                          "Yes",
+                          style: TextStyle(),
+                        ),
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (content) => MyApp()));
+                        },
+                      ),
+                      TextButton(
+                        child: const Text(
+                          "No",
+                          style: TextStyle(),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class EditProfileScreen extends StatefulWidget {
+  final User user;
+  const EditProfileScreen({Key? key, required this.user}) : super(key: key);
+
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  late double screenHeight, screenWidth, resWidth;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  final TextEditingController oldpasswordController = TextEditingController();
+  final TextEditingController newpasswordController = TextEditingController();
+  bool oldpasswordVisible = true;
+  bool newpasswordVisible = true;
+  var val = 50;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget.user.name.toString();
+    phoneController.text = widget.user.phone.toString();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 600) {
+      resWidth = screenWidth;
+    } else {
+      resWidth = screenWidth * 0.75;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 1,
+                childAspectRatio: (1 / 0.23),
+                children: <Widget>[
+                  Card(
+                    color: const Color(0xFFDEE7E7),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.person),
+                          title: const Text(
+                            'Change Name',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                _updateNameDialog();
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              color: const Color(0xFFF9A03F)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    color: const Color(0xFFDEE7E7),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.phone),
+                          title: const Text(
+                            'Change Phone Number',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                _updatePhoneDialog();
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              color: const Color(0xFFF9A03F)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    color: const Color(0xFFDEE7E7),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.lock),
+                          title: const Text(
+                            'Change Password',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                _changePasswordDialog();
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              color: const Color(0xFFF9A03F)),
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
-            ))
+            ),
           ],
         ),
       ),
@@ -240,6 +423,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final _formKey = GlobalKey<FormState>();
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
@@ -248,7 +432,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 300,
+                    height: 350,
                     child: SingleChildScrollView(
                       child: GestureDetector(
                         behavior: HitTestBehavior.opaque,
@@ -258,14 +442,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Update New Name?",
+                            "Change Name?",
                             style: TextStyle(fontSize: 20, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
                               key: _formKey,
                               child: TextFormField(
-                                controller: _nameController,
+                                controller: nameController,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   labelText: 'Name',
@@ -286,20 +470,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           actions: <Widget>[
                             TextButton(
                               child: const Text(
-                                "Yes",
+                                "Confirm",
                                 style: TextStyle(),
                               ),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   Navigator.of(context).pop();
-                                  String newname = _nameController.text;
+                                  String newname = nameController.text;
                                   _updateName(newname);
                                 }
                               },
                             ),
                             TextButton(
                               child: const Text(
-                                "No",
+                                "Cancel",
                                 style: TextStyle(),
                               ),
                               onPressed: () {
@@ -315,272 +499,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
           },
-        );
-      },
-    );
-  }
-
-  void _updatePhoneDialog() {
-    final _formKey = GlobalKey<FormState>();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 300,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Update New Phone Number?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          ),
-                          content: Form(
-                            key: _formKey,
-                            child: TextFormField(
-                              controller: _phoneController,
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(),
-                              decoration: InputDecoration(
-                                  labelText: 'Phone',
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(5.0))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your new phone';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Yes",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newphone = _phoneController.text;
-                                  _updatePhone(newphone);
-                                }
-                              },
-                            ),
-                            TextButton(
-                              child: const Text(
-                                "No",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  void _changePasswordDialog() {
-    final _formKey = GlobalKey<FormState>();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: screenHeight / 1.5,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change Password?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          ),
-                          content: Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
-                                TextFormField(
-                                  controller: _oldpasswordController,
-                                  obscureText: oldpasswordVisible,
-                                  decoration: InputDecoration(
-                                      labelText: 'Old Password',
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0)),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          oldpasswordVisible
-                                              ? Icons.visibility_off
-                                              : Icons.visibility,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            oldpasswordVisible =
-                                                !oldpasswordVisible;
-                                          });
-                                        },
-                                      )),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your old password';
-                                    }
-                                    if (value.length < 6) {
-                                      return "Password must be at least 6 characters";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                const SizedBox(height: 5),
-                                TextFormField(
-                                  controller: _newpasswordController,
-                                  obscureText: newpasswordVisible,
-                                  decoration: InputDecoration(
-                                      labelText: 'New Password',
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0)),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          newpasswordVisible
-                                              ? Icons.visibility_off
-                                              : Icons.visibility,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            newpasswordVisible =
-                                                !newpasswordVisible;
-                                          });
-                                        },
-                                      )),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your new password';
-                                    }
-                                    if (value.length < 6) {
-                                      return "Password must be at least 6 characters";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Yes",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String oldpassword =
-                                      _oldpasswordController.text;
-                                  String newpassword =
-                                      _newpasswordController.text;
-                                  _changePassword(oldpassword, newpassword);
-                                }
-                              },
-                            ),
-                            TextButton(
-                              child: const Text(
-                                "No",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  void _logoutDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: StatefulBuilder(
-            builder: (context, StateSetter setState) {
-              return GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {},
-                child: AlertDialog(
-                  backgroundColor: const Color(0xFFF4FAFF),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                  title: const Text(
-                    "Logout?",
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ),
-                  content: const Text("Are your sure"),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text(
-                        "Yes",
-                        style: TextStyle(),
-                      ),
-                      onPressed: () async {
-                        Navigator.of(context).pop();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (content) => MyApp()));
-                      },
-                    ),
-                    TextButton(
-                      child: const Text(
-                        "No",
-                        style: TextStyle(),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
         );
       },
     );
@@ -614,6 +532,256 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  void _updatePhoneDialog() {
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, StateSetter setState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 350,
+                    child: SingleChildScrollView(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {},
+                        child: AlertDialog(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          title: const Text(
+                            "Change Phone Number?",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                          content: SingleChildScrollView(
+                            child: Form(
+                              key: _formKey,
+                              child: TextFormField(
+                                controller: phoneController,
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(),
+                                decoration: InputDecoration(
+                                    labelText: 'Phone',
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your new phone number';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text(
+                                "Confirm",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop();
+                                  String newphone = phoneController.text;
+                                  _updatePhone(newphone);
+                                }
+                              },
+                            ),
+                            TextButton(
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _updatePhone(String newphone) {
+    http.post(Uri.parse(CONSTANTS.server + "/hellojava/php/update_profile.php"),
+        body: {
+          "email": widget.user.email,
+          "newphone": newphone,
+        }).then((response) {
+      var jsondata = jsonDecode(response.body);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: "Success",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
+        setState(() {
+          widget.user.phone = newphone;
+        });
+      } else {
+        Fluttertoast.showToast(
+            msg: "Failed",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
+      }
+    });
+  }
+
+  void _changePasswordDialog() {
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, StateSetter setState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: screenHeight / 1.5,
+                    child: SingleChildScrollView(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {},
+                        child: AlertDialog(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          title: const Text(
+                            "Change Password?",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                          content: SingleChildScrollView(
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    controller: oldpasswordController,
+                                    obscureText: oldpasswordVisible,
+                                    decoration: InputDecoration(
+                                        labelText: 'Old Password',
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0)),
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            oldpasswordVisible
+                                                ? Icons.visibility_off
+                                                : Icons.visibility,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              oldpasswordVisible =
+                                                  !oldpasswordVisible;
+                                            });
+                                          },
+                                        )),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your old password';
+                                      }
+                                      if (value.length < 6) {
+                                        return "Password must be at least 6 characters";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  const SizedBox(height: 5),
+                                  TextFormField(
+                                    controller: newpasswordController,
+                                    obscureText: newpasswordVisible,
+                                    decoration: InputDecoration(
+                                        labelText: 'New Password',
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0)),
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            newpasswordVisible
+                                                ? Icons.visibility_off
+                                                : Icons.visibility,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              newpasswordVisible =
+                                                  !newpasswordVisible;
+                                            });
+                                          },
+                                        )),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your new password';
+                                      }
+                                      if (value.length < 6) {
+                                        return "Password must be at least 6 characters";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text(
+                                "Confirm",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop();
+                                  String oldpassword =
+                                      oldpasswordController.text;
+                                  String newpassword =
+                                      newpasswordController.text;
+                                  _changePassword(oldpassword, newpassword);
+                                }
+                              },
+                            ),
+                            TextButton(
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   void _changePassword(String oldpassword, String newpassword) {
     http.post(Uri.parse(CONSTANTS.server + "/hellojava/php/update_profile.php"),
         body: {
@@ -639,34 +807,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 16.0);
-      } else {
-        Fluttertoast.showToast(
-            msg: "Failed",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 16.0);
-      }
-    });
-  }
-
-  void _updatePhone(String newphone) {
-    http.post(Uri.parse(CONSTANTS.server + "/hellojava/php/update_profile.php"),
-        body: {
-          "email": widget.user.email,
-          "newphone": newphone,
-        }).then((response) {
-      var jsondata = jsonDecode(response.body);
-      if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: "Success",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 16.0);
-        setState(() {
-          widget.user.phone = newphone;
-        });
       } else {
         Fluttertoast.showToast(
             msg: "Failed",
