@@ -568,6 +568,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                _formKey.currentState!.reset();
                               },
                             ),
                           ],
@@ -683,6 +684,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                _formKey.currentState!.reset();
                               },
                             ),
                           ],
@@ -843,6 +845,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       newpasswordController.text;
                                   _changePassword(oldpassword, newpassword);
                                 }
+                                _formKey.currentState!.reset();
                               },
                             ),
                             TextButton(
@@ -852,6 +855,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                _formKey.currentState!.reset();
                               },
                             ),
                           ],
