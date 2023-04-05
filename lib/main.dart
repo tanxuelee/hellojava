@@ -64,7 +64,7 @@ class MySplashScreenState extends State<MySplashScreen> {
         id: '0',
         name: 'guest',
         email: 'guest@gmail.com',
-        phone: '0',
+        phone: '0123456789',
         datereg: '0');
     Timer(
         const Duration(seconds: 3),

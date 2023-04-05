@@ -41,53 +41,58 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       resWidth = screenWidth * 0.75;
     }
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Text(
-              "Java Exercise",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
+      body: topicList.isEmpty
+          ? Center(
+              child: Text(titlecenter,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)))
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text(
+                    "Java Exercise",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 1,
+                      childAspectRatio: (1 / 0.23),
+                      children: List.generate(topicList.length, (index) {
+                        return InkWell(
+                          onTap: () => {_clickExerciseButton(index)},
+                          child: Card(
+                              color: const Color(0xFFDEE7E7),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: const Icon(Icons.check_box),
+                                    title: Text(
+                                      topicList[index].topicTitle.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    trailing: const Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: Color(0xFFF9A03F)),
+                                  ),
+                                ],
+                              )),
+                        );
+                      }),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 1,
-                childAspectRatio: (1 / 0.23),
-                children: List.generate(topicList.length, (index) {
-                  return InkWell(
-                    onTap: () => {_clickExerciseButton(index)},
-                    child: Card(
-                        color: const Color(0xFFDEE7E7),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: const Icon(Icons.check_box),
-                              title: Text(
-                                topicList[index].topicTitle.toString(),
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              trailing: const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Color(0xFFF9A03F)),
-                            ),
-                          ],
-                        )),
-                  );
-                }),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -152,7 +157,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: const Color(0xFFF4FAFF),
+            backgroundColor: const Color(0xFFF4F4F4),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             title: const Center(
@@ -235,74 +240,81 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: const [
-                Icon(
-                  Icons.lightbulb,
-                  size: 24.0,
-                  color: Color(0xFFF9A03F),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  "Exercise List",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+      body: exerciseList.isEmpty
+          ? Center(
+              child: Text(titlecenter,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)))
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: const [
+                      Icon(
+                        Icons.lightbulb,
+                        size: 24.0,
+                        color: Color(0xFFF9A03F),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "Exercise List",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 1,
-                childAspectRatio: (1 / 0.23),
-                children: List.generate(exerciseList.length, (index) {
-                  return InkWell(
-                    onTap: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (content) => ExerciseDetailsScreen(
-                                    user: widget.user,
-                                    index: index,
-                                    topicList: topicList,
-                                    exerciseList: exerciseList,
-                                  )))
-                    },
-                    child: Card(
-                        color: const Color(0xFFDEE7E7),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading:
-                                  const Icon(Icons.question_answer_rounded),
-                              title: Text(
-                                exerciseList[index].exerciseTitle.toString(),
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              trailing: const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Color(0xFFF9A03F)),
-                            ),
-                          ],
-                        )),
-                  );
-                }),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 1,
+                      childAspectRatio: (1 / 0.23),
+                      children: List.generate(exerciseList.length, (index) {
+                        return InkWell(
+                          onTap: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (content) => ExerciseDetailsScreen(
+                                          user: widget.user,
+                                          index: index,
+                                          topicList: topicList,
+                                          exerciseList: exerciseList,
+                                        )))
+                          },
+                          child: Card(
+                              color: const Color(0xFFDEE7E7),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: const Icon(
+                                        Icons.question_answer_rounded),
+                                    title: Text(
+                                      exerciseList[index]
+                                          .exerciseTitle
+                                          .toString(),
+                                      style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    trailing: const Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: Color(0xFFF9A03F)),
+                                  ),
+                                ],
+                              )),
+                        );
+                      }),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -399,125 +411,142 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(questionList.length, (index) {
-              return Container(
-                margin: EdgeInsets.only(bottom: 10.0),
-                child: Card(
-                  color: const Color(0xFFDEE7E7),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Question ${index + 1} / ${questionList.length}',
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF4F646F)),
-                              textAlign: TextAlign.center,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _showHint = true;
-                                });
-                                _showHintDialog(index);
-                              },
-                              icon: Icon(Icons.help_outline),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          questionList[index].questionTitle.toString(),
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: 400,
-                          height:
-                              questionList[index].optionA.toString().length > 38
-                                  ? 80
-                                  : 40,
-                          child: ElevatedButton(
-                            onPressed: questionList[index].optionSelectedA
-                                ? null
-                                : () => _submitAnswer(widget.topicList,
-                                    questionList[index].optionA, index),
-                            child: Text(
-                              questionList[index].optionA.toString(),
-                              style: const TextStyle(fontSize: 13),
-                              textAlign: TextAlign.center,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: questionList[index].buttonColorA,
-                            ),
+      body: questionList.isEmpty
+          ? Center(
+              child: Text(titlecenter,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)))
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(questionList.length, (index) {
+                    return Container(
+                      margin: EdgeInsets.only(bottom: 10.0),
+                      child: Card(
+                        color: const Color(0xFFDEE7E7),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Question ${index + 1} / ${questionList.length}',
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF4F646F)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _showHint = true;
+                                      });
+                                      _showHintDialog(index);
+                                    },
+                                    icon: Icon(Icons.help_outline),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                questionList[index].questionTitle.toString(),
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                width: 400,
+                                height: questionList[index]
+                                            .optionA
+                                            .toString()
+                                            .length >
+                                        38
+                                    ? 80
+                                    : 40,
+                                child: ElevatedButton(
+                                  onPressed: questionList[index].optionSelectedA
+                                      ? null
+                                      : () => _submitAnswer(widget.topicList,
+                                          questionList[index].optionA, index),
+                                  child: Text(
+                                    questionList[index].optionA.toString(),
+                                    style: const TextStyle(fontSize: 13),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        questionList[index].buttonColorA,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                width: 400,
+                                height: questionList[index]
+                                            .optionB
+                                            .toString()
+                                            .length >
+                                        38
+                                    ? 80
+                                    : 40,
+                                child: ElevatedButton(
+                                  onPressed: questionList[index].optionSelectedB
+                                      ? null
+                                      : () => _submitAnswer(widget.topicList,
+                                          questionList[index].optionB, index),
+                                  child: Text(
+                                    questionList[index].optionB.toString(),
+                                    style: const TextStyle(fontSize: 13),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        questionList[index].buttonColorB,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                width: 400,
+                                height: questionList[index]
+                                            .optionC
+                                            .toString()
+                                            .length >
+                                        38
+                                    ? 80
+                                    : 40,
+                                child: ElevatedButton(
+                                  onPressed: questionList[index].optionSelectedC
+                                      ? null
+                                      : () => _submitAnswer(widget.topicList,
+                                          questionList[index].optionC, index),
+                                  child: Text(
+                                    questionList[index].optionC.toString(),
+                                    style: const TextStyle(fontSize: 13),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        questionList[index].buttonColorC,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: 400,
-                          height:
-                              questionList[index].optionB.toString().length > 38
-                                  ? 80
-                                  : 40,
-                          child: ElevatedButton(
-                            onPressed: questionList[index].optionSelectedB
-                                ? null
-                                : () => _submitAnswer(widget.topicList,
-                                    questionList[index].optionB, index),
-                            child: Text(
-                              questionList[index].optionB.toString(),
-                              style: const TextStyle(fontSize: 13),
-                              textAlign: TextAlign.center,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: questionList[index].buttonColorB,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: 400,
-                          height:
-                              questionList[index].optionC.toString().length > 38
-                                  ? 80
-                                  : 40,
-                          child: ElevatedButton(
-                            onPressed: questionList[index].optionSelectedC
-                                ? null
-                                : () => _submitAnswer(widget.topicList,
-                                    questionList[index].optionC, index),
-                            child: Text(
-                              questionList[index].optionC.toString(),
-                              style: const TextStyle(fontSize: 13),
-                              textAlign: TextAlign.center,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: questionList[index].buttonColorC,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
+                    );
+                  }),
                 ),
-              );
-            }),
-          ),
-        ),
-      ),
+              ),
+            ),
       bottomNavigationBar: Container(
         height: 50,
         color: Color(0xFF4F646F),
@@ -622,7 +651,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
             behavior: HitTestBehavior.opaque,
             onTap: () {},
             child: AlertDialog(
-              backgroundColor: const Color(0xFFF4FAFF),
+              backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text("Hint:",

@@ -6,6 +6,8 @@ class Quiz {
   List<QuizQuestion>? quizquestions;
   String? scoreId;
   String? totalScore;
+  late String quizDate;
+  String? id;
 
   Quiz({
     this.quizId,
@@ -13,6 +15,8 @@ class Quiz {
     this.quizquestions,
     this.scoreId,
     this.totalScore,
+    required this.quizDate,
+    this.id,
   });
 
   Quiz.fromJson(Map<String, dynamic> json) {
@@ -26,6 +30,8 @@ class Quiz {
     }
     scoreId = json['score_id'];
     totalScore = json['total_score'];
+    quizDate = json['quiz_date'];
+    id = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,6 +43,8 @@ class Quiz {
     }
     data['score_id'] = scoreId;
     data['total_score'] = totalScore;
+    data['quiz_date'] = quizDate;
+    data['user_id'] = id;
     return data;
   }
 }

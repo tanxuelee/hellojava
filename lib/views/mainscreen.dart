@@ -141,6 +141,7 @@ class _MainScreenState extends State<MainScreen> {
                 behavior: HitTestBehavior.opaque,
                 onTap: () {},
                 child: AlertDialog(
+                  backgroundColor: const Color(0xFFF4F4F4),
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   title: const Text(

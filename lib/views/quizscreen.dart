@@ -42,53 +42,58 @@ class _QuizScreenState extends State<QuizScreen> {
       resWidth = screenWidth * 0.75;
     }
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Text(
-              "Java Quiz",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
+      body: quizList.isEmpty
+          ? Center(
+              child: Text(titlecenter,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)))
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text(
+                    "Java Quiz",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 1,
+                      childAspectRatio: (1 / 0.23),
+                      children: List.generate(quizList.length, (index) {
+                        return InkWell(
+                          onTap: () => {_clickQuizButton(index)},
+                          child: Card(
+                              color: const Color(0xFFDEE7E7),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: const Icon(Icons.quiz_rounded),
+                                    title: Text(
+                                      quizList[index].quizTitle.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    trailing: const Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: Color(0xFFF9A03F)),
+                                  ),
+                                ],
+                              )),
+                        );
+                      }),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 1,
-                childAspectRatio: (1 / 0.23),
-                children: List.generate(quizList.length, (index) {
-                  return InkWell(
-                    onTap: () => {_clickQuizButton(index)},
-                    child: Card(
-                        color: const Color(0xFFDEE7E7),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: const Icon(Icons.quiz_rounded),
-                              title: Text(
-                                quizList[index].quizTitle.toString(),
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              trailing: const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Color(0xFFF9A03F)),
-                            ),
-                          ],
-                        )),
-                  );
-                }),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -146,7 +151,7 @@ class _QuizScreenState extends State<QuizScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: const Color(0xFFF4FAFF),
+            backgroundColor: const Color(0xFFF4F4F4),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             title: const Center(
@@ -186,7 +191,7 @@ class _QuizScreenState extends State<QuizScreen> {
             behavior: HitTestBehavior.opaque,
             onTap: () {},
             child: AlertDialog(
-              backgroundColor: const Color(0xFFF4FAFF),
+              backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
@@ -290,7 +295,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
             context: context,
             barrierDismissible: false,
             builder: (context) => AlertDialog(
-              backgroundColor: const Color(0xFFF4FAFF),
+              backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: Text('Time is up!'),
@@ -335,7 +340,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
           context: context,
           barrierDismissible: false,
           builder: (context) => AlertDialog(
-            backgroundColor: const Color(0xFFF4FAFF),
+            backgroundColor: const Color(0xFFF4F4F4),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
@@ -375,145 +380,171 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(quizquestionList.length, (index) {
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 10.0),
-                  child: Card(
-                    color: const Color(0xFFDEE7E7),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Question ${index + 1} / ${quizquestionList.length}',
-                            style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF4F646F)),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            quizquestionList[index].questionTitle.toString(),
-                            style: const TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: 400,
-                            height: quizquestionList[index]
-                                        .optionA
-                                        .toString()
-                                        .length >
-                                    38
-                                ? 80
-                                : 40,
-                            child: ElevatedButton(
-                              onPressed: quizquestionList[index].optionSelectedA
-                                  ? null
-                                  : () => _selectAnswer(widget.quizList,
-                                      quizquestionList[index].optionA, index),
-                              child: Text(
-                                quizquestionList[index].optionA.toString(),
-                                style: const TextStyle(fontSize: 13),
-                                textAlign: TextAlign.center,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    quizquestionList[index].buttonColorA,
-                              ),
+        body: quizquestionList.isEmpty
+            ? Center(
+                child: Text(titlecenter,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold)))
+            : Padding(
+                padding: const EdgeInsets.all(15),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(quizquestionList.length, (index) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10.0),
+                        child: Card(
+                          color: const Color(0xFFDEE7E7),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Question ${index + 1} / ${quizquestionList.length}',
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF4F646F)),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  quizquestionList[index]
+                                      .questionTitle
+                                      .toString(),
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  width: 400,
+                                  height: quizquestionList[index]
+                                              .optionA
+                                              .toString()
+                                              .length >
+                                          38
+                                      ? 80
+                                      : 40,
+                                  child: ElevatedButton(
+                                    onPressed:
+                                        quizquestionList[index].optionSelectedA
+                                            ? null
+                                            : () => _selectAnswer(
+                                                widget.quizList,
+                                                quizquestionList[index].optionA,
+                                                index),
+                                    child: Text(
+                                      quizquestionList[index]
+                                          .optionA
+                                          .toString(),
+                                      style: const TextStyle(fontSize: 13),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          quizquestionList[index].buttonColorA,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  width: 400,
+                                  height: quizquestionList[index]
+                                              .optionB
+                                              .toString()
+                                              .length >
+                                          38
+                                      ? 80
+                                      : 40,
+                                  child: ElevatedButton(
+                                    onPressed:
+                                        quizquestionList[index].optionSelectedB
+                                            ? null
+                                            : () => _selectAnswer(
+                                                widget.quizList,
+                                                quizquestionList[index].optionB,
+                                                index),
+                                    child: Text(
+                                      quizquestionList[index]
+                                          .optionB
+                                          .toString(),
+                                      style: const TextStyle(fontSize: 13),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          quizquestionList[index].buttonColorB,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  width: 400,
+                                  height: quizquestionList[index]
+                                              .optionC
+                                              .toString()
+                                              .length >
+                                          38
+                                      ? 80
+                                      : 40,
+                                  child: ElevatedButton(
+                                    onPressed:
+                                        quizquestionList[index].optionSelectedC
+                                            ? null
+                                            : () => _selectAnswer(
+                                                widget.quizList,
+                                                quizquestionList[index].optionC,
+                                                index),
+                                    child: Text(
+                                      quizquestionList[index]
+                                          .optionC
+                                          .toString(),
+                                      style: const TextStyle(fontSize: 13),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          quizquestionList[index].buttonColorC,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  width: 400,
+                                  height: 40,
+                                  child: ElevatedButton(
+                                    onPressed: (quizquestionList[index]
+                                                .optionSelectedA ||
+                                            quizquestionList[index]
+                                                .optionSelectedB ||
+                                            quizquestionList[index]
+                                                .optionSelectedC)
+                                        ? () => _clearAnswer(index)
+                                        : null,
+                                    child: const Text(
+                                      "Clear",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFFF9A03F),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: 400,
-                            height: quizquestionList[index]
-                                        .optionB
-                                        .toString()
-                                        .length >
-                                    38
-                                ? 80
-                                : 40,
-                            child: ElevatedButton(
-                              onPressed: quizquestionList[index].optionSelectedB
-                                  ? null
-                                  : () => _selectAnswer(widget.quizList,
-                                      quizquestionList[index].optionB, index),
-                              child: Text(
-                                quizquestionList[index].optionB.toString(),
-                                style: const TextStyle(fontSize: 13),
-                                textAlign: TextAlign.center,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    quizquestionList[index].buttonColorB,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: 400,
-                            height: quizquestionList[index]
-                                        .optionC
-                                        .toString()
-                                        .length >
-                                    38
-                                ? 80
-                                : 40,
-                            child: ElevatedButton(
-                              onPressed: quizquestionList[index].optionSelectedC
-                                  ? null
-                                  : () => _selectAnswer(widget.quizList,
-                                      quizquestionList[index].optionC, index),
-                              child: Text(
-                                quizquestionList[index].optionC.toString(),
-                                style: const TextStyle(fontSize: 13),
-                                textAlign: TextAlign.center,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    quizquestionList[index].buttonColorC,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: 400,
-                            height: 40,
-                            child: ElevatedButton(
-                              onPressed: (quizquestionList[index]
-                                          .optionSelectedA ||
-                                      quizquestionList[index].optionSelectedB ||
-                                      quizquestionList[index].optionSelectedC)
-                                  ? () => _clearAnswer(index)
-                                  : null,
-                              child: const Text(
-                                "Clear",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFF9A03F),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    }),
                   ),
-                );
-              }),
-            ),
-          ),
-        ),
+                ),
+              ),
         bottomNavigationBar: allAnswered
             ? BottomAppBar(
                 child: Container(
@@ -527,7 +558,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                           context: context,
                           barrierDismissible: false,
                           builder: (context) => AlertDialog(
-                            backgroundColor: const Color(0xFFF4FAFF),
+                            backgroundColor: const Color(0xFFF4F4F4),
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20.0))),
@@ -670,7 +701,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
               behavior: HitTestBehavior.opaque,
               onTap: () {},
               child: AlertDialog(
-                backgroundColor: const Color(0xFFF4FAFF),
+                backgroundColor: const Color(0xFFF4F4F4),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 title: const Text('Quiz Score'),
@@ -710,7 +741,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
               behavior: HitTestBehavior.opaque,
               onTap: () {},
               child: AlertDialog(
-                backgroundColor: const Color(0xFFF4FAFF),
+                backgroundColor: const Color(0xFFF4F4F4),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 title: const Text('Error'),

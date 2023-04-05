@@ -41,6 +41,8 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   webview_flutter: ^4.0.6
   word_search: ^0.1.2
+  firebase_auth: ^4.3.0
+  firebase_core: ^2.8.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hellojava/views/forgotpasswordscreen.dart';
 import 'package:hellojava/views/mainscreen.dart';
 import 'package:hellojava/views/registerscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,12 @@ class _LoginScreenState extends State<LoginScreen> {
   bool passwordVisible = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    loadPref();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +220,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   TextStyle(fontSize: 16, color: Colors.white),
                             ),
                             GestureDetector(
-                              onTap: () => {},
+                              onTap: () => {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (content) =>
+                                //             const ForgotPasswordScreen()))
+                              },
                               child: const Text(
                                 " Click Here",
                                 style: TextStyle(
@@ -280,7 +293,8 @@ class _LoginScreenState extends State<LoginScreen> {
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
-              fontSize: 16.0);
+              fontSize: 14,
+              backgroundColor: const Color(0xFF4F646F));
           var extractdata = data['data'];
           User user = User.fromJson(extractdata);
           print(user.email);
@@ -292,7 +306,8 @@ class _LoginScreenState extends State<LoginScreen> {
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
-              fontSize: 16.0);
+              fontSize: 14,
+              backgroundColor: const Color(0xFF4F646F));
           return;
         }
       });
@@ -315,7 +330,8 @@ class _LoginScreenState extends State<LoginScreen> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            fontSize: 14.0);
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
       } else {
         await prefs.setString('email', '');
         await prefs.setString('pass', '');
@@ -323,11 +339,12 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController.text = "";
         passwordController.text = "";
         Fluttertoast.showToast(
-            msg: "Credentials removed",
+            msg: "Credentials Removed",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            fontSize: 14.0);
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
       }
     } else {
       Fluttertoast.showToast(
@@ -335,7 +352,8 @@ class _LoginScreenState extends State<LoginScreen> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
-          fontSize: 14.0);
+          fontSize: 14,
+          backgroundColor: const Color(0xFF4F646F));
       remember = false;
     }
   }

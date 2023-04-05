@@ -325,33 +325,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () {},
+        return Center(
           child: AlertDialog(
-              title: const Text("Select from",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton.icon(
-                      onPressed: () => {
-                            Navigator.of(context).pop(),
-                            _galleryPicker(),
-                          },
-                      icon: const Icon(Icons.browse_gallery),
-                      label: const Text("Gallery",
-                          style: TextStyle(fontWeight: FontWeight.bold))),
-                  TextButton.icon(
-                      onPressed: () => {
-                            Navigator.of(context).pop(),
-                            _cameraPicker(),
-                          },
-                      icon: const Icon(Icons.camera_alt),
-                      label: const Text("Camera",
-                          style: TextStyle(fontWeight: FontWeight.bold))),
-                ],
-              )),
+            backgroundColor: const Color(0xFFF4F4F4),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            title: const Text(
+              "Select from",
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+            actions: <Widget>[
+              TextButton.icon(
+                onPressed: () => {
+                  Navigator.of(context).pop(),
+                  _galleryPicker(),
+                },
+                icon: const Icon(Icons.browse_gallery),
+                label: const Text("Gallery"),
+              ),
+              TextButton.icon(
+                onPressed: () => {Navigator.of(context).pop(), _cameraPicker()},
+                icon: const Icon(Icons.camera_alt),
+                label: const Text("Camera"),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -414,11 +412,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             behavior: HitTestBehavior.opaque,
             onTap: () {},
             child: AlertDialog(
+              backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Register new account",
-                style: TextStyle(),
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
               content: const Text("Are you sure?", style: TextStyle()),
               actions: <Widget>[
@@ -468,20 +467,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 && data['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Success",
+            msg: "Registration Success",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            fontSize: 16.0);
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
         Navigator.push(context,
             MaterialPageRoute(builder: (content) => const LoginScreen()));
       } else {
         Fluttertoast.showToast(
-            msg: data['status'],
+            msg: "Registration Failed",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            fontSize: 16.0);
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
       }
     });
   }

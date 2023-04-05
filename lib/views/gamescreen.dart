@@ -67,7 +67,7 @@ class _GameScreenState extends State<GameScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: const Color(0xFFF4FAFF),
+            backgroundColor: const Color(0xFFF4F4F4),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             title: const Center(
@@ -107,7 +107,7 @@ class _GameScreenState extends State<GameScreen> {
             behavior: HitTestBehavior.opaque,
             onTap: () {},
             child: AlertDialog(
-              backgroundColor: const Color(0xFFF4FAFF),
+              backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
@@ -212,7 +212,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
           context: context,
           barrierDismissible: false,
           builder: (context) => AlertDialog(
-            backgroundColor: const Color(0xFFF4FAFF),
+            backgroundColor: const Color(0xFFF4F4F4),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
@@ -463,7 +463,7 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
   //     context: context,
   //     barrierDismissible: false,
   //     builder: (context) => AlertDialog(
-  //       backgroundColor: const Color(0xFFF4FAFF),
+  //       backgroundColor: const Color(0xFFF4F4F4),
   //       shape: const RoundedRectangleBorder(
   //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
   //       ),
