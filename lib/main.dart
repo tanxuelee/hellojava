@@ -62,7 +62,7 @@ class MySplashScreenState extends State<MySplashScreen> {
     super.initState();
     User user = User(
         id: '0',
-        name: 'guest',
+        name: 'Guest',
         email: 'guest@gmail.com',
         phone: '0123456789',
         datereg: '0');

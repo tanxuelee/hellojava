@@ -782,7 +782,12 @@ class QuizReviewScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Quiz Review"),
+        title: const Text(
+          "Quiz Review",
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: numQuestions,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hellojava/models/admin.dart';
+import 'package:hellojava/views/adminmainscreen.dart';
 import 'package:hellojava/views/forgotpasswordscreen.dart';
 import 'package:hellojava/views/mainscreen.dart';
 import 'package:hellojava/views/registerscreen.dart';
@@ -42,7 +44,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF4F646F),
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text(
+          'Login',
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -288,18 +295,35 @@ class _LoginScreenState extends State<LoginScreen> {
         print(response.body);
         var data = jsonDecode(response.body);
         if (response.statusCode == 200 && data['status'] == 'success') {
-          Fluttertoast.showToast(
-              msg: "Login Success",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              fontSize: 14,
-              backgroundColor: const Color(0xFF4F646F));
           var extractdata = data['data'];
-          User user = User.fromJson(extractdata);
-          print(user.email);
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (content) => MainScreen(user: user)));
+          var userType = data['type'];
+          if (userType == 'user') {
+            Fluttertoast.showToast(
+                msg: "Welcome Back",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                fontSize: 14,
+                backgroundColor: const Color(0xFF4F646F));
+            User user = User.fromJson(extractdata);
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (content) => MainScreen(user: user)));
+          } else if (userType == 'admin') {
+            Fluttertoast.showToast(
+                msg: "Welcome to Admin Page",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                fontSize: 14,
+                backgroundColor: const Color(0xFF4F646F));
+            Admin admin = Admin.fromJson(extractdata);
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (content) => AdminMainScreen(admin: admin)));
+          }
         } else {
           Fluttertoast.showToast(
               msg: "Login Failed",

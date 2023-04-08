@@ -1,26 +1,16 @@
-class User {
+class Admin {
   String? id;
   String? name;
   String? email;
-  String? phone;
   String? password;
-  late String datereg;
 
-  User(
-      {this.id,
-      this.name,
-      this.email,
-      this.phone,
-      this.password,
-      required this.datereg});
+  Admin({this.id, this.name, this.email, this.password});
 
-  User.fromJson(Map<String, dynamic> json) {
+  Admin.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    phone = json['phone'];
     password = json['password'];
-    datereg = json['datereg'];
   }
 
   Map<String, dynamic> toJson() {
@@ -28,9 +18,7 @@ class User {
     data['id'] = id;
     data['name'] = name;
     data['email'] = email;
-    data['phone'] = phone;
     data['password'] = password;
-    data['datereg'] = datereg;
     return data;
   }
 }

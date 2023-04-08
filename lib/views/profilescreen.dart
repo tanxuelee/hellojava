@@ -384,7 +384,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: const Text(
+          'Edit Profile',
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -1045,7 +1050,12 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View Score'),
+        title: const Text(
+          'View Score',
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -1153,7 +1163,12 @@ class _QuizListScreenState extends State<QuizListScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Score for'),
+        title: const Text(
+          'Score for',
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
       ),
       body: quizList.isEmpty
           ? Center(
@@ -1412,6 +1427,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
     http.post(
       Uri.parse(CONSTANTS.server + "/hellojava/php/load_quizscore.php"),
       body: {
+        'id': widget.user.id.toString(),
         'quiz_id': widget.quizList[widget.index].quizId.toString(),
       },
     ).timeout(

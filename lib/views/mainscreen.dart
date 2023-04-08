@@ -41,7 +41,12 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
         backgroundColor: const Color(0xFFF4FAFF),
         appBar: AppBar(
-          title: const Text('Hello Java'),
+          title: const Text(
+            'Hello Java',
+            style: TextStyle(
+              fontSize: 17,
+            ),
+          ),
           bottom: const TabBar(
             isScrollable: true,
             tabs: <Widget>[

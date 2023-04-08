@@ -234,7 +234,12 @@ class _PlayGameScreenState extends State<PlayGameScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Game Screen'),
+          title: const Text(
+            'Game Screen',
+            style: TextStyle(
+              fontSize: 17,
+            ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(15),
