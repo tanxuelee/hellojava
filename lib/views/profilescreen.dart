@@ -599,7 +599,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Change Name Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -610,12 +610,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         });
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Change Name",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     });
   }
@@ -715,7 +715,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Change Phone Number Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -726,12 +726,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         });
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Change Phone Number",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     });
   }
@@ -887,7 +887,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Change Password Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -898,20 +898,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         });
       } else if (jsondata['status'] == 'invalid') {
         Fluttertoast.showToast(
-            msg: "Incorrect Old Password",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Change Password",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     });
   }
@@ -984,6 +984,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ],
         androidUiSettings: const AndroidUiSettings(
             toolbarTitle: 'Cropper',
+            toolbarColor: Color(0xFF4F646F),
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),
@@ -1006,7 +1007,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Change Profile Picture Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -1017,12 +1018,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         });
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Change Profile Picture",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     });
   }
@@ -1507,7 +1508,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
       var jsondata = jsonDecode(response.body);
       if (jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Quiz Score Deleted Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -1518,21 +1519,21 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
         });
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Delete Quiz Score",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     } else {
       Fluttertoast.showToast(
-          msg: "Failed to Delete Quiz Score",
+          msg: "Failed to delete quiz score",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 14,
-          backgroundColor: const Color(0xFF4F646F));
+          backgroundColor: const Color(0xFFAB3232));
     }
   }
 }

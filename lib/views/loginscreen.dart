@@ -299,7 +299,7 @@ class _LoginScreenState extends State<LoginScreen> {
           var userType = data['type'];
           if (userType == 'user') {
             Fluttertoast.showToast(
-                msg: "Welcome Back",
+                msg: "Welcome back",
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
@@ -312,7 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (content) => MainScreen(user: user)));
           } else if (userType == 'admin') {
             Fluttertoast.showToast(
-                msg: "Welcome to Admin Page",
+                msg: "Welcome to admin page",
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
@@ -326,12 +326,12 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         } else {
           Fluttertoast.showToast(
-              msg: "Login Failed",
+              msg: "Login failed",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
               fontSize: 14,
-              backgroundColor: const Color(0xFF4F646F));
+              backgroundColor: const Color(0xFFAB3232));
           return;
         }
       });
@@ -350,7 +350,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await prefs.setString('pass', password);
         await prefs.setBool('remember', true);
         Fluttertoast.showToast(
-            msg: "Credentials Stored Success",
+            msg: "Credentials stored success",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -363,7 +363,7 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController.text = "";
         passwordController.text = "";
         Fluttertoast.showToast(
-            msg: "Credentials Removed",
+            msg: "Credentials removed",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -372,12 +372,12 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } else {
       Fluttertoast.showToast(
-          msg: "Credentials Failed",
+          msg: "Credentials failed",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 14,
-          backgroundColor: const Color(0xFF4F646F));
+          backgroundColor: const Color(0xFFAB3232));
       remember = false;
     }
   }

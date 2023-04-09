@@ -139,46 +139,48 @@ class _MainScreenState extends State<MainScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: StatefulBuilder(
-            builder: (context, StateSetter setState) {
-              return GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {},
-                child: AlertDialog(
-                  backgroundColor: const Color(0xFFF4F4F4),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                  title: const Text(
-                    "Logout?",
-                    style: TextStyle(fontSize: 20, color: Colors.black),
+        return Center(
+          child: SingleChildScrollView(
+            child: StatefulBuilder(
+              builder: (context, StateSetter setState) {
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {},
+                  child: AlertDialog(
+                    backgroundColor: const Color(0xFFF4F4F4),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    title: const Text(
+                      "Logout?",
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                    content: const Text("Are your sure want to logout?"),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text(
+                          "Yes",
+                          style: TextStyle(),
+                        ),
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (content) => MyApp()));
+                        },
+                      ),
+                      TextButton(
+                        child: const Text(
+                          "No",
+                          style: TextStyle(),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   ),
-                  content: const Text("Are your sure"),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text(
-                        "Yes",
-                        style: TextStyle(),
-                      ),
-                      onPressed: () async {
-                        Navigator.of(context).pop();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (content) => MyApp()));
-                      },
-                    ),
-                    TextButton(
-                      child: const Text(
-                        "No",
-                        style: TextStyle(),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         );
       },

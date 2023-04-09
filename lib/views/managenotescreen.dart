@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellojava/views/adminmainscreen.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -289,7 +290,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
     );
   }
 
-  void _loadSubTopics(String? topicId) {
+  void _loadSubTopics(String? subtopicId) {
     http.post(
       Uri.parse(CONSTANTS.server + "/hellojava/php/load_subtopics.php"),
       body: {
@@ -372,7 +373,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
       var jsondata = jsonDecode(response.body);
       if (jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Subtopic Deleted Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -383,21 +384,21 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
         });
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Subtopic",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     } else {
       Fluttertoast.showToast(
-          msg: "Failed to Subtopic",
+          msg: "Failed to delete subtopic",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 14,
-          backgroundColor: const Color(0xFF4F646F));
+          backgroundColor: const Color(0xFFAB3232));
     }
   }
 }
@@ -741,12 +742,6 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                   onPressed: () async {
                     Navigator.of(context).pop();
                     _addSubtopic();
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           AdminMainScreen(admin: widget.admin)),
-                    // );
                   },
                 ),
                 TextButton(
@@ -783,7 +778,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 && data['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Add Subtopic Successful",
+            msg: data['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -793,12 +788,12 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
         widget.onSubtopicUpdated();
       } else {
         Fluttertoast.showToast(
-            msg: "Add Subtopic Failed",
+            msg: data['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     });
   }
@@ -824,6 +819,9 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
   TextEditingController subtopicTitleController = TextEditingController();
   TextEditingController subtopicDescriptionController = TextEditingController();
   TextEditingController youtubeLinkController = TextEditingController();
+  var val = 50;
+  var _image;
+  Random random = Random();
 
   @override
   void initState() {
@@ -900,7 +898,9 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _updateDescriptionsDialog();
+                              },
                               icon: const Icon(Icons.arrow_forward_ios_rounded),
                               color: const Color(0xFFF9A03F)),
                         ),
@@ -921,7 +921,9 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _updateYoutubeLinkDialog();
+                              },
                               icon: const Icon(Icons.arrow_forward_ios_rounded),
                               color: const Color(0xFFF9A03F)),
                         ),
@@ -942,7 +944,9 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _updateImageDialog();
+                              },
                               icon: const Icon(Icons.arrow_forward_ios_rounded),
                               color: const Color(0xFFF9A03F)),
                         ),
@@ -1000,7 +1004,7 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your new title';
+                                    return 'Please enter the new title';
                                   }
                                   return null;
                                 },
@@ -1057,7 +1061,7 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Change Title Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -1067,12 +1071,375 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
         widget.onSubtopicUpdated();
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Change Title",
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      }
+    });
+  }
+
+  void _updateDescriptionsDialog() {
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, StateSetter setState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: screenHeight / 1.2,
+                    child: SingleChildScrollView(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {},
+                        child: AlertDialog(
+                          backgroundColor: const Color(0xFFF4F4F4),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          title: const Text(
+                            "Change Descriptions?",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                          content: SingleChildScrollView(
+                            child: Form(
+                              key: _formKey,
+                              child: TextFormField(
+                                controller: subtopicDescriptionController,
+                                maxLines: null,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelText: 'Descriptions',
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter the new descriptions';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text(
+                                "Confirm",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop();
+                                  String newdescription =
+                                      subtopicDescriptionController.text;
+                                  _updateDescription(newdescription);
+                                }
+                              },
+                            ),
+                            TextButton(
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                _formKey.currentState!.reset();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _updateDescription(String newdescription) {
+    http.post(
+        Uri.parse(CONSTANTS.server + "/hellojava/php/update_subtopic.php"),
+        body: {
+          'topic_id': widget.topicList.topicId,
+          'subtopic_id': widget.topicList.subtopicId,
+          "newdescription": newdescription,
+        }).then((response) {
+      var jsondata = jsonDecode(response.body);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFF4F646F));
+        Navigator.pop(context);
+        widget.onSubtopicUpdated();
+      } else {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      }
+    });
+  }
+
+  void _updateYoutubeLinkDialog() {
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, StateSetter setState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 350,
+                    child: SingleChildScrollView(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {},
+                        child: AlertDialog(
+                          backgroundColor: const Color(0xFFF4F4F4),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          title: const Text(
+                            "Change Youtube Link?",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                          content: SingleChildScrollView(
+                            child: Form(
+                              key: _formKey,
+                              child: TextFormField(
+                                controller: youtubeLinkController,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelText: 'Youtube Link',
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                ),
+                                validator: (value) {
+                                  final pattern =
+                                      r'(?:http(?:s)?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/)?([a-zA-Z0-9\-_]+)';
+                                  final regex = RegExp(pattern);
+
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter the new youtube link';
+                                  }
+
+                                  if (!regex.hasMatch(value)) {
+                                    return 'Please enter a valid youtube link';
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text(
+                                "Confirm",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop();
+                                  String newyoutubelink =
+                                      youtubeLinkController.text;
+                                  _updateYoutubeLink(newyoutubelink);
+                                }
+                              },
+                            ),
+                            TextButton(
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                _formKey.currentState!.reset();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _updateYoutubeLink(String newyoutubelink) {
+    http.post(
+        Uri.parse(CONSTANTS.server + "/hellojava/php/update_subtopic.php"),
+        body: {
+          'topic_id': widget.topicList.topicId,
+          'subtopic_id': widget.topicList.subtopicId,
+          "newyoutubelink": newyoutubelink,
+        }).then((response) {
+      var jsondata = jsonDecode(response.body);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
+        Navigator.pop(context);
+        widget.onSubtopicUpdated();
+      } else {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      }
+    });
+  }
+
+  void _updateImageDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: AlertDialog(
+            backgroundColor: const Color(0xFFF4F4F4),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            title: const Text(
+              "Select from",
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+            actions: <Widget>[
+              TextButton.icon(
+                onPressed: () => {
+                  Navigator.of(context).pop(),
+                  _galleryPicker(),
+                },
+                icon: const Icon(Icons.browse_gallery),
+                label: const Text("Gallery"),
+              ),
+              TextButton.icon(
+                onPressed: () => {Navigator.of(context).pop(), _cameraPicker()},
+                icon: const Icon(Icons.camera_alt),
+                label: const Text("Camera"),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  _galleryPicker() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 800,
+      maxWidth: 800,
+    );
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      _cropImage();
+    }
+  }
+
+  _cameraPicker() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 800,
+      maxWidth: 800,
+    );
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      _cropImage();
+    }
+  }
+
+  Future<void> _cropImage() async {
+    File? croppedFile = await ImageCropper().cropImage(
+        sourcePath: _image!.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.ratio16x9,
+        ],
+        androidUiSettings: const AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Color(0xFF4F646F),
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: const IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        ));
+    if (croppedFile != null) {
+      _image = croppedFile;
+      _updateImage(_image);
+    }
+  }
+
+  void _updateImage(image) {
+    String base64Image = base64Encode(image!.readAsBytesSync());
+    http.post(
+        Uri.parse(CONSTANTS.server + "/hellojava/php/update_subtopic.php"),
+        body: {
+          'topic_id': widget.topicList.topicId,
+          'subtopic_id': widget.topicList.subtopicId,
+          "image": base64Image,
+        }).then((response) {
+      var jsondata = jsonDecode(response.body);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
+        setState(() {
+          val = Random().nextInt(1000);
+        });
+        widget.onSubtopicUpdated();
+      } else {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
       }
     });
   }

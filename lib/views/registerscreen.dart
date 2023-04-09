@@ -487,7 +487,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     });
   }

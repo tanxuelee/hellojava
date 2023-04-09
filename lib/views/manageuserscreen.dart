@@ -205,7 +205,7 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
       var jsondata = jsonDecode(response.body);
       if (jsondata['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "User Account Deleted Successfully",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -216,21 +216,21 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
         });
       } else {
         Fluttertoast.showToast(
-            msg: "Failed to Delete User Account",
+            msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+            backgroundColor: const Color(0xFFAB3232));
       }
     } else {
       Fluttertoast.showToast(
-          msg: "Failed to Delete User Account",
+          msg: "Failed to delete user account",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           fontSize: 14,
-          backgroundColor: const Color(0xFF4F646F));
+          backgroundColor: const Color(0xFFAB3232));
     }
   }
 

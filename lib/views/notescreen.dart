@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hellojava/constants.dart';
@@ -184,6 +186,10 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
     _loadSubNotes();
   }
 
+  void refreshSubtopics() {
+    _loadSubNotes();
+  }
+
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -245,6 +251,7 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
                                           user: widget.user,
                                           index: index,
                                           topicList: topicList,
+                                          onSubtopicUpdated: refreshSubtopics,
                                         )))
                           },
                           child: Card(
@@ -324,12 +331,13 @@ class SubNoteDetailsScreen extends StatefulWidget {
   final User user;
   int index;
   final List<Topic> topicList;
-
+  final Function() onSubtopicUpdated;
   SubNoteDetailsScreen({
     Key? key,
     required this.user,
     required this.index,
     required this.topicList,
+    required this.onSubtopicUpdated,
   }) : super(key: key);
 
   @override
@@ -342,11 +350,14 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
   late YoutubePlayerController _controller;
   String titlecenter = "";
   String? videoUrl;
+  Random random = Random();
+  late int val;
 
   @override
   void initState() {
     super.initState();
     _loadSubNotesDetails();
+    val = Random().nextInt(1000);
   }
 
   @override
@@ -415,7 +426,8 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                                           topicList[index]
                                               .subtopicId
                                               .toString() +
-                                          '.jpg',
+                                          '.jpg' +
+                                          "?v=$val",
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator(),
@@ -437,7 +449,8 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                                 imageUrl: CONSTANTS.server +
                                     "/hellojava/assets/notes/subtopics/" +
                                     topicList[index].subtopicId.toString() +
-                                    '.jpg',
+                                    '.jpg' +
+                                    "?v=$val",
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
@@ -499,6 +512,7 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
               initialVideoId: videoID ?? '',
               flags: const YoutubePlayerFlags(autoPlay: false));
         });
+        widget.onSubtopicUpdated();
       } else {
         setState(() {
           titlecenter = "No Data Found";
