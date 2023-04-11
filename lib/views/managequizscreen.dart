@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellojava/constants.dart';
 import 'package:hellojava/models/admin.dart';
 import 'package:hellojava/models/quiz.dart';
@@ -132,6 +133,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
   late double screenHeight, screenWidth, resWidth;
   List<Quiz> quizList = <Quiz>[];
   String titlecenter = "";
+  TextEditingController quizTitleController = TextEditingController();
 
   @override
   void initState() {
@@ -193,7 +195,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
                                         IconButton(
                                           icon: const Icon(Icons.edit),
                                           onPressed: () =>
-                                              _editQuizListDialog(),
+                                              _editQuizListDialog(index),
                                         ),
                                         IconButton(
                                           icon: const Icon(
@@ -201,7 +203,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
                                             color: Color(0xFFAB3232),
                                           ),
                                           onPressed: () =>
-                                              _deleteQuizListDialog(),
+                                              _deleteQuizListDialog(index),
                                         ),
                                       ],
                                     ),
@@ -218,7 +220,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _addQuizListDialog(),
       ),
       bottomNavigationBar: const BottomAppBar(
         color: Color(0xFF4F646F),
@@ -271,9 +273,303 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
     });
   }
 
-  _editQuizListDialog() {}
+  _addQuizListDialog() {
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, StateSetter setState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 350,
+                    child: SingleChildScrollView(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {},
+                        child: AlertDialog(
+                          backgroundColor: const Color(0xFFF4F4F4),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          title: const Text(
+                            "Add Quiz?",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                          content: SingleChildScrollView(
+                            child: Form(
+                              key: _formKey,
+                              child: TextFormField(
+                                controller: quizTitleController,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelText: 'Title',
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter the new title';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text(
+                                "Confirm",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop();
+                                  _addQuiz();
+                                }
+                              },
+                            ),
+                            TextButton(
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                _formKey.currentState!.reset();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
-  _deleteQuizListDialog() {}
+  void _addQuiz() {
+    String quizTitle = quizTitleController.text;
+    http.post(Uri.parse(CONSTANTS.server + "/hellojava/php/add_quiz.php"),
+        body: {
+          "quiz_title": quizTitle,
+        }).then((response) {
+      print(response.body);
+      var data = jsonDecode(response.body);
+      if (response.statusCode == 200 && data['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: data['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
+        _loadQuiz();
+      } else {
+        Fluttertoast.showToast(
+            msg: data['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      }
+    });
+  }
+
+  _editQuizListDialog(int index) {
+    quizTitleController.text = quizList[index].quizTitle.toString();
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, StateSetter setState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 350,
+                    child: SingleChildScrollView(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {},
+                        child: AlertDialog(
+                          backgroundColor: const Color(0xFFF4F4F4),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          title: const Text(
+                            "Change Title?",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                          content: SingleChildScrollView(
+                            child: Form(
+                              key: _formKey,
+                              child: TextFormField(
+                                controller: quizTitleController,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelText: 'Title',
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter the new title';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text(
+                                "Confirm",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop();
+                                  String newtitle = quizTitleController.text;
+                                  _updateTitle(newtitle, index);
+                                }
+                              },
+                            ),
+                            TextButton(
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                _formKey.currentState!.reset();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _updateTitle(String newtitle, int index) {
+    http.post(Uri.parse(CONSTANTS.server + "/hellojava/php/update_quiz.php"),
+        body: {
+          'quiz_id': quizList[index].quizId,
+          "newtitle": newtitle,
+        }).then((response) {
+      var jsondata = jsonDecode(response.body);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
+        _loadQuiz();
+      } else {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      }
+    });
+  }
+
+  _deleteQuizListDialog(int index) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFFF4F4F4),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        title: const Text('Delete Quiz?'),
+        content: const Text('Are you sure want to delete this quiz?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _deleteQuiz(index);
+            },
+            child: const Text('Delete'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _deleteQuiz(int index) async {
+    var url = Uri.parse(CONSTANTS.server + "/hellojava/php/delete_quiz.php");
+    var response = await http.post(url, body: {
+      'quiz_id': quizList[index].quizId.toString(),
+    });
+    if (response.statusCode == 200) {
+      var jsondata = jsonDecode(response.body);
+      if (jsondata['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
+        setState(() {
+          _loadQuiz();
+        });
+      } else {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: "Failed to delete subtopic",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          fontSize: 14,
+          backgroundColor: const Color(0xFFAB3232));
+    }
+  }
 }
 
 class SelectQuizListScreen extends StatefulWidget {

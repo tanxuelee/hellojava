@@ -78,7 +78,7 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
                                 label: Text(
                               'User Email',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -95,7 +95,7 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
                                     child: Text(
                                       userList[index].email.toString(),
                                       style: const TextStyle(
-                                          fontSize: 13, color: Colors.black),
+                                          fontSize: 14, color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -107,7 +107,7 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
                                       icon: const Center(
                                         child: Icon(
                                           Icons.delete,
-                                          size: 20.0,
+                                          size: 22.0,
                                           color: Color(0xFFF9A03F),
                                         ),
                                       )),
