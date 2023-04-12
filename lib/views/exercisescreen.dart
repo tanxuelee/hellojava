@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellojava/constants.dart';
 import 'package:hellojava/views/loginscreen.dart';
 import 'package:hellojava/views/registerscreen.dart';
@@ -104,15 +108,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         .timeout(
       const Duration(seconds: 5),
       onTimeout: () {
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
-      },
-    ).timeout(
-      const Duration(seconds: 5),
-      onTimeout: () {
-        titlecenter = "Timeout Please retry again later";
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -133,6 +136,18 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         titlecenter = "No Topic Available";
         topicList.clear();
         setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
       }
     });
   }
@@ -327,15 +342,14 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
     ).timeout(
       const Duration(seconds: 5),
       onTimeout: () {
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
-      },
-    ).timeout(
-      const Duration(seconds: 5),
-      onTimeout: () {
-        titlecenter = "Timeout Please retry again later";
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -357,6 +371,18 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
         titlecenter = "No Exercise Available";
         topicList.clear();
         setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
       }
     });
   }
@@ -579,15 +605,14 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
     ).timeout(
       const Duration(seconds: 5),
       onTimeout: () {
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
-      },
-    ).timeout(
-      const Duration(seconds: 5),
-      onTimeout: () {
-        titlecenter = "Timeout Please retry again later";
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -609,6 +634,18 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
         titlecenter = "No Question Available";
         questionList.clear();
         setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
       }
     });
   }

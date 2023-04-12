@@ -116,15 +116,14 @@ class _ManageNoteScreenState extends State<ManageNoteScreen> {
         .timeout(
       const Duration(seconds: 5),
       onTimeout: () {
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
-      },
-    ).timeout(
-      const Duration(seconds: 5),
-      onTimeout: () {
-        titlecenter = "Timeout Please retry again later";
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -145,6 +144,18 @@ class _ManageNoteScreenState extends State<ManageNoteScreen> {
         titlecenter = "No Topic Available";
         topicList.clear();
         setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
       }
     });
   }
@@ -299,15 +310,14 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
     ).timeout(
       const Duration(seconds: 5),
       onTimeout: () {
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
-      },
-    ).timeout(
-      const Duration(seconds: 5),
-      onTimeout: () {
-        titlecenter = "Timeout Please retry again later";
-        return http.Response(
-            'Error', 408); // Request Timeout response status code
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -329,6 +339,18 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
         titlecenter = "No Subtopic Available";
         topicList.clear();
         setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
       }
     });
   }
