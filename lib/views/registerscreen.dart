@@ -472,7 +472,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 && data['status'] == 'success') {
         Fluttertoast.showToast(
-            msg: "Registration Success",
+            msg: data['message'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -482,7 +482,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             MaterialPageRoute(builder: (content) => const LoginScreen()));
       } else {
         Fluttertoast.showToast(
-            msg: "Registration Failed",
+            msg: data['message'],
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,

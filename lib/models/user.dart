@@ -4,6 +4,7 @@ class User {
   String? email;
   String? phone;
   String? password;
+  late String verified;
   late String datereg;
 
   User(
@@ -12,6 +13,7 @@ class User {
       this.email,
       this.phone,
       this.password,
+      required this.verified,
       required this.datereg});
 
   User.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class User {
     email = json['email'];
     phone = json['phone'];
     password = json['password'];
+    verified = json['verified'];
     datereg = json['datereg'];
   }
 
@@ -30,6 +33,7 @@ class User {
     data['email'] = email;
     data['phone'] = phone;
     data['password'] = password;
+    data['verified'] = verified;
     data['datereg'] = datereg;
     return data;
   }

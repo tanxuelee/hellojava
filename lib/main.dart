@@ -65,7 +65,8 @@ class MySplashScreenState extends State<MySplashScreen> {
         name: 'Guest',
         email: 'guest@gmail.com',
         phone: '0123456789',
-        datereg: '0');
+        datereg: '0',
+        verified: '0');
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,

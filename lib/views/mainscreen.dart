@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hellojava/main.dart';
@@ -26,7 +27,15 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   List<User> userList = <User>[];
   late double screenHeight, screenWidth, resWidth;
-  var val = 50;
+  late int val;
+  Random random = Random();
+
+  @override
+  void initState() {
+    super.initState();
+    val = Random().nextInt(1000);
+  }
+
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
