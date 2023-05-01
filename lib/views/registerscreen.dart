@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellojava/views/loginscreen.dart';
 import 'dart:convert';
@@ -70,16 +71,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(height: 20),
                         Card(
                           child: GestureDetector(
-                              onTap: () => {_takePictureDialog()},
+                            onTap: () => {_takePictureDialog()},
+                            child: Container(
+                              decoration: _image == null
+                                  ? BoxDecoration(
+                                      border: Border.all(
+                                          color: const Color(0xFFF9A03F),
+                                          width: 3),
+                                    )
+                                  : null,
                               child: SizedBox(
-                                  height: screenHeight / 3,
-                                  width: screenWidth,
-                                  child: _image == null
-                                      ? Image.asset('assets/images/camera.png')
-                                      : Image.file(
-                                          _image,
-                                          fit: BoxFit.cover,
-                                        ))),
+                                height: screenHeight / 3,
+                                width: screenWidth,
+                                child: _image == null
+                                    ? Image.asset('assets/images/camera.png')
+                                    : Image.file(
+                                        _image,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Padding(
@@ -102,7 +114,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
@@ -118,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 decoration: InputDecoration(
                                   isDense: true,
                                   prefixIcon: const Icon(Icons.email),
-                                  labelText: "Email",
+                                  labelText: "Email Address",
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
@@ -127,18 +145,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter valid email';
+                                    return 'Please enter your email address';
                                   }
                                   bool emailValid = RegExp(
                                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                       .hasMatch(value);
                                   if (!emailValid) {
-                                    return 'Please enter a valid email';
+                                    return 'Please enter a valid email address';
                                   }
                                   return null;
                                 },
@@ -148,6 +172,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 controller: phoneController,
                                 keyboardType:
                                     const TextInputType.numberWithOptions(),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
                                 decoration: InputDecoration(
                                   isDense: true,
                                   prefixIcon: const Icon(Icons.phone),
@@ -160,12 +187,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your phone';
+                                    return 'Please enter your phone number';
                                   }
                                   return null;
                                 },
@@ -187,7 +220,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         color: Color(0xFFF7D488)),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none,
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
                                     ),
                                     suffixIcon: IconButton(
                                       icon: Icon(
@@ -228,7 +267,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         color: Color(0xFFF7D488)),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none,
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
                                     ),
                                     suffixIcon: IconButton(
                                       icon: Icon(
@@ -278,7 +323,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   BorderRadius.circular(18.0))),
                                       backgroundColor:
                                           MaterialStateProperty.all(
-                                        Color(0xFFF9A03F),
+                                        const Color(0xFFF9A03F),
                                       ),
                                     ),
                                   ),
@@ -295,11 +340,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (content) =>
-                                                  const LoginScreen()));
+                                      Navigator.pop(context);
                                     },
                                     child: const Text(
                                       " Login here",
@@ -408,7 +449,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _registerUserdialog() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && _image != null) {
       _formKey.currentState!.save();
       showDialog(
         context: context,

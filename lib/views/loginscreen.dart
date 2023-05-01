@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             isDense: true,
                             prefixIcon: const Icon(Icons.email),
-                            labelText: "Email",
+                            labelText: "Email Address",
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -85,18 +85,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const TextStyle(color: Color(0xFFF7D488)),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6.0),
-                              borderSide: BorderSide.none,
+                              borderSide: const BorderSide(
+                                  color: Color(0xFFF9A03F), width: 2),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                  color: Color(0xFFF9A03F), width: 2),
                             ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter valid email';
+                              return 'Please enter your email address';
                             }
                             bool emailValid = RegExp(
                                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(value);
                             if (!emailValid) {
-                              return 'Please enter a valid email';
+                              return 'Please enter a valid email address';
                             }
                             return null;
                           },
@@ -117,7 +123,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   const TextStyle(color: Color(0xFFF7D488)),
                               errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(6.0),
-                                borderSide: BorderSide.none,
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(

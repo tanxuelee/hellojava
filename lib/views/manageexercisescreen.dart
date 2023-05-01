@@ -489,6 +489,18 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
+                                  errorStyle:
+                                      const TextStyle(color: Color(0xFFF7D488)),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -606,6 +618,18 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
+                                  errorStyle:
+                                      const TextStyle(color: Color(0xFFF7D488)),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -1420,11 +1444,16 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F)),
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
@@ -1451,11 +1480,16 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F)),
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
@@ -1482,11 +1516,16 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F)),
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
@@ -1513,11 +1552,16 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F)),
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
@@ -1544,11 +1588,16 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F)),
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
@@ -1575,11 +1624,16 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFF7D488)),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F)),
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
                                   ),
                                 ),
                                 validator: (value) {
@@ -1912,6 +1966,18 @@ class _EditExerciseQuestionScreenState
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
+                                  errorStyle:
+                                      const TextStyle(color: Color(0xFFF7D488)),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -2032,6 +2098,18 @@ class _EditExerciseQuestionScreenState
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
+                                  errorStyle:
+                                      const TextStyle(color: Color(0xFFF7D488)),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -2154,6 +2232,20 @@ class _EditExerciseQuestionScreenState
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
+                                      errorStyle: const TextStyle(
+                                          color: Color(0xFFF7D488)),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -2174,6 +2266,20 @@ class _EditExerciseQuestionScreenState
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
+                                      errorStyle: const TextStyle(
+                                          color: Color(0xFFF7D488)),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -2194,6 +2300,20 @@ class _EditExerciseQuestionScreenState
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
+                                      errorStyle: const TextStyle(
+                                          color: Color(0xFFF7D488)),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -2214,6 +2334,20 @@ class _EditExerciseQuestionScreenState
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
+                                      errorStyle: const TextStyle(
+                                          color: Color(0xFFF7D488)),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFF9A03F), width: 2),
+                                      ),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {

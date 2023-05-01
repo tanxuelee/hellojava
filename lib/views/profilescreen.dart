@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hellojava/main.dart';
 import 'package:hellojava/models/quiz.dart';
 import 'package:hellojava/views/loginscreen.dart';
@@ -542,6 +543,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
+                                  errorStyle:
+                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -654,11 +667,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 controller: phoneController,
                                 keyboardType:
                                     const TextInputType.numberWithOptions(),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
                                 decoration: InputDecoration(
-                                    labelText: 'Phone',
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0))),
+                                  labelText: 'Phone Number',
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  errorStyle:
+                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xFFF9A03F), width: 2),
+                                  ),
+                                ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your new phone number';
@@ -749,7 +779,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: screenHeight / 1.5,
+                    height: screenHeight / 1.3,
                     child: SingleChildScrollView(
                       child: GestureDetector(
                         behavior: HitTestBehavior.opaque,
@@ -768,14 +798,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               key: _formKey,
                               child: Column(
                                 children: [
+                                  const Text(
+                                      "Password must be at least 6 characters"),
+                                  const SizedBox(height: 10),
                                   TextFormField(
                                     controller: oldpasswordController,
                                     obscureText: oldpasswordVisible,
                                     decoration: InputDecoration(
                                         labelText: 'Old Password',
+                                        filled: true,
+                                        fillColor: Colors.white,
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(5.0)),
+                                        errorStyle: const TextStyle(
+                                            color: Color(0xFFF7D488)),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
+                                          borderSide: const BorderSide(
+                                              color: Color(0xFFF9A03F),
+                                              width: 2),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
+                                          borderSide: const BorderSide(
+                                              color: Color(0xFFF9A03F),
+                                              width: 2),
+                                        ),
                                         suffixIcon: IconButton(
                                           icon: Icon(
                                             oldpasswordVisible
@@ -805,9 +856,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     obscureText: newpasswordVisible,
                                     decoration: InputDecoration(
                                         labelText: 'New Password',
+                                        filled: true,
+                                        fillColor: Colors.white,
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(5.0)),
+                                        errorStyle: const TextStyle(
+                                            color: Color(0xFFF7D488)),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
+                                          borderSide: const BorderSide(
+                                              color: Color(0xFFF9A03F),
+                                              width: 2),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
+                                          borderSide: const BorderSide(
+                                              color: Color(0xFFF9A03F),
+                                              width: 2),
+                                        ),
                                         suffixIcon: IconButton(
                                           icon: Icon(
                                             newpasswordVisible
@@ -1236,7 +1305,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1446,7 +1515,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
