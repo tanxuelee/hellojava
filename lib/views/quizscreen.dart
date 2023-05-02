@@ -113,7 +113,7 @@ class _QuizScreenState extends State<QuizScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -296,7 +296,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_timeRemaining > 0) {
           _timeRemaining--;
@@ -310,14 +310,15 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
               backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: Text('Time is up!'),
-              content: Text('Press exit to go back to the main screen.'),
+              title: const Text('Time is up!'),
+              content: const Text(
+                  'Your score won\'t be saved. You can do the quiz again.'),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (content) => MainScreen(user: widget.user))),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  },
                   child: const Text('Exit'),
                 ),
               ],
@@ -627,7 +628,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
