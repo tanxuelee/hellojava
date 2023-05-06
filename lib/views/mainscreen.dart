@@ -74,19 +74,47 @@ class _MainScreenState extends State<MainScreen> {
                 accountName: Text(widget.user.name.toString()),
                 accountEmail: Text(widget.user.email.toString()),
                 currentAccountPicture: ClipOval(
-                  child: CachedNetworkImage(
-                    imageUrl: CONSTANTS.server +
-                        '/hellojava/assets/users/${widget.user.id}.jpg' +
-                        "?v=$val",
-                    fit: BoxFit.cover,
-                    width: resWidth / 2,
-                    placeholder: (context, url) =>
-                        const LinearProgressIndicator(),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          child: Hero(
+                            tag: 'profileImage${widget.user.id}',
+                            child: CachedNetworkImage(
+                              imageUrl: CONSTANTS.server +
+                                  '/hellojava/assets/users/${widget.user.id}.jpg' +
+                                  "?v=$val",
+                              fit: BoxFit.contain,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: CachedNetworkImage(
+                      imageUrl: CONSTANTS.server +
+                          '/hellojava/assets/users/${widget.user.id}.jpg' +
+                          "?v=$val",
+                      fit: BoxFit.cover,
+                      width: resWidth / 2,
+                      placeholder: (context, url) =>
+                          const LinearProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
                   ),
                 ),
               ),
+              if (widget.user.email == "guest@gmail.com")
+                _createDrawerItem(
+                  icon: Icons.room_rounded,
+                  text: 'User Manual',
+                  onTap: () {},
+                ),
               if (widget.user.email == "guest@gmail.com")
                 _createDrawerItem(
                   icon: Icons.login,

@@ -56,12 +56,18 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Text(
-                    "Java Exercise",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
+                  Row(
+                    children: const [
+                      Icon(Icons.flag_outlined, color: Color(0xFFF9A03F)),
+                      SizedBox(width: 10),
+                      Text(
+                        "Java Exercise",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   Expanded(
@@ -185,7 +191,10 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
               height: 50,
               width: 100,
               child: ElevatedButton(
-                onPressed: _onLogin,
+                onPressed: () {
+                  Navigator.pop(context);
+                  _onLogin();
+                },
                 child: const Text(
                   "Login",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),

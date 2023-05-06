@@ -54,12 +54,18 @@ class _QuizScreenState extends State<QuizScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Text(
-                    "Java Quiz",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
+                  Row(
+                    children: const [
+                      Icon(Icons.timer_outlined, color: Color(0xFFF9A03F)),
+                      SizedBox(width: 10),
+                      Text(
+                        "Java Quiz",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   Expanded(
@@ -176,7 +182,10 @@ class _QuizScreenState extends State<QuizScreen> {
               height: 50,
               width: 100,
               child: ElevatedButton(
-                onPressed: _onLogin,
+                onPressed: () {
+                  Navigator.pop(context);
+                  _onLogin();
+                },
                 child: const Text(
                   "Login",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -357,12 +366,12 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
-            title: const Text('Are you sure you want to leave?'),
+            title: const Text('Do you really want to leave?'),
             content: const Text('All progress will be lost.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Yes'),
+                child: const Text('Leave'),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
@@ -760,24 +769,21 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
       } else {
         showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (BuildContext context) {
-            return GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () {},
-              child: AlertDialog(
-                backgroundColor: const Color(0xFFF4F4F4),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text('Error'),
-                content: const Text(
-                    'An error occurred while saving your quiz score, please try it again.'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('OK'),
-                  ),
-                ],
-              ),
+            return AlertDialog(
+              backgroundColor: const Color(0xFFF4F4F4),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              title: const Text('Error'),
+              content: const Text(
+                  'An error occurred while saving your quiz score, please try it again.'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('OK'),
+                ),
+              ],
             );
           },
         );

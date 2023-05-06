@@ -54,12 +54,18 @@ class _NoteScreenState extends State<NoteScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Text(
-                    "Java Note",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
+                  Row(
+                    children: const [
+                      Icon(Icons.code_outlined, color: Color(0xFFF9A03F)),
+                      SizedBox(width: 10),
+                      Text(
+                        "Java Note",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   Expanded(
