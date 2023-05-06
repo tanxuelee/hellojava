@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hellojava/main.dart';
+import 'package:hellojava/models/game.dart';
 import 'package:hellojava/models/quiz.dart';
 import 'package:hellojava/views/loginscreen.dart';
 import 'package:hellojava/views/mainscreen.dart';
@@ -1180,7 +1181,14 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (content) => GameListScreen(
+                                              user: widget.user,
+                                            )));
+                              },
                               icon: const Icon(Icons.arrow_forward_ios_rounded),
                               color: const Color(0xFFF9A03F)),
                         ),
@@ -1614,6 +1622,433 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
     } else {
       Fluttertoast.showToast(
           msg: "Failed to delete quiz score",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          fontSize: 14,
+          backgroundColor: const Color(0xFFAB3232));
+    }
+  }
+}
+
+class GameListScreen extends StatefulWidget {
+  final User user;
+  const GameListScreen({Key? key, required this.user}) : super(key: key);
+
+  @override
+  State<GameListScreen> createState() => _GameListScreenState();
+}
+
+class _GameListScreenState extends State<GameListScreen> {
+  late double screenHeight, screenWidth, resWidth;
+  List<Game> gameList = <Game>[];
+  String titlecenter = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadGameList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 600) {
+      resWidth = screenWidth;
+    } else {
+      resWidth = screenWidth * 0.75;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Score for',
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+      ),
+      body: gameList.isEmpty
+          ? Center(
+              child: Text(titlecenter,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)))
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 1,
+                      childAspectRatio: (1 / 0.23),
+                      children: List.generate(gameList.length, (index) {
+                        return InkWell(
+                          onTap: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (content) => GameScoreScreen(
+                                          user: widget.user,
+                                          index: index,
+                                          gameList: gameList,
+                                        )))
+                          },
+                          child: Card(
+                              color: const Color(0xFFDEE7E7),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: const Icon(
+                                        Icons.videogame_asset_rounded),
+                                    title: Text(
+                                      gameList[index].gameMode.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    trailing: const Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: Color(0xFFF9A03F)),
+                                  ),
+                                ],
+                              )),
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+
+  void _loadGameList() {
+    http
+        .post(
+      Uri.parse(CONSTANTS.server + "/hellojava/php/load_gamelist.php"),
+    )
+        .timeout(
+      const Duration(seconds: 5),
+      onTimeout: () {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw const SocketException("Connection timed out");
+      },
+    ).then((response) {
+      var jsondata = jsonDecode(response.body);
+      print(jsondata);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        var extractdata = jsondata['data'];
+        if (extractdata['gameList'] != null) {
+          gameList = <Game>[];
+          extractdata['gameList'].forEach((v) {
+            gameList.add(Game.fromJson(v));
+          });
+        } else {
+          titlecenter = "No Game List Available";
+          gameList.clear();
+        }
+        setState(() {});
+      } else {
+        //do something
+        titlecenter = "No Game List Available";
+        gameList.clear();
+        setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
+      }
+    });
+  }
+}
+
+class GameScoreScreen extends StatefulWidget {
+  final User user;
+  int index;
+  final List<Game> gameList;
+  GameScoreScreen({
+    Key? key,
+    required this.user,
+    required this.index,
+    required this.gameList,
+  }) : super(key: key);
+
+  @override
+  State<GameScoreScreen> createState() => _GameScoreScreenState();
+}
+
+class _GameScoreScreenState extends State<GameScoreScreen> {
+  late double screenHeight, screenWidth, resWidth;
+  List<Game> gameList = <Game>[];
+  String titlecenter = "";
+  Widget _verticalDivider = const VerticalDivider(
+    thickness: 2,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _loadGameScore(widget.gameList[widget.index].gameId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 600) {
+      resWidth = screenWidth;
+    } else {
+      resWidth = screenWidth * 0.75;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.gameList[widget.index].gameMode.toString(),
+          style: const TextStyle(
+            fontSize: 17,
+          ),
+        ),
+      ),
+      body: gameList.isEmpty
+          ? Center(
+              child: Text(titlecenter,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)))
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: DataTable(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color: Theme.of(context).primaryColor),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          columnSpacing: 6.0,
+                          dividerThickness: 2.0,
+                          columns: [
+                            const DataColumn(
+                              label: Text(
+                                'No.',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            DataColumn(label: _verticalDivider),
+                            const DataColumn(
+                                label: Text(
+                              'Date Time',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                            DataColumn(label: _verticalDivider),
+                            const DataColumn(
+                                label: Text(
+                              'Score',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                            DataColumn(label: _verticalDivider),
+                            const DataColumn(label: Text('')),
+                          ],
+                          rows: List<DataRow>.generate(
+                            gameList.length,
+                            (index) => DataRow(
+                              cells: [
+                                DataCell(Center(
+                                  child: Text(
+                                    (index + 1).toString(),
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                )),
+                                DataCell(_verticalDivider),
+                                DataCell(Text(
+                                  gameList[index].gameDate.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 13, color: Colors.black),
+                                )),
+                                DataCell(_verticalDivider),
+                                DataCell(Center(
+                                  child: Text(
+                                    gameList[index].totalScore.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 13, color: Colors.black),
+                                  ),
+                                )),
+                                DataCell(_verticalDivider),
+                                DataCell(
+                                  IconButton(
+                                      onPressed: () =>
+                                          _confirmationDelete(index),
+                                      icon: const Center(
+                                        child: Icon(
+                                          Icons.delete,
+                                          size: 20.0,
+                                          color: Color(0xFFF9A03F),
+                                        ),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+
+  void _loadGameScore(String? gameId) {
+    http.post(
+      Uri.parse(CONSTANTS.server + "/hellojava/php/load_gamescore.php"),
+      body: {
+        'id': widget.user.id.toString(),
+        'game_id': widget.gameList[widget.index].gameId.toString(),
+      },
+    ).timeout(
+      const Duration(seconds: 5),
+      onTimeout: () {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw const SocketException("Connection timed out");
+      },
+    ).then((response) {
+      var jsondata = jsonDecode(response.body);
+      print(jsondata);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        var extractdata = jsondata['data'];
+        if (extractdata['gamescore'] != null) {
+          gameList = <Game>[];
+          extractdata['gamescore'].forEach((v) {
+            gameList.add(Game.fromJson(v));
+          });
+        } else {
+          titlecenter = "No Game Score Available";
+          gameList.clear();
+        }
+        setState(() {});
+      } else {
+        titlecenter = "No Game Score Available";
+        gameList.clear();
+        setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
+      }
+    });
+  }
+
+  _confirmationDelete(int index) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFFF4F4F4),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        title: const Text('Delete Score?'),
+        content: const Text('Are you sure want to delete this score?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _deleteScore(index);
+            },
+            child: const Text('Delete'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _deleteScore(int index) async {
+    var url =
+        Uri.parse(CONSTANTS.server + "/hellojava/php/delete_gamescore.php");
+    var response = await http.post(url, body: {
+      'game_id': gameList[index].gameId.toString(),
+      "score_id": gameList[index].scoreId.toString(),
+      "email": widget.user.email.toString(),
+    });
+    if (response.statusCode == 200) {
+      var jsondata = jsonDecode(response.body);
+      if (jsondata['status'] == 'success') {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFF4F646F));
+        setState(() {
+          _loadGameScore(widget.gameList[widget.index].gameId);
+        });
+      } else {
+        Fluttertoast.showToast(
+            msg: jsondata['data'],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: "Failed to delete game score",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,

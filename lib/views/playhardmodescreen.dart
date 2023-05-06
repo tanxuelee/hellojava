@@ -24,14 +24,14 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
   List<List<String>> hardkeywordLists = [
     [
       'switch',
-      '(expression)',
+      '(day)',
       '{',
       'case',
-      'value1:',
-      'statement1;',
+      '\'Monday\':',
+      'System.out.print(\"Monday\");',
       'break;',
       'default:',
-      'statement2;',
+      'System.out.print(\"Not Monday\");',
       '}'
     ],
     [
