@@ -595,7 +595,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                 style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Color(0xFFDEE7E7)),
                 textAlign: TextAlign.center,
               ),
             ],

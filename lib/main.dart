@@ -38,10 +38,6 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.catamaranTextTheme(
           Theme.of(context).textTheme.apply(),
         ),
-
-        /*textTheme: GoogleFonts.barlowTextTheme(
-          Theme.of(context).textTheme.apply(),
-        ),*/
       ),
       home: const MySplashScreen(title: 'MY Tutor'),
     );

@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'package:hellojava/models/game.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -399,7 +401,18 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                     'You have finished the game and obtained a score of $totalScore.'),
                 actions: [
                   TextButton(
-                    child: const Text('OK'),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LeaderboardScreen(
+                          user: widget.user,
+                        ),
+                      ),
+                    ),
+                    child: const Text('View Leaderboard'),
+                  ),
+                  TextButton(
+                    child: const Text('Exit'),
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
@@ -423,7 +436,18 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                     'You have finished the game and obtained a score of $totalScore. Better luck next time!'),
                 actions: [
                   TextButton(
-                    child: const Text('OK'),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LeaderboardScreen(
+                          user: widget.user,
+                        ),
+                      ),
+                    ),
+                    child: const Text('View Leaderboard'),
+                  ),
+                  TextButton(
+                    child: const Text('Exit'),
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
@@ -455,6 +479,243 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
             );
           },
         );
+      }
+    });
+  }
+}
+
+class LeaderboardScreen extends StatefulWidget {
+  final User user;
+  const LeaderboardScreen({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
+  @override
+  State<LeaderboardScreen> createState() => _LeaderboardScreenState();
+}
+
+class _LeaderboardScreenState extends State<LeaderboardScreen> {
+  late double screenHeight, screenWidth, resWidth;
+  List<Game> gameList = <Game>[];
+  String titlecenter = "";
+  Widget _verticalDivider = const VerticalDivider(
+    thickness: 2,
+  );
+  late int index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLeaderboard(index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 600) {
+      resWidth = screenWidth;
+    } else {
+      resWidth = screenWidth * 0.75;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Hard Mode",
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+      ),
+      body: gameList.isEmpty
+          ? Center(
+              child: Text(titlecenter,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)))
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.emoji_events,
+                            size: 18, color: Color(0xFFF9A03F)),
+                        SizedBox(width: 15),
+                        Text(
+                          'Top Five of the Day',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 15),
+                        Icon(Icons.emoji_events,
+                            size: 18, color: Color(0xFFF9A03F)),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: DataTable(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color: Theme.of(context).primaryColor),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          columnSpacing: 22.0,
+                          dividerThickness: 2.0,
+                          columns: [
+                            const DataColumn(
+                              label: Text(
+                                'No.',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            DataColumn(label: _verticalDivider),
+                            const DataColumn(
+                                label: Text(
+                              'Players',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                            DataColumn(label: _verticalDivider),
+                            const DataColumn(
+                                label: Text(
+                              'Score',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                          ],
+                          rows: List<DataRow>.generate(
+                            gameList.length,
+                            (index) {
+                              return DataRow(
+                                color: index == 0
+                                    ? MaterialStateColor.resolveWith((states) =>
+                                        const Color(0xFFFFF380)) // gold
+                                    : index == 1
+                                        ? MaterialStateColor.resolveWith(
+                                            (states) => const Color(
+                                                0xFFE5E4E2)) // silver
+                                        : index == 2
+                                            ? MaterialStateColor.resolveWith(
+                                                (states) => const Color(
+                                                    0xFFFBE7A1)) // bronze
+                                            : null, // default color
+                                cells: [
+                                  DataCell(Center(
+                                    child: Text(
+                                      (index + 1).toString(),
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.black,
+                                        fontWeight: index < 3
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
+                                      ),
+                                    ),
+                                  )),
+                                  DataCell(_verticalDivider),
+                                  DataCell(Text(
+                                    gameList[index].name.toString(),
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: index < 3
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                    ),
+                                  )),
+                                  DataCell(_verticalDivider),
+                                  DataCell(Center(
+                                    child: Text(
+                                      gameList[index].totalScore.toString(),
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.black,
+                                        fontWeight: index < 3
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
+                                      ),
+                                    ),
+                                  )),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+
+  void _loadLeaderboard(int index) {
+    http
+        .post(
+      Uri.parse(CONSTANTS.server + "/hellojava/php/load_hardleaderboard.php"),
+    )
+        .timeout(
+      const Duration(seconds: 5),
+      onTimeout: () {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+        throw const SocketException("Connection timed out");
+      },
+    ).then((response) {
+      var jsondata = jsonDecode(response.body);
+      print(jsondata);
+      if (response.statusCode == 200 && jsondata['status'] == 'success') {
+        var extractdata = jsondata['data'];
+        if (extractdata['gamescore'] != null) {
+          gameList = <Game>[];
+          extractdata['gamescore'].forEach((v) {
+            gameList.add(Game.fromJson(v));
+          });
+        } else {
+          titlecenter = "No Data Available";
+          gameList.clear();
+        }
+        setState(() {});
+      } else {
+        titlecenter = "No Data Available";
+        gameList.clear();
+        setState(() {});
+      }
+    }).catchError((error) {
+      if (error is SocketException) {
+        Fluttertoast.showToast(
+            msg: "Timeout error, please try again later",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            fontSize: 14,
+            backgroundColor: const Color(0xFFAB3232));
+      } else {
+        print("Error: $error");
       }
     });
   }

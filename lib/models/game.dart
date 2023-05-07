@@ -5,6 +5,7 @@ class Game {
   String? totalScore;
   late String gameDate;
   String? id;
+  String? name;
 
   Game({
     this.gameId,
@@ -13,6 +14,7 @@ class Game {
     this.totalScore,
     required this.gameDate,
     this.id,
+    this.name,
   });
 
   Game.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class Game {
     totalScore = json['total_score'];
     gameDate = json['game_date'];
     id = json['user_id'];
+    name = json['user_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -32,6 +35,7 @@ class Game {
     data['total_score'] = totalScore;
     data['game_date'] = gameDate;
     data['user_id'] = id;
+    data['user_name'] = name;
     return data;
   }
 }
