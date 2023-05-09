@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hellojava/main.dart';
 import 'package:hellojava/models/user.dart';
@@ -113,22 +114,34 @@ class _MainScreenState extends State<MainScreen> {
                 _createDrawerItem(
                   icon: Icons.room_rounded,
                   text: 'User Manual',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (content) => const UserManualScreen()));
+                  },
                 ),
               if (widget.user.email == "guest@gmail.com")
                 _createDrawerItem(
                   icon: Icons.login,
                   text: 'Login',
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (content) => LoginScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (content) => const LoginScreen()));
                   },
                 ),
               if (widget.user.email != "guest@gmail.com")
                 _createDrawerItem(
                   icon: Icons.room_rounded,
                   text: 'User Manual',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (content) => const UserManualScreen()));
+                  },
                 ),
               if (widget.user.email != "guest@gmail.com")
                 _createDrawerItem(
@@ -200,8 +213,10 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                         onPressed: () async {
                           Navigator.of(context).pop();
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (content) => MyApp()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (content) => const MyApp()));
                         },
                       ),
                       TextButton(
@@ -221,6 +236,157 @@ class _MainScreenState extends State<MainScreen> {
           ),
         );
       },
+    );
+  }
+}
+
+class UserManualScreen extends StatefulWidget {
+  const UserManualScreen({Key? key}) : super(key: key);
+
+  @override
+  State<UserManualScreen> createState() => _UserManualScreenState();
+}
+
+class _UserManualScreenState extends State<UserManualScreen> {
+  int _currentPage = 0;
+  final _controller = PageController(initialPage: 0);
+
+  final List<String> _functionNames = [
+    'Note',
+    'Exercise',
+    'Quiz',
+    'Game',
+    'Profile'
+  ];
+
+  final List<String> _functionDescriptions = [
+    'You can read the notes with or without logging in to the account. There are several subtopics available for every main topic for Java. For every subtopic, there are descriptions, image and video available to help you understand the topic better.',
+    'You need to login to your account in order to do the exercises. You can choose a main topic from the list and the system will display several exercises related to the selected topic. You can view a hint that will provide some guidance for every question. After answering each question, the system will show whether your answer is correct or not. The system will also keep track of the number of questions that you have answered correctly. If you leave the session, your progress will be lost.',
+    'You need to login to your account in order to so the quizzes. Each quiz has a duration of 15 minutes. Once you start the quiz, a timer will appear on the screen to show you how much time is left. You can answer each question by selecting one of the options provided. If you want to change your answer, you can click on the "Clear" button for that question and select a different option. Once you have answered all the questions, you can submit the quiz. After you submit the quiz, you can view your score and review the quiz to see which questions you got right or wrong. The correct answers will be provided. If you leave the quiz without submitting or if the time is up, your progress will be lost.',
+    'To play the game, you need to login first. After logging in, you can select the game mode you want to play. You will be presented with a set of keywords that you need to rearrange in the correct order. To rearrange the keywords, long press on a keyword and drag it to the desired position. There are three game modes available: Easy, Medium, and Hard. Each mode has 5 rounds of the game, and each round will have a different duration of time and number of keywords that need to be rearranged. After each round, the system will show you whether your answer was correct or not. You can view your score and the leaderboard to see the top five of the day for the selected game mode. At the main screen of the game, you also can view the leaderboard for every game mode. If you leave the game without finishing or the time runs out, your progress will be lost.',
+    'To access your personal information, you need to log in using your registered email address and password. Once you have logged in, you can view your personal information such as your name, email, phone number and profile picture. You can also edit your profile information except for your email address. You can view your own quiz and game scores. To logout from your account, click on the "Logout" button. This will log you out and take you back to the guest mode screen.'
+  ];
+
+  // final List<Widget> _functionIcons = [
+  //   Icon(Icons.note),
+  //   Icon(Icons.fitness_center),
+  //   Icon(Icons.quiz),
+  //   Icon(Icons.gamepad),
+  //   Icon(Icons.person)
+  // ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('User Manual'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _controller,
+                  itemCount: _functionNames.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          // _functionIcons[index],
+                          // SizedBox(height: 20.0),
+                          Container(
+                            padding: const EdgeInsets.all(15),
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: Color(0xFFF9A03F),
+                            ),
+                            child: Text(
+                              _functionNames[index],
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Text(
+                                      _functionDescriptions[index],
+                                      textAlign: TextAlign.justify,
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  onPageChanged: (int index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        _controller.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                    ),
+                    DotsIndicator(
+                      dotsCount: _functionNames.length,
+                      position: _currentPage,
+                      decorator: DotsDecorator(
+                        size: const Size.square(10.0),
+                        activeSize: const Size.square(10.0),
+                        activeShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.arrow_forward_ios),
+                      onPressed: () {
+                        _controller.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 35.0),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
