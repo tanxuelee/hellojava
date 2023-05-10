@@ -117,7 +117,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -148,7 +148,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -354,7 +354,7 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -386,7 +386,7 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -617,7 +617,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -649,7 +649,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellojava/constants.dart';
-import 'package:hellojava/views/loginscreen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -63,7 +61,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0)),
-                      errorStyle: const TextStyle(color: Color(0xFFF9A03F)),
+                      errorStyle: const TextStyle(color: Color(0xFFAB3232)),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6.0),
                         borderSide: const BorderSide(
@@ -131,25 +129,36 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         var data = jsonDecode(response.body);
         if (response.statusCode == 200 && data['status'] == 'success') {
           setState(() {
-            Fluttertoast.showToast(
-                msg: data['message'],
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 3,
-                fontSize: 14,
-                backgroundColor: const Color(0xFF4F646F));
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  data['message'],
+                  style: TextStyle(color: Color(0xFF4F646F)),
+                  textAlign: TextAlign.center,
+                ),
+                duration: Duration(seconds: 2),
+                backgroundColor: Color(0xFFF4FAFF),
+                behavior: SnackBarBehavior
+                    .fixed, // Ensures the snackbar sticks to the bottom
+              ),
+            );
           });
-          // Navigator.pushReplacement(context,
-          //     MaterialPageRoute(builder: (content) => const LoginScreen()));
         } else {
           setState(() {
-            Fluttertoast.showToast(
-                msg: data['message'],
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 3,
-                fontSize: 14,
-                backgroundColor: const Color(0xFFAB3232));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  data['message'],
+                  style: TextStyle(color: Color(0xFFF4FAFF)),
+                  textAlign: TextAlign.center,
+                ),
+                duration: Duration(seconds: 2),
+                backgroundColor: Color(0xFFAB3232),
+                behavior: SnackBarBehavior
+                    .fixed, // Ensures the snackbar sticks to the bottom
+              ),
+            );
           });
           return;
         }

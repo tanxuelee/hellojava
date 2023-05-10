@@ -545,7 +545,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -612,24 +612,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         setState(() {
           widget.user.name = newname;
         });
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
@@ -678,7 +690,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF9A03F)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -745,24 +757,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         setState(() {
           widget.user.phone = newphone;
         });
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
@@ -813,7 +837,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(5.0)),
                                         errorStyle: const TextStyle(
-                                            color: Color(0xFFF7D488)),
+                                            color: Color(0xFFAB3232)),
                                         errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6.0),
@@ -863,7 +887,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(5.0)),
                                         errorStyle: const TextStyle(
-                                            color: Color(0xFFF7D488)),
+                                            color: Color(0xFFAB3232)),
                                         errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6.0),
@@ -956,64 +980,92 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         setState(() {
           widget.user.password = newpassword;
         });
       } else if (jsondata['status'] == 'invalid') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
 
   _updateImageDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Center(
-          child: AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Text(
-              "Select from",
-              style: TextStyle(fontSize: 20, color: Colors.black),
+        return Container(
+          color: const Color(0xFFF4FAFF),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text(
+                    'Import photo from the gallery',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _galleryPicker();
+                  },
+                ),
+                const Divider(
+                  height: 2,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text(
+                    'Take photo using the camera',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _cameraPicker();
+                  },
+                ),
+              ],
             ),
-            actions: <Widget>[
-              TextButton.icon(
-                onPressed: () => {
-                  Navigator.of(context).pop(),
-                  _galleryPicker(),
-                },
-                icon: const Icon(Icons.browse_gallery),
-                label: const Text("Gallery"),
-              ),
-              TextButton.icon(
-                onPressed: () => {Navigator.of(context).pop(), _cameraPicker()},
-                icon: const Icon(Icons.camera_alt),
-                label: const Text("Camera"),
-              ),
-            ],
           ),
         );
       },
@@ -1076,24 +1128,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         setState(() {
           val = Random().nextInt(1000);
         });
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
@@ -1309,7 +1373,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1341,7 +1405,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1519,7 +1583,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1550,7 +1614,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1600,33 +1664,51 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
     if (response.statusCode == 200) {
       var jsondata = jsonDecode(response.body);
       if (jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         setState(() {
           _loadQuizScore(widget.quizList[widget.index].quizId);
         });
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     } else {
-      Fluttertoast.showToast(
-          msg: "Failed to delete quiz score",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          fontSize: 14,
-          backgroundColor: const Color(0xFFAB3232));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Failed to delete quiz score",
+            style: TextStyle(color: Color(0xFFF4FAFF)),
+            textAlign: TextAlign.center,
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Color(0xFFAB3232),
+          behavior: SnackBarBehavior
+              .fixed, // Ensures the snackbar sticks to the bottom
+        ),
+      );
     }
   }
 }
@@ -1736,7 +1818,7 @@ class _GameListScreenState extends State<GameListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1768,7 +1850,7 @@ class _GameListScreenState extends State<GameListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1946,7 +2028,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1977,7 +2059,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -2027,33 +2109,51 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
     if (response.statusCode == 200) {
       var jsondata = jsonDecode(response.body);
       if (jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         setState(() {
           _loadGameScore(widget.gameList[widget.index].gameId);
         });
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     } else {
-      Fluttertoast.showToast(
-          msg: "Failed to delete game score",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          fontSize: 14,
-          backgroundColor: const Color(0xFFAB3232));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Failed to delete game score",
+            style: TextStyle(color: Color(0xFFF4FAFF)),
+            textAlign: TextAlign.center,
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Color(0xFFAB3232),
+          behavior: SnackBarBehavior
+              .fixed, // Ensures the snackbar sticks to the bottom
+        ),
+      );
     }
   }
 }

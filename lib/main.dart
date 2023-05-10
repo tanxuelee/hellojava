@@ -32,14 +32,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MY Tutor',
+      title: 'Hello Java',
       theme: ThemeData(
         primarySwatch: buildMaterialColor(Color(0xFF4F646F)),
         textTheme: GoogleFonts.catamaranTextTheme(
           Theme.of(context).textTheme.apply(),
         ),
       ),
-      home: const MySplashScreen(title: 'MY Tutor'),
+      home: const MySplashScreen(title: 'Hello Java'),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellojava/views/loginscreen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -374,33 +373,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   _takePictureDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Center(
-          child: AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Text(
-              "Select from",
-              style: TextStyle(fontSize: 20, color: Colors.black),
+        return Container(
+          color: const Color(0xFFF4FAFF),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text(
+                    'Import photo from the gallery',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _galleryPicker();
+                  },
+                ),
+                const Divider(
+                  height: 2,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text(
+                    'Take photo using the camera',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _cameraPicker();
+                  },
+                ),
+              ],
             ),
-            actions: <Widget>[
-              TextButton.icon(
-                onPressed: () => {
-                  Navigator.of(context).pop(),
-                  _galleryPicker(),
-                },
-                icon: const Icon(Icons.browse_gallery),
-                label: const Text("Gallery"),
-              ),
-              TextButton.icon(
-                onPressed: () => {Navigator.of(context).pop(), _cameraPicker()},
-                icon: const Icon(Icons.camera_alt),
-                label: const Text("Camera"),
-              ),
-            ],
           ),
         );
       },
@@ -518,23 +527,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
       print(response.body);
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 && data['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: data['message'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
-        Navigator.push(context,
-            MaterialPageRoute(builder: (content) => const LoginScreen()));
+        setState(() {
+          Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                data['message'],
+                style: TextStyle(color: Color(0xFF4F646F)),
+                textAlign: TextAlign.center,
+              ),
+              duration: Duration(seconds: 2),
+              backgroundColor: Color(0xFFF4FAFF),
+              behavior: SnackBarBehavior
+                  .fixed, // Ensures the snackbar sticks to the bottom
+            ),
+          );
+        });
       } else {
-        Fluttertoast.showToast(
-            msg: data['message'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              data['message'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 2),
+            backgroundColor: Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }

@@ -196,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         borderRadius:
                                             BorderRadius.circular(18.0))),
                                 backgroundColor: MaterialStateProperty.all(
-                                  Color(0xFFF9A03F),
+                                  const Color(0xFFF9A03F),
                                 ),
                               ),
                             ),
@@ -337,13 +337,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (content) => AdminMainScreen(admin: admin)));
           }
         } else {
-          Fluttertoast.showToast(
-              msg: "Login failed",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              fontSize: 14,
-              backgroundColor: const Color(0xFFAB3232));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Login failed",
+                style: const TextStyle(color: Color(0xFFF4FAFF)),
+                textAlign: TextAlign.center,
+              ),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xFFAB3232),
+              behavior: SnackBarBehavior
+                  .fixed, // Ensures the snackbar sticks to the bottom
+            ),
+          );
           return;
         }
       });
@@ -361,35 +367,53 @@ class _LoginScreenState extends State<LoginScreen> {
         await prefs.setString('email', email);
         await prefs.setString('pass', password);
         await prefs.setBool('remember', true);
-        Fluttertoast.showToast(
-            msg: "Credentials stored success",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Credentials stored success",
+              style: TextStyle(color: Color(0xFF4F646F)),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 1),
+            backgroundColor: Color(0xFFF4FAFF),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       } else {
         await prefs.setString('email', '');
         await prefs.setString('pass', '');
         await prefs.setBool('remember', false);
         emailController.text = "";
         passwordController.text = "";
-        Fluttertoast.showToast(
-            msg: "Credentials removed",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Credentials removed",
+              style: TextStyle(color: Color(0xFF4F646F)),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 1),
+            backgroundColor: Color(0xFFF4FAFF),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     } else {
-      Fluttertoast.showToast(
-          msg: "Credentials failed",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          fontSize: 14,
-          backgroundColor: const Color(0xFFAB3232));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Credentials failed",
+            style: const TextStyle(color: Color(0xFFF4FAFF)),
+            textAlign: TextAlign.center,
+          ),
+          duration: Duration(seconds: 1),
+          backgroundColor: Color(0xFFAB3232),
+          behavior: SnackBarBehavior
+              .fixed, // Ensures the snackbar sticks to the bottom
+        ),
+      );
       remember = false;
     }
   }

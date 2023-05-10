@@ -112,13 +112,24 @@ class _MainScreenState extends State<MainScreen> {
               ),
               if (widget.user.email == "guest@gmail.com")
                 _createDrawerItem(
-                  icon: Icons.room_rounded,
+                  icon: Icons.location_on_rounded,
                   text: 'User Manual',
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (content) => const UserManualScreen()));
+                  },
+                ),
+              if (widget.user.email == "guest@gmail.com")
+                _createDrawerItem(
+                  icon: Icons.info_outline_rounded,
+                  text: 'About Hello Java',
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (content) => const AboutScreen()));
                   },
                 ),
               if (widget.user.email == "guest@gmail.com")
@@ -134,13 +145,24 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               if (widget.user.email != "guest@gmail.com")
                 _createDrawerItem(
-                  icon: Icons.room_rounded,
+                  icon: Icons.location_on_rounded,
                   text: 'User Manual',
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (content) => const UserManualScreen()));
+                  },
+                ),
+              if (widget.user.email != "guest@gmail.com")
+                _createDrawerItem(
+                  icon: Icons.info_outline_rounded,
+                  text: 'About Hello Java',
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (content) => const AboutScreen()));
                   },
                 ),
               if (widget.user.email != "guest@gmail.com")
@@ -248,6 +270,7 @@ class UserManualScreen extends StatefulWidget {
 }
 
 class _UserManualScreenState extends State<UserManualScreen> {
+  late double screenHeight, screenWidth, resWidth;
   int _currentPage = 0;
   final _controller = PageController(initialPage: 0);
 
@@ -267,21 +290,24 @@ class _UserManualScreenState extends State<UserManualScreen> {
     'To access your personal information, you need to log in using your registered email address and password. Once you have logged in, you can view your personal information such as your name, email, phone number and profile picture. You can also edit your profile information except for your email address. You can view your own quiz and game scores. To logout from your account, click on the "Logout" button. This will log you out and take you back to the guest mode screen.'
   ];
 
-  // final List<Widget> _functionIcons = [
-  //   Icon(Icons.note),
-  //   Icon(Icons.fitness_center),
-  //   Icon(Icons.quiz),
-  //   Icon(Icons.gamepad),
-  //   Icon(Icons.person)
-  // ];
-
   @override
   Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 600) {
+      resWidth = screenWidth;
+    } else {
+      resWidth = screenWidth * 0.75;
+    }
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF4FAFF),
       appBar: AppBar(
-        title: const Text('User Manual'),
-      ),
+          title: const Text(
+        'User Manual',
+        style: TextStyle(
+          fontSize: 17,
+        ),
+      )),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
         child: SafeArea(
@@ -296,8 +322,6 @@ class _UserManualScreenState extends State<UserManualScreen> {
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
-                          // _functionIcons[index],
-                          // SizedBox(height: 20.0),
                           Container(
                             padding: const EdgeInsets.all(15),
                             width: double.infinity,
@@ -353,10 +377,26 @@ class _UserManualScreenState extends State<UserManualScreen> {
                     IconButton(
                       icon: const Icon(Icons.arrow_back_ios),
                       onPressed: () {
-                        _controller.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
+                        if (_currentPage > 0) {
+                          _controller.previousPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "No more pages before this page",
+                                style: TextStyle(color: Color(0xFFF4FAFF)),
+                                textAlign: TextAlign.center,
+                              ),
+                              duration: Duration(seconds: 2),
+                              backgroundColor: Color(0xFF4F646F),
+                              behavior: SnackBarBehavior
+                                  .fixed, // Ensures the snackbar sticks to the bottom
+                            ),
+                          );
+                        }
                       },
                     ),
                     DotsIndicator(
@@ -373,16 +413,94 @@ class _UserManualScreenState extends State<UserManualScreen> {
                     IconButton(
                       icon: const Icon(Icons.arrow_forward_ios),
                       onPressed: () {
-                        _controller.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
+                        if (_currentPage < _functionNames.length - 1) {
+                          _controller.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "No more pages after this page",
+                                style: TextStyle(color: Color(0xFFF4FAFF)),
+                                textAlign: TextAlign.center,
+                              ),
+                              duration: Duration(seconds: 2),
+                              backgroundColor: Color(0xFF4F646F),
+                              behavior: SnackBarBehavior
+                                  .fixed, // Ensures the snackbar sticks to the bottom
+                            ),
+                          );
+                        }
                       },
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 35.0),
+              const SizedBox(height: 60.0),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AboutScreen extends StatefulWidget {
+  const AboutScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+  late double screenHeight, screenWidth, resWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 600) {
+      resWidth = screenWidth;
+    } else {
+      resWidth = screenWidth * 0.75;
+    }
+    return Scaffold(
+      backgroundColor: const Color(0xFF4F646F),
+      appBar: AppBar(
+        title: const Text(
+          'About Hello Java',
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            children: [
+              SizedBox(
+                  height: screenHeight / 4,
+                  width: screenWidth,
+                  child: Image.asset('assets/images/logo.png')),
+              const SizedBox(height: 20),
+              const Text(
+                'Hello Java is a mobile application designed to help beginners learn the theory of Java programming language. Our app provides a user-friendly interface and comprehensive learning materials to guide you through the fundamental concepts of Java. Hello Java offers various features such as notes, exercises, quizzes, and engaging games to make your learning experience enjoyable and interactive.',
+                style: TextStyle(
+                  color: Color(0xFFF4FAFF),
+                ),
+                textAlign: TextAlign.justify,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'For any queries or feedback, please feel free to reach out to us at the email below: adminhellojava@moneymoney12345.com',
+                style: TextStyle(
+                  color: Color(0xFFF4FAFF),
+                ),
+                textAlign: TextAlign.left,
+              ),
             ],
           ),
         ),

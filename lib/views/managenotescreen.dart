@@ -119,7 +119,7 @@ class _ManageNoteScreenState extends State<ManageNoteScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -150,7 +150,7 @@ class _ManageNoteScreenState extends State<ManageNoteScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -313,7 +313,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -345,7 +345,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -397,7 +397,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFF4F646F));
@@ -408,7 +408,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -417,7 +417,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
       Fluttertoast.showToast(
           msg: "Failed to delete subtopic",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
+          gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           fontSize: 14,
           backgroundColor: const Color(0xFFAB3232));
@@ -503,7 +503,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -539,7 +539,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -571,17 +571,29 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                                 ),
                                 child: Card(
                                   child: GestureDetector(
-                                      onTap: () => {_takePictureDialog()},
+                                    onTap: () => {_takePictureDialog()},
+                                    child: Container(
+                                      decoration: _image == null
+                                          ? BoxDecoration(
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xFFF9A03F),
+                                                  width: 2),
+                                            )
+                                          : null,
                                       child: SizedBox(
-                                          height: screenHeight / 4,
-                                          width: screenWidth,
-                                          child: _image == null
-                                              ? Image.asset(
-                                                  'assets/images/uploadimage.png')
-                                              : Image.file(
-                                                  _image,
-                                                  fit: BoxFit.cover,
-                                                ))),
+                                        height: screenHeight / 4,
+                                        width: screenWidth,
+                                        child: _image == null
+                                            ? Image.asset(
+                                                'assets/images/uploadimage.png')
+                                            : Image.file(
+                                                _image,
+                                                fit: BoxFit.cover,
+                                              ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -600,7 +612,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -672,33 +684,43 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
   }
 
   _takePictureDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Center(
-          child: AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Text(
-              "Select from",
-              style: TextStyle(fontSize: 20, color: Colors.black),
+        return Container(
+          color: const Color(0xFFF4FAFF),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text(
+                    'Import photo from the gallery',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _galleryPicker();
+                  },
+                ),
+                const Divider(
+                  height: 2,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text(
+                    'Take photo using the camera',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _cameraPicker();
+                  },
+                ),
+              ],
             ),
-            actions: <Widget>[
-              TextButton.icon(
-                onPressed: () => {
-                  Navigator.of(context).pop(),
-                  _galleryPicker(),
-                },
-                icon: const Icon(Icons.browse_gallery),
-                label: const Text("Gallery"),
-              ),
-              TextButton.icon(
-                onPressed: () => {Navigator.of(context).pop(), _cameraPicker()},
-                icon: const Icon(Icons.camera_alt),
-                label: const Text("Camera"),
-              ),
-            ],
           ),
         );
       },
@@ -753,7 +775,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
   }
 
   void _addsubtopicdialog() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && _image != null) {
       _formKey.currentState!.save();
       showDialog(
         context: context,
@@ -814,20 +836,22 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
       print(response.body);
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 && data['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: data['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
-        Navigator.pop(context);
-        widget.onSubtopicUpdated();
+        setState(() {
+          Navigator.pop(context);
+          Fluttertoast.showToast(
+              msg: data['data'],
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              fontSize: 14,
+              backgroundColor: const Color(0xFF4F646F));
+          widget.onSubtopicUpdated();
+        });
       } else {
         Fluttertoast.showToast(
             msg: data['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1039,7 +1063,7 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1109,23 +1133,34 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
-        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         widget.onSubtopicUpdated();
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
@@ -1171,7 +1206,7 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1241,23 +1276,34 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
-        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         widget.onSubtopicUpdated();
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
@@ -1302,7 +1348,7 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1381,55 +1427,76 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
-        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         widget.onSubtopicUpdated();
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
 
   void _updateImageDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Center(
-          child: AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Text(
-              "Select from",
-              style: TextStyle(fontSize: 20, color: Colors.black),
+        return Container(
+          color: const Color(0xFFF4FAFF),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text(
+                    'Import photo from the gallery',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _galleryPicker();
+                  },
+                ),
+                const Divider(
+                  height: 2,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text(
+                    'Take photo using the camera',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _cameraPicker();
+                  },
+                ),
+              ],
             ),
-            actions: <Widget>[
-              TextButton.icon(
-                onPressed: () => {
-                  Navigator.of(context).pop(),
-                  _galleryPicker(),
-                },
-                icon: const Icon(Icons.browse_gallery),
-                label: const Text("Gallery"),
-              ),
-              TextButton.icon(
-                onPressed: () => {Navigator.of(context).pop(), _cameraPicker()},
-                icon: const Icon(Icons.camera_alt),
-                label: const Text("Camera"),
-              ),
-            ],
           ),
         );
       },
@@ -1494,25 +1561,37 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         setState(() {
           val = Random().nextInt(1000);
         });
         widget.onSubtopicUpdated();
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }

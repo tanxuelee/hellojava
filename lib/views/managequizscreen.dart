@@ -245,7 +245,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -276,7 +276,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -327,7 +327,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -397,7 +397,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: data['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFF4F646F));
@@ -406,7 +406,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: data['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -455,7 +455,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -525,7 +525,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFF4F646F));
@@ -534,7 +534,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -582,7 +582,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFF4F646F));
@@ -593,7 +593,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -602,7 +602,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
       Fluttertoast.showToast(
           msg: "Failed to delete subtopic",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
+          gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           fontSize: 14,
           backgroundColor: const Color(0xFFAB3232));
@@ -719,7 +719,7 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -750,7 +750,7 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -915,7 +915,7 @@ class _ManageQuizQuestionScreenState extends State<ManageQuizQuestionScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -947,7 +947,7 @@ class _ManageQuizQuestionScreenState extends State<ManageQuizQuestionScreen> {
         Fluttertoast.showToast(
             msg: "Timeout error, please try again later",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -999,7 +999,7 @@ class _ManageQuizQuestionScreenState extends State<ManageQuizQuestionScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFF4F646F));
@@ -1010,7 +1010,7 @@ class _ManageQuizQuestionScreenState extends State<ManageQuizQuestionScreen> {
         Fluttertoast.showToast(
             msg: jsondata['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1019,7 +1019,7 @@ class _ManageQuizQuestionScreenState extends State<ManageQuizQuestionScreen> {
       Fluttertoast.showToast(
           msg: "Failed to delete question",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
+          gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           fontSize: 14,
           backgroundColor: const Color(0xFFAB3232));
@@ -1108,7 +1108,7 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1144,7 +1144,7 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1180,7 +1180,7 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1216,7 +1216,7 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1252,7 +1252,7 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
                                     ),
                                   ),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1387,7 +1387,7 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
         Fluttertoast.showToast(
             msg: data['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFF4F646F));
@@ -1397,7 +1397,7 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
         Fluttertoast.showToast(
             msg: data['data'],
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
@@ -1568,7 +1568,7 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
-                                      const TextStyle(color: Color(0xFFF7D488)),
+                                      const TextStyle(color: Color(0xFFAB3232)),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
                                     borderSide: const BorderSide(
@@ -1637,23 +1637,34 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
-        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         widget.onSubtopicUpdated();
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
@@ -1702,7 +1713,7 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
                                       errorStyle: const TextStyle(
-                                          color: Color(0xFFF7D488)),
+                                          color: Color(0xFFAB3232)),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(6.0),
@@ -1736,7 +1747,7 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
                                       errorStyle: const TextStyle(
-                                          color: Color(0xFFF7D488)),
+                                          color: Color(0xFFAB3232)),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(6.0),
@@ -1770,7 +1781,7 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
                                       errorStyle: const TextStyle(
-                                          color: Color(0xFFF7D488)),
+                                          color: Color(0xFFAB3232)),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(6.0),
@@ -1804,7 +1815,7 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                                           borderRadius:
                                               BorderRadius.circular(5.0)),
                                       errorStyle: const TextStyle(
-                                          color: Color(0xFFF7D488)),
+                                          color: Color(0xFFAB3232)),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(6.0),
@@ -1890,23 +1901,34 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
         }).then((response) {
       var jsondata = jsonDecode(response.body);
       if (response.statusCode == 200 && jsondata['status'] == 'success') {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFF4F646F));
-        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFF4F646F),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
         widget.onSubtopicUpdated();
       } else {
-        Fluttertoast.showToast(
-            msg: jsondata['data'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 14,
-            backgroundColor: const Color(0xFFAB3232));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              jsondata['data'],
+              style: const TextStyle(color: Color(0xFFF4FAFF)),
+              textAlign: TextAlign.center,
+            ),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
+            behavior: SnackBarBehavior
+                .fixed, // Ensures the snackbar sticks to the bottom
+          ),
+        );
       }
     });
   }
