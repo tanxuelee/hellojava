@@ -79,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             labelText: "Email Address",
                             filled: true,
                             fillColor: Colors.white,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0)),
                             errorStyle:
@@ -117,6 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               labelText: "Password",
                               filled: true,
                               fillColor: Colors.white,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0)),
                               errorStyle:

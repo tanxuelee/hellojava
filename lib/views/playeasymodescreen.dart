@@ -127,7 +127,10 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
               backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text('Time is up!'),
+              title: const Text(
+                'Time is up!',
+                style: TextStyle(fontSize: 18, color: Colors.black),
+              ),
               content: const Text(
                   'Your score won\'t be saved. You can play the game again.'),
               actions: [
@@ -173,7 +176,10 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
               ),
-              title: const Text('Do you really want to leave?'),
+              title: const Text(
+                'Do you really want to leave?',
+                style: TextStyle(fontSize: 18, color: Colors.black),
+              ),
               content: const Text('All progress will be lost.'),
               actions: [
                 TextButton(
@@ -341,7 +347,10 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
                 backgroundColor: const Color(0xFFF4F4F4),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text('Congratulations!'),
+                title: const Text(
+                  'Congratulations!',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
                 content: Text(
                     'You have finished the game and obtained a score of $totalScore.'),
                 actions: [
@@ -376,7 +385,10 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
                 backgroundColor: const Color(0xFFF4F4F4),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text('Game Over!'),
+                title: const Text(
+                  'Game over!',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
                 content: Text(
                     'You have finished the game and obtained a score of $totalScore. Better luck next time!'),
                 actions: [
@@ -412,7 +424,10 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
               backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text('Error'),
+              title: const Text(
+                'Error',
+                style: TextStyle(fontSize: 18, color: Colors.black),
+              ),
               content: const Text(
                   'An error occurred while saving your game score, please try it again.'),
               actions: [
@@ -641,12 +656,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No Data Available";
+          titlecenter = "No data available for this game";
           gameList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Data Available";
+        titlecenter = "No data available for this game";
         gameList.clear();
         setState(() {});
       }

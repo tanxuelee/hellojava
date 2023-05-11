@@ -92,9 +92,8 @@ class _ManageNoteScreenState extends State<ManageNoteScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -136,12 +135,12 @@ class _ManageNoteScreenState extends State<ManageNoteScreen> {
             topicList.add(Topic.fromJson(v));
           });
         } else {
-          titlecenter = "No Topic Available";
+          titlecenter = "No topic available";
           topicList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Topic Available";
+        titlecenter = "No topic available";
         topicList.clear();
         setState(() {});
       }
@@ -330,13 +329,13 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
             topicList.add(Topic.fromJson(v));
           });
         } else {
-          titlecenter = "No Subtopic Available";
+          titlecenter = "No subtopic available for this topic";
           topicList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Subtopic Available";
+        titlecenter = "No subtopic available for this topic";
         topicList.clear();
         setState(() {});
       }
@@ -363,7 +362,10 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Subtopic?'),
+        title: const Text(
+          'Delete subtopic?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
         content: const Text('Are you sure want to delete this subtopic?'),
         actions: [
           TextButton(
@@ -789,9 +791,9 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Add new subtopic?",
-                style: TextStyle(fontSize: 20, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
-              content: const Text("Are you sure?", style: TextStyle()),
+              content: const Text("Are you sure want to add new subtopic?"),
               actions: <Widget>[
                 TextButton(
                   child: const Text(
@@ -939,7 +941,10 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                               onPressed: () {
                                 _updateTitleDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -962,7 +967,10 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                               onPressed: () {
                                 _updateDescriptionsDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -985,7 +993,10 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                               onPressed: () {
                                 _updateYoutubeLinkDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1008,7 +1019,10 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                               onPressed: () {
                                 _updateImageDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1047,8 +1061,8 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Title?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change title?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -1189,8 +1203,8 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Descriptions?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change descriptions?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -1332,8 +1346,8 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Youtube Link?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change youtube link?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(

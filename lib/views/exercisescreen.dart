@@ -90,9 +90,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -134,12 +133,12 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
             topicList.add(Topic.fromJson(v));
           });
         } else {
-          titlecenter = "No Topic Available";
+          titlecenter = "No Exercise available";
           topicList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Topic Available";
+        titlecenter = "No Exercise available";
         topicList.clear();
         setState(() {});
       }
@@ -326,9 +325,8 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -371,13 +369,13 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
             exerciseList.add(Exercise.fromJson(v));
           });
         } else {
-          titlecenter = "No Exercise Available";
+          titlecenter = "No exercise available for this topic";
           topicList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Exercise Available";
+        titlecenter = "No exercise available for this topic";
         topicList.clear();
         setState(() {});
       }
@@ -634,13 +632,13 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
             questionList.add(Question.fromJson(v));
           });
         } else {
-          titlecenter = "No Question Available";
+          titlecenter = "No question available for this exercise";
           questionList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Question Available";
+        titlecenter = "No question available for this exercise";
         questionList.clear();
         setState(() {});
       }

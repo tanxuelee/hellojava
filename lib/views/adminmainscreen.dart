@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hellojava/main.dart';
 import 'package:hellojava/models/admin.dart';
@@ -245,7 +244,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     title: const Text(
                       "Logout?",
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+                      style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
                     content: const Text("Are your sure want to logout?"),
                     actions: <Widget>[

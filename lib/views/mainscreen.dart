@@ -68,112 +68,115 @@ class _MainScreenState extends State<MainScreen> {
             ],
           ),
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              UserAccountsDrawerHeader(
-                accountName: Text(widget.user.name.toString()),
-                accountEmail: Text(widget.user.email.toString()),
-                currentAccountPicture: ClipOval(
-                  child: GestureDetector(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                          child: Hero(
-                            tag: 'profileImage${widget.user.id}',
-                            child: CachedNetworkImage(
-                              imageUrl: CONSTANTS.server +
-                                  '/hellojava/assets/users/${widget.user.id}.jpg' +
-                                  "?v=$val",
-                              fit: BoxFit.contain,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+        drawer: Container(
+          width: screenWidth / 1.2,
+          child: Drawer(
+            child: ListView(
+              children: [
+                UserAccountsDrawerHeader(
+                  accountName: Text(widget.user.name.toString()),
+                  accountEmail: Text(widget.user.email.toString()),
+                  currentAccountPicture: ClipOval(
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            child: Hero(
+                              tag: 'profileImage${widget.user.id}',
+                              child: CachedNetworkImage(
+                                imageUrl: CONSTANTS.server +
+                                    '/hellojava/assets/users/${widget.user.id}.jpg' +
+                                    "?v=$val",
+                                fit: BoxFit.contain,
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                    child: CachedNetworkImage(
-                      imageUrl: CONSTANTS.server +
-                          '/hellojava/assets/users/${widget.user.id}.jpg' +
-                          "?v=$val",
-                      fit: BoxFit.cover,
-                      width: resWidth / 2,
-                      placeholder: (context, url) =>
-                          const LinearProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                        );
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: CONSTANTS.server +
+                            '/hellojava/assets/users/${widget.user.id}.jpg' +
+                            "?v=$val",
+                        fit: BoxFit.cover,
+                        width: resWidth / 2,
+                        placeholder: (context, url) =>
+                            const LinearProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (widget.user.email == "guest@gmail.com")
-                _createDrawerItem(
-                  icon: Icons.location_on_rounded,
-                  text: 'User Manual',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => const UserManualScreen()));
-                  },
-                ),
-              if (widget.user.email == "guest@gmail.com")
-                _createDrawerItem(
-                  icon: Icons.info_outline_rounded,
-                  text: 'About Hello Java',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => const AboutScreen()));
-                  },
-                ),
-              if (widget.user.email == "guest@gmail.com")
-                _createDrawerItem(
-                  icon: Icons.login,
-                  text: 'Login',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => const LoginScreen()));
-                  },
-                ),
-              if (widget.user.email != "guest@gmail.com")
-                _createDrawerItem(
-                  icon: Icons.location_on_rounded,
-                  text: 'User Manual',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => const UserManualScreen()));
-                  },
-                ),
-              if (widget.user.email != "guest@gmail.com")
-                _createDrawerItem(
-                  icon: Icons.info_outline_rounded,
-                  text: 'About Hello Java',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => const AboutScreen()));
-                  },
-                ),
-              if (widget.user.email != "guest@gmail.com")
-                _createDrawerItem(
-                  icon: Icons.logout,
-                  text: 'Logout',
-                  onTap: () {
-                    _logoutDialog();
-                  },
-                ),
-            ],
+                if (widget.user.email == "guest@gmail.com")
+                  _createDrawerItem(
+                    icon: Icons.location_on_rounded,
+                    text: 'User Manual',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (content) => const UserManualScreen()));
+                    },
+                  ),
+                if (widget.user.email == "guest@gmail.com")
+                  _createDrawerItem(
+                    icon: Icons.info_outline_rounded,
+                    text: 'About Hello Java',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (content) => const AboutScreen()));
+                    },
+                  ),
+                if (widget.user.email == "guest@gmail.com")
+                  _createDrawerItem(
+                    icon: Icons.login,
+                    text: 'Login',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (content) => const LoginScreen()));
+                    },
+                  ),
+                if (widget.user.email != "guest@gmail.com")
+                  _createDrawerItem(
+                    icon: Icons.location_on_rounded,
+                    text: 'User Manual',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (content) => const UserManualScreen()));
+                    },
+                  ),
+                if (widget.user.email != "guest@gmail.com")
+                  _createDrawerItem(
+                    icon: Icons.info_outline_rounded,
+                    text: 'About Hello Java',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (content) => const AboutScreen()));
+                    },
+                  ),
+                if (widget.user.email != "guest@gmail.com")
+                  _createDrawerItem(
+                    icon: Icons.logout,
+                    text: 'Logout',
+                    onTap: () {
+                      _logoutDialog();
+                    },
+                  ),
+              ],
+            ),
           ),
         ),
         body: TabBarView(
@@ -224,7 +227,7 @@ class _MainScreenState extends State<MainScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     title: const Text(
                       "Logout?",
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+                      style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
                     content: const Text("Are your sure want to logout?"),
                     actions: <Widget>[
@@ -286,7 +289,7 @@ class _UserManualScreenState extends State<UserManualScreen> {
     'You can read the notes with or without logging in to the account. There are several subtopics available for every main topic for Java. For every subtopic, there are descriptions, image and video available to help you understand the topic better.',
     'You need to login to your account in order to do the exercises. You can choose a main topic from the list and the system will display several exercises related to the selected topic. You can view a hint that will provide some guidance for every question. After answering each question, the system will show whether your answer is correct or not. The system will also keep track of the number of questions that you have answered correctly. If you leave the session, your progress will be lost.',
     'You need to login to your account in order to so the quizzes. Each quiz has a duration of 15 minutes. Once you start the quiz, a timer will appear on the screen to show you how much time is left. You can answer each question by selecting one of the options provided. If you want to change your answer, you can click on the "Clear" button for that question and select a different option. Once you have answered all the questions, you can submit the quiz. After you submit the quiz, you can view your score and review the quiz to see which questions you got right or wrong. The correct answers will be provided. If you leave the quiz without submitting or if the time is up, your progress will be lost.',
-    'To play the game, you need to login first. After logging in, you can select the game mode you want to play. You will be presented with a set of keywords that you need to rearrange in the correct order. To rearrange the keywords, long press on a keyword and drag it to the desired position. There are three game modes available: Easy, Medium, and Hard. Each mode has 5 rounds of the game, and each round will have a different duration of time and number of keywords that need to be rearranged. After each round, the system will show you whether your answer was correct or not. You can view your score and the leaderboard to see the top five of the day for the selected game mode. At the main screen of the game, you also can view the leaderboard for every game mode. If you leave the game without finishing or the time runs out, your progress will be lost.',
+    'To play the game, you need to login first. After logging in, you can select the game mode you want to play. You will be presented with a set of keywords that you need to rearrange in the correct order. To rearrange the keywords, long press on a keyword and drag it to the desired position. There are three game modes available: Easy, Medium, and Hard. Each mode has 5 rounds of the game, and each round will have a different duration of time and number of keywords that need to be rearranged. After each round, the system will show you whether your answer was correct or not. You can view your score and the leaderboard to see the top five of the day who have scored at least 1 mark for the selected game mode. At the main screen of the game, you also can view the leaderboard for every game mode. If you leave the game without finishing or the time runs out, your progress will be lost.',
     'To access your personal information, you need to log in using your registered email address and password. Once you have logged in, you can view your personal information such as your name, email, phone number and profile picture. You can also edit your profile information except for your email address. You can view your own quiz and game scores. To logout from your account, click on the "Logout" button. This will log you out and take you back to the guest mode screen.'
   ];
 
@@ -350,7 +353,7 @@ class _UserManualScreenState extends State<UserManualScreen> {
                                       _functionDescriptions[index],
                                       textAlign: TextAlign.justify,
                                       style: const TextStyle(
-                                        fontSize: 17,
+                                        fontSize: 15,
                                       ),
                                     ),
                                   ),
@@ -489,6 +492,7 @@ class _AboutScreenState extends State<AboutScreen> {
               const Text(
                 'Hello Java is a mobile application designed to help beginners learn the theory of Java programming language. Our app provides a user-friendly interface and comprehensive learning materials to guide you through the fundamental concepts of Java. Hello Java offers various features such as notes, exercises, quizzes, and engaging games to make your learning experience enjoyable and interactive.',
                 style: TextStyle(
+                  fontSize: 15,
                   color: Color(0xFFF4FAFF),
                 ),
                 textAlign: TextAlign.justify,
@@ -497,6 +501,7 @@ class _AboutScreenState extends State<AboutScreen> {
               const Text(
                 'For any queries or feedback, please feel free to reach out to us at the email below: adminhellojava@moneymoney12345.com',
                 style: TextStyle(
+                  fontSize: 15,
                   color: Color(0xFFF4FAFF),
                 ),
                 textAlign: TextAlign.left,

@@ -140,7 +140,7 @@ class _NoteScreenState extends State<NoteScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -153,13 +153,13 @@ class _NoteScreenState extends State<NoteScreen> {
             topicList.add(Topic.fromJson(v));
           });
         } else {
-          titlecenter = "No Topic Available";
+          titlecenter = "No topic available";
           topicList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Topic Available";
+        titlecenter = "No topic available";
         topicList.clear();
         setState(() {});
       }
@@ -286,9 +286,8 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -318,7 +317,7 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -331,13 +330,13 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
             topicList.add(Topic.fromJson(v));
           });
         } else {
-          titlecenter = "No Topic Available";
+          titlecenter = "No subtopic available for this topic";
           topicList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Topic Available";
+        titlecenter = "No subtopic available for this topic";
         topicList.clear();
         setState(() {});
       }
@@ -502,6 +501,26 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                           progressIndicatorColor: const Color(0xFFF9A03F),
                           onReady: () => debugPrint('Video Ready'),
                         )
+                        // YoutubePlayerBuilder(
+                        //   player: YoutubePlayer(
+                        //     controller: _controller,
+                        //     showVideoProgressIndicator: true,
+                        //     progressIndicatorColor: const Color(0xFFF9A03F),
+                        //     onReady: () => debugPrint('Video Ready'),
+                        //   ),
+                        //   builder: (context, player) {
+                        //     if (_controller.value.hasError) {
+                        //       return const Center(
+                        //         child: Icon(
+                        //           Icons.error_outline,
+                        //           color: Colors.red,
+                        //           size: 48.0,
+                        //         ),
+                        //       );
+                        //     }
+                        //     return player;
+                        //   },
+                        // )
                       ],
                     );
                   }),
@@ -528,7 +547,7 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = json.decode(response.body);
@@ -548,7 +567,7 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
         widget.onSubtopicUpdated();
       } else {
         setState(() {
-          titlecenter = "No Data Found";
+          titlecenter = "No data found for this subtopic";
         });
       }
     }).catchError((error) {

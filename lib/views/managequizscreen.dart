@@ -75,7 +75,10 @@ class _ManageQuizScreenState extends State<ManageQuizScreen> {
                                               admin: widget.admin,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -104,7 +107,10 @@ class _ManageQuizScreenState extends State<ManageQuizScreen> {
                                               admin: widget.admin,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -262,12 +268,12 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
             quizList.add(Quiz.fromJson(v));
           });
         } else {
-          titlecenter = "No Quiz Available";
+          titlecenter = "No quiz available";
           quizList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Quiz Available";
+        titlecenter = "No quiz available";
         quizList.clear();
         setState(() {});
       }
@@ -311,8 +317,8 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Add Quiz?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Add quiz?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -439,8 +445,8 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Title?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change title?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -550,7 +556,10 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Quiz?'),
+        title: const Text(
+          'Delete quiz?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
         content: const Text('Are you sure want to delete this quiz?'),
         actions: [
           TextButton(
@@ -692,9 +701,8 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -736,12 +744,12 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
             quizList.add(Quiz.fromJson(v));
           });
         } else {
-          titlecenter = "No Quiz Available";
+          titlecenter = "No quiz available";
           quizList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Quiz Available";
+        titlecenter = "No quiz available";
         quizList.clear();
         setState(() {});
       }
@@ -932,13 +940,13 @@ class _ManageQuizQuestionScreenState extends State<ManageQuizQuestionScreen> {
             quizquestionList.add(QuizQuestion.fromJson(v));
           });
         } else {
-          titlecenter = "No Question Available";
+          titlecenter = "No question available for this quiz";
           quizquestionList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Question Available";
+        titlecenter = "No question available for this quiz";
         quizquestionList.clear();
         setState(() {});
       }
@@ -965,7 +973,10 @@ class _ManageQuizQuestionScreenState extends State<ManageQuizQuestionScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Question?'),
+        title: const Text(
+          'Delete question?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
         content: const Text('Are you sure want to delete this question?'),
         actions: [
           TextButton(
@@ -1334,9 +1345,9 @@ class _AddQuizQuestionScreenState extends State<AddQuizQuestionScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Add new question?",
-                style: TextStyle(fontSize: 20, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
-              content: const Text("Are you sure?", style: TextStyle()),
+              content: const Text("Are you sure want to add new question?"),
               actions: <Widget>[
                 TextButton(
                   child: const Text(
@@ -1489,7 +1500,10 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                               onPressed: () {
                                 _updateQuestionDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1512,7 +1526,10 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                               onPressed: () {
                                 _updateOptionNCorrectAnsDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1551,8 +1568,8 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Question?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change question?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -1693,8 +1710,8 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Option and Correct Answer?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change option and correct answer?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(

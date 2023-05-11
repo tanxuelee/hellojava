@@ -78,7 +78,10 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
                                               admin: widget.admin,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -107,7 +110,10 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
                                               admin: widget.admin,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -271,13 +277,13 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
             userList.add(User.fromJson(v));
           });
         } else {
-          titlecenter = "No User Available";
+          titlecenter = "No user available";
           userList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No User Available";
+        titlecenter = "No user available";
         userList.clear();
         setState(() {});
       }
@@ -304,7 +310,10 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete User Account?'),
+        title: const Text(
+          'Delete user account?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
         content: const Text('Are you sure want to delete this user account?'),
         actions: [
           TextButton(
@@ -499,9 +508,8 @@ class _SelectUserListScreenState extends State<SelectUserListScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -543,13 +551,13 @@ class _SelectUserListScreenState extends State<SelectUserListScreen> {
             userList.add(User.fromJson(v));
           });
         } else {
-          titlecenter = "No User Available";
+          titlecenter = "No user available";
           userList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No User Available";
+        titlecenter = "No user available";
         userList.clear();
         setState(() {});
       }
@@ -643,7 +651,10 @@ class _SelectScoreCategoryScreenState extends State<SelectScoreCategoryScreen> {
                                               quizList: quizList,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -674,7 +685,10 @@ class _SelectScoreCategoryScreenState extends State<SelectScoreCategoryScreen> {
                                               gameList: gameList,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -774,9 +788,8 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -818,13 +831,13 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
             quizList.add(Quiz.fromJson(v));
           });
         } else {
-          titlecenter = "No Quiz List Available";
+          titlecenter = "No quiz available";
           quizList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Quiz List Available";
+        titlecenter = "No quiz available";
         quizList.clear();
         setState(() {});
       }
@@ -1028,12 +1041,12 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
             quizList.add(Quiz.fromJson(v));
           });
         } else {
-          titlecenter = "No Quiz Score Available";
+          titlecenter = "No quiz score available";
           quizList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Quiz Score Available";
+        titlecenter = "No quiz score available";
         quizList.clear();
         setState(() {});
       }
@@ -1060,8 +1073,11 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Score?'),
-        content: const Text('Are you sure want to delete this score?'),
+        title: const Text(
+          'Delete quiz score?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
+        content: const Text('Are you sure want to delete this quiz score?'),
         actions: [
           TextButton(
             onPressed: () {
@@ -1226,9 +1242,8 @@ class _SelectGameListScreenState extends State<SelectGameListScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -1270,13 +1285,13 @@ class _SelectGameListScreenState extends State<SelectGameListScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No Game List Available";
+          titlecenter = "No game list available";
           gameList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Game List Available";
+        titlecenter = "No game list available";
         gameList.clear();
         setState(() {});
       }
@@ -1480,12 +1495,12 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No Game Score Available";
+          titlecenter = "No game score available";
           gameList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Game Score Available";
+        titlecenter = "No game score available";
         gameList.clear();
         setState(() {});
       }
@@ -1512,8 +1527,11 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Score?'),
-        content: const Text('Are you sure want to delete this score?'),
+        title: const Text(
+          'Delete game score?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
+        content: const Text('Are you sure want to delete this game score?'),
         actions: [
           TextButton(
             onPressed: () {

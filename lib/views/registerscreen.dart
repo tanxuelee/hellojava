@@ -106,6 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               TextFormField(
+                                maxLength: 35,
                                 controller: nameController,
                                 decoration: InputDecoration(
                                   isDense: true,
@@ -113,6 +114,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   labelText: 'Name',
                                   filled: true,
                                   fillColor: Colors.white,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  counterStyle:
+                                      const TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
@@ -144,6 +149,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   labelText: "Email Address",
                                   filled: true,
                                   fillColor: Colors.white,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
@@ -174,6 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               const SizedBox(height: 10),
                               TextFormField(
+                                maxLength: 11,
                                 controller: phoneController,
                                 keyboardType:
                                     const TextInputType.numberWithOptions(),
@@ -186,6 +194,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   labelText: 'Phone Number',
                                   filled: true,
                                   fillColor: Colors.white,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  counterStyle:
+                                      const TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0)),
                                   errorStyle:
@@ -205,6 +217,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your phone number';
                                   }
+                                  if (value.length < 10) {
+                                    return 'Phone number must be at least 10 digits';
+                                  }
                                   return null;
                                 },
                               ),
@@ -218,6 +233,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     labelText: "Password",
                                     filled: true,
                                     fillColor: Colors.white,
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
@@ -265,6 +282,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     labelText: "Re-enter Password",
                                     filled: true,
                                     fillColor: Colors.white,
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
@@ -478,9 +497,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Register new account",
-                style: TextStyle(fontSize: 20, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
-              content: const Text("Are you sure?", style: TextStyle()),
+              content: const Text("Are you sure want to register new account?"),
               actions: <Widget>[
                 TextButton(
                   child: const Text(
@@ -533,11 +552,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SnackBar(
               content: Text(
                 data['message'],
-                style: TextStyle(color: Color(0xFF4F646F)),
+                style: const TextStyle(color: Color(0xFF4F646F)),
                 textAlign: TextAlign.center,
               ),
-              duration: Duration(seconds: 2),
-              backgroundColor: Color(0xFFF4FAFF),
+              duration: const Duration(seconds: 2),
+              backgroundColor: const Color(0xFFF4FAFF),
               behavior: SnackBarBehavior
                   .fixed, // Ensures the snackbar sticks to the bottom
             ),
@@ -551,8 +570,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               style: const TextStyle(color: Color(0xFFF4FAFF)),
               textAlign: TextAlign.center,
             ),
-            duration: Duration(seconds: 2),
-            backgroundColor: Color(0xFFAB3232),
+            duration: const Duration(seconds: 2),
+            backgroundColor: const Color(0xFFAB3232),
             behavior: SnackBarBehavior
                 .fixed, // Ensures the snackbar sticks to the bottom
           ),

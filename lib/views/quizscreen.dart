@@ -88,9 +88,8 @@ class _QuizScreenState extends State<QuizScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -132,12 +131,12 @@ class _QuizScreenState extends State<QuizScreen> {
             quizList.add(Quiz.fromJson(v));
           });
         } else {
-          titlecenter = "No Quiz Available";
+          titlecenter = "No quiz available";
           quizList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Quiz Available";
+        titlecenter = "No quiz available";
         quizList.clear();
         setState(() {});
       }
@@ -217,7 +216,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Start the quiz now?",
-                style: TextStyle(),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               content: const Text(
                 "Please note that the quiz will only have a duration of 15 minutes. Once you click 'Start', the timer will begin and you will have to complete the quiz within the given time.",
@@ -319,7 +318,10 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
               backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text('Time is up!'),
+              title: const Text(
+                'Time is up!',
+                style: TextStyle(fontSize: 18, color: Colors.black),
+              ),
               content: const Text(
                   'Your score won\'t be saved. You can do the quiz again.'),
               actions: [
@@ -366,7 +368,10 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
-            title: const Text('Do you really want to leave?'),
+            title: const Text(
+              'Do you really want to leave?',
+              style: TextStyle(fontSize: 18, color: Colors.black),
+            ),
             content: const Text('All progress will be lost.'),
             actions: [
               TextButton(
@@ -584,8 +589,11 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20.0))),
-                            title:
-                                const Text('Are you sure you want to submit?'),
+                            title: const Text(
+                              'Are you sure you want to submit?',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.black),
+                            ),
                             content: const Text(
                                 'You cannot change your answers after submitting.'),
                             actions: [
@@ -650,13 +658,13 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
             quizquestionList.add(QuizQuestion.fromJson(v));
           });
         } else {
-          titlecenter = "No Question Available";
+          titlecenter = "No question available for this quiz";
           quizquestionList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Question Available";
+        titlecenter = "No question available for this quiz";
         quizquestionList.clear();
         setState(() {});
       }
@@ -737,7 +745,10 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                 backgroundColor: const Color(0xFFF4F4F4),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text('Quiz Score'),
+                title: const Text(
+                  'Quiz score',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
                 content: Text(
                   'Your score is $totalScore / ${quizquestionList.length}',
                 ),
@@ -775,7 +786,10 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
               backgroundColor: const Color(0xFFF4F4F4),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text('Error'),
+              title: const Text(
+                'Error',
+                style: TextStyle(fontSize: 18, color: Colors.black),
+              ),
               content: const Text(
                   'An error occurred while saving your quiz score, please try it again.'),
               actions: [

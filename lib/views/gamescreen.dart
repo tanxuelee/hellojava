@@ -79,8 +79,8 @@ class _GameScreenState extends State<GameScreen> {
                     'Has five keywords',
                     style: TextStyle(color: Color(0xFF4F646F)),
                   ),
-                  trailing: const Icon(Icons.arrow_forward_ios_rounded,
-                      color: Color(0xFFF9A03F)),
+                  trailing: const Icon(Icons.arrow_right,
+                      size: 30, color: Color(0xFFF9A03F)),
                   onTap: _clickPlayEasyModeButton,
                 ),
               ),
@@ -100,8 +100,8 @@ class _GameScreenState extends State<GameScreen> {
                     'Has seven keywords',
                     style: TextStyle(color: Color(0xFF4F646F)),
                   ),
-                  trailing: const Icon(Icons.arrow_forward_ios_rounded,
-                      color: Color(0xFFF9A03F)),
+                  trailing: const Icon(Icons.arrow_right,
+                      size: 30, color: Color(0xFFF9A03F)),
                   onTap: _clickPlayMediumModeButton,
                 ),
               ),
@@ -121,8 +121,8 @@ class _GameScreenState extends State<GameScreen> {
                     'Has ten keywords',
                     style: TextStyle(color: Color(0xFF4F646F)),
                   ),
-                  trailing: const Icon(Icons.arrow_forward_ios_rounded,
-                      color: Color(0xFFF9A03F)),
+                  trailing: const Icon(Icons.arrow_right,
+                      size: 30, color: Color(0xFFF9A03F)),
                   onTap: _clickPlayHardModeButton,
                 ),
               ),
@@ -228,7 +228,7 @@ class _GameScreenState extends State<GameScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Play easy mode now?",
-                style: TextStyle(),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               content: const SingleChildScrollView(
                 child: Text(
@@ -297,7 +297,7 @@ class _GameScreenState extends State<GameScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Play medium mode now?",
-                style: TextStyle(),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               content: const SingleChildScrollView(
                 child: Text(
@@ -361,7 +361,7 @@ class _GameScreenState extends State<GameScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Play hard mode now?",
-                style: TextStyle(),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
               content: const SingleChildScrollView(
                 child: Text(
@@ -498,9 +498,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -542,13 +541,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No Game List Available";
+          titlecenter = "No game list available";
           gameList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Game List Available";
+        titlecenter = "No game list available";
         gameList.clear();
         setState(() {});
       }
@@ -860,12 +859,12 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No Data Available";
+          titlecenter = "No data available for this game";
           gameList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Data Available";
+        titlecenter = "No data available for this game";
         gameList.clear();
         setState(() {});
       }

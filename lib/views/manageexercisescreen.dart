@@ -73,7 +73,10 @@ class _ManageExerciseScreenState extends State<ManageExerciseScreen> {
                                               admin: widget.admin,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -102,7 +105,10 @@ class _ManageExerciseScreenState extends State<ManageExerciseScreen> {
                                               admin: widget.admin,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -202,9 +208,8 @@ class _SelectTopicScreenState extends State<SelectTopicScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -246,12 +251,12 @@ class _SelectTopicScreenState extends State<SelectTopicScreen> {
             topicList.add(Topic.fromJson(v));
           });
         } else {
-          titlecenter = "No Topic Available";
+          titlecenter = "No exercise available";
           topicList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Topic Available";
+        titlecenter = "No exercise available";
         topicList.clear();
         setState(() {});
       }
@@ -424,13 +429,13 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
             exerciseList.add(Exercise.fromJson(v));
           });
         } else {
-          titlecenter = "No Exercise Available";
+          titlecenter = "No exercise available for this topic";
           topicList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Exercise Available";
+        titlecenter = "No exercise available for this topic";
         topicList.clear();
         setState(() {});
       }
@@ -474,8 +479,8 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Add Exercise?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Add exercise?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -603,8 +608,8 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Title?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change title?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -717,7 +722,10 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Exercise?'),
+        title: const Text(
+          'Delete exercise?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
         content: const Text('Are you sure want to delete this exercise?'),
         actions: [
           TextButton(
@@ -861,9 +869,8 @@ class _SelectTopicScreen2State extends State<SelectTopicScreen2> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -903,12 +910,12 @@ class _SelectTopicScreen2State extends State<SelectTopicScreen2> {
             topicList.add(Topic.fromJson(v));
           });
         } else {
-          titlecenter = "No Topic Available";
+          titlecenter = "No exercise available for this topic";
           topicList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Topic Available";
+        titlecenter = "No exercise available for this topic";
         topicList.clear();
         setState(() {});
       }
@@ -1019,9 +1026,8 @@ class _SelectExerciseListScreenState extends State<SelectExerciseListScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -1064,13 +1070,13 @@ class _SelectExerciseListScreenState extends State<SelectExerciseListScreen> {
             exerciseList.add(Exercise.fromJson(v));
           });
         } else {
-          titlecenter = "No Exercise Available";
+          titlecenter = "No exercise available for this topic";
           topicList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Exercise Available";
+        titlecenter = "No exercise available for this topic";
         topicList.clear();
         setState(() {});
       }
@@ -1266,13 +1272,13 @@ class _ManageQuestionScreenState extends State<ManageQuestionScreen> {
             questionList.add(Question.fromJson(v));
           });
         } else {
-          titlecenter = "No Question Available";
+          titlecenter = "No question available for this exercise";
           questionList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Question Available";
+        titlecenter = "No question available for this exercise";
         questionList.clear();
         setState(() {});
       }
@@ -1299,7 +1305,10 @@ class _ManageQuestionScreenState extends State<ManageQuestionScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Question?'),
+        title: const Text(
+          'Delete question?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
         content: const Text('Are you sure want to delete this question?'),
         actions: [
           TextButton(
@@ -1706,9 +1715,9 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
               title: const Text(
                 "Add new question?",
-                style: TextStyle(fontSize: 20, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
-              content: const Text("Are you sure?", style: TextStyle()),
+              content: const Text("Are you sure want to add new question?"),
               actions: <Widget>[
                 TextButton(
                   child: const Text(
@@ -1865,7 +1874,10 @@ class _EditExerciseQuestionScreenState
                               onPressed: () {
                                 _updateQuestionDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1888,7 +1900,10 @@ class _EditExerciseQuestionScreenState
                               onPressed: () {
                                 _updateHintDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1911,7 +1926,10 @@ class _EditExerciseQuestionScreenState
                               onPressed: () {
                                 _updateOptionNCorrectAnsDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1950,8 +1968,8 @@ class _EditExerciseQuestionScreenState
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Question?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change question?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -2093,8 +2111,8 @@ class _EditExerciseQuestionScreenState
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Hint?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change hint?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -2235,8 +2253,8 @@ class _EditExerciseQuestionScreenState
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Option and Correct Answer?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change option and correct answer?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(

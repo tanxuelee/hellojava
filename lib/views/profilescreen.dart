@@ -132,27 +132,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Text(
                                     widget.user.name.toString(),
                                     style: const TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  // Row(
-                                  //   children: [
-                                  //     Icon(Icons.email,
-                                  //         size: 20,
-                                  //         color:
-                                  //             Theme.of(context).primaryColor),
                                   Text(" " + widget.user.email.toString()),
-                                  //   ],
-                                  // ),
-                                  // Row(
-                                  //   children: [
-                                  //     Icon(Icons.phone,
-                                  //         size: 20,
-                                  //         color:
-                                  //             Theme.of(context).primaryColor),
                                   Text(" " + widget.user.phone.toString()),
-                                  //   ],
-                                  // ),
                                 ],
                               ),
                             ),
@@ -185,7 +169,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: ListTile(
                               leading: const Icon(Icons.login),
                               title: const Text("Login",
-                                  style: TextStyle(fontSize: 15)),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
                                     Navigator.push(
@@ -194,7 +180,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             builder: (content) =>
                                                 const LoginScreen()));
                                   },
-                                  icon: const Icon(Icons.arrow_right),
+                                  icon: const Icon(
+                                    Icons.arrow_right,
+                                    size: 30,
+                                  ),
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
@@ -214,7 +203,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: ListTile(
                               leading: const Icon(Icons.edit),
                               title: const Text("Edit Profile",
-                                  style: TextStyle(fontSize: 15)),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
                                     Navigator.push(
@@ -225,7 +216,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   user: widget.user,
                                                 )));
                                   },
-                                  icon: const Icon(Icons.arrow_right),
+                                  icon: const Icon(
+                                    Icons.arrow_right,
+                                    size: 30,
+                                  ),
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
@@ -240,7 +234,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: ListTile(
                               leading: const Icon(Icons.scoreboard),
                               title: const Text("View Score",
-                                  style: TextStyle(fontSize: 15)),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
                                     Navigator.push(
@@ -251,7 +247,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   user: widget.user,
                                                 )));
                                   },
-                                  icon: const Icon(Icons.arrow_right),
+                                  icon: const Icon(
+                                    Icons.arrow_right,
+                                    size: 30,
+                                  ),
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
@@ -266,12 +265,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: ListTile(
                               leading: const Icon(Icons.logout),
                               title: const Text("Logout",
-                                  style: TextStyle(fontSize: 15)),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
                                     _logoutDialog();
                                   },
-                                  icon: const Icon(Icons.arrow_right),
+                                  icon: const Icon(
+                                    Icons.arrow_right,
+                                    size: 30,
+                                  ),
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
@@ -310,7 +314,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     title: const Text(
                       "Logout?",
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+                      style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
                     content: const Text("Are your sure want to logout?"),
                     actions: <Widget>[
@@ -421,7 +425,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               onPressed: () {
                                 _updateNameDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -444,7 +451,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               onPressed: () {
                                 _updatePhoneDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -467,7 +477,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               onPressed: () {
                                 _changePasswordDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -490,7 +503,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               onPressed: () {
                                 _updateImageDialog();
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -529,13 +545,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Name?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change name?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
                               key: _formKey,
                               child: TextFormField(
+                                maxLength: 35,
                                 controller: nameController,
                                 decoration: InputDecoration(
                                   isDense: true,
@@ -670,13 +687,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Phone Number?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change phone number?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
                               key: _formKey,
                               child: TextFormField(
+                                maxLength: 11,
                                 controller: phoneController,
                                 keyboardType:
                                     const TextInputType.numberWithOptions(),
@@ -705,6 +723,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your new phone number';
+                                  }
+                                  if (value.length < 10) {
+                                    return 'Must be at least 10 digits';
                                   }
                                   return null;
                                 },
@@ -815,8 +836,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           title: const Text(
-                            "Change Password?",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            "Change password?",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                           content: SingleChildScrollView(
                             child: Form(
@@ -875,7 +896,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       return null;
                                     },
                                   ),
-                                  const SizedBox(height: 5),
+                                  const SizedBox(height: 10),
                                   TextFormField(
                                     controller: newpasswordController,
                                     obscureText: newpasswordVisible,
@@ -1225,7 +1246,10 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
                                               user: widget.user,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1253,7 +1277,10 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
                                               user: widget.user,
                                             )));
                               },
-                              icon: const Icon(Icons.arrow_forward_ios_rounded),
+                              icon: const Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
                               color: const Color(0xFFF9A03F)),
                         ),
                       ],
@@ -1346,9 +1373,8 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -1390,13 +1416,13 @@ class _QuizListScreenState extends State<QuizListScreen> {
             quizList.add(Quiz.fromJson(v));
           });
         } else {
-          titlecenter = "No Quiz List Available";
+          titlecenter = "No quiz available";
           quizList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Quiz List Available";
+        titlecenter = "No quiz available";
         quizList.clear();
         setState(() {});
       }
@@ -1600,12 +1626,12 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
             quizList.add(Quiz.fromJson(v));
           });
         } else {
-          titlecenter = "No Quiz Score Available";
+          titlecenter = "No quiz score available for this quiz";
           quizList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Quiz Score Available";
+        titlecenter = "No quiz score available for this quiz";
         quizList.clear();
         setState(() {});
       }
@@ -1632,8 +1658,11 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Score?'),
-        content: const Text('Are you sure want to delete this score?'),
+        title: const Text(
+          'Delete quiz score?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
+        content: const Text('Are you sure want to delete this quiz score?'),
         actions: [
           TextButton(
             onPressed: () {
@@ -1791,9 +1820,8 @@ class _GameListScreenState extends State<GameListScreen> {
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xFFF9A03F)),
+                                    trailing: const Icon(Icons.arrow_right,
+                                        size: 30, color: Color(0xFFF9A03F)),
                                   ),
                                 ],
                               )),
@@ -1835,13 +1863,13 @@ class _GameListScreenState extends State<GameListScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No Game List Available";
+          titlecenter = "No game list available";
           gameList.clear();
         }
         setState(() {});
       } else {
         //do something
-        titlecenter = "No Game List Available";
+        titlecenter = "No game list available";
         gameList.clear();
         setState(() {});
       }
@@ -2045,12 +2073,12 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No Game Score Available";
+          titlecenter = "No game score available for this game";
           gameList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No Game Score Available";
+        titlecenter = "No game score available for this game";
         gameList.clear();
         setState(() {});
       }
@@ -2077,8 +2105,11 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
         backgroundColor: const Color(0xFFF4F4F4),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text('Delete Score?'),
-        content: const Text('Are you sure want to delete this score?'),
+        title: const Text(
+          'Delete game score?',
+          style: TextStyle(fontSize: 18, color: Colors.black),
+        ),
+        content: const Text('Are you sure want to delete this game score?'),
         actions: [
           TextButton(
             onPressed: () {
