@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hellojava/models/user.dart';
 import 'package:hellojava/views/mainscreen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() => runApp(const MyApp());
 
@@ -52,14 +53,15 @@ class MySplashScreen extends StatefulWidget {
 }
 
 class MySplashScreenState extends State<MySplashScreen> {
-  late double screenWeight, screenWidth;
+  late double screenHeight, screenWidth, resWidth;
+
   @override
   void initState() {
     super.initState();
     User user = User(
         id: '0',
         name: 'Guest',
-        email: 'guest@gmail.com',
+        email: 'guest@hellojava.com',
         phone: '0123456789',
         datereg: '0',
         verified: '0');
@@ -71,8 +73,13 @@ class MySplashScreenState extends State<MySplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    screenWeight = MediaQuery.of(context).size.height;
+    screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth <= 600) {
+      resWidth = screenWidth;
+    } else {
+      resWidth = screenWidth * 0.75;
+    }
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -86,7 +93,10 @@ class MySplashScreenState extends State<MySplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              CircularProgressIndicator(),
+              SpinKitFadingCircle(
+                size: 48,
+                color: Color(0xFF4F646F),
+              ),
             ],
           ),
         )

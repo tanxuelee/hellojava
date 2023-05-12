@@ -44,6 +44,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
           ),
         ),
         drawer: Drawer(
+          width: screenWidth / 1.1,
           child: ListView(
             children: [
               UserAccountsDrawerHeader(
@@ -228,52 +229,79 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
   }
 
   void _logoutDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return Center(
-          child: SingleChildScrollView(
-            child: StatefulBuilder(
-              builder: (context, StateSetter setState) {
-                return GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {},
-                  child: AlertDialog(
-                    backgroundColor: const Color(0xFFF4F4F4),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    title: const Text(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
                       "Logout?",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    content: const Text("Are your sure want to logout?"),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text(
-                          "Yes",
-                          style: TextStyle(),
-                        ),
-                        onPressed: () async {
-                          Navigator.of(context).pop();
-                          Navigator.push(
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      "Are you sure you want to logout?",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Yes",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (content) => const MyApp()));
-                        },
-                      ),
-                      TextButton(
-                        child: const Text(
-                          "No",
-                          style: TextStyle(),
+                                  builder: (context) => const MyApp()),
+                            );
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "No",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
                       ),
                     ],
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ),
         );

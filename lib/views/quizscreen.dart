@@ -156,7 +156,7 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   _clickQuizButton(int index) {
-    if (widget.user.email == "guest@gmail.com") {
+    if (widget.user.email == "guest@hellojava.com") {
       _loadOptions();
     } else {
       _startConfirmation(index);
@@ -164,95 +164,146 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   _loadOptions() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Center(
-              child: Text(
-                "Please login first!",
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-            ),
-            content: SizedBox(
-              height: 50,
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _onLogin();
-                },
-                child: const Text(
-                  "Login",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return Container(
+          color: const Color(0xFFF4F4F4),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "Please login first!",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0))),
-                  backgroundColor: MaterialStateProperty.all(
-                    const Color(0xFFF9A03F),
+              ),
+              const Divider(
+                height: 2,
+                color: Colors.grey,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _onLogin();
+                      },
+                      child: const Text('Login'),
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 1,
+                    height: 48,
+                    color: Colors.grey,
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          );
-        });
+            ],
+          ),
+        );
+      },
+    );
   }
 
   _startConfirmation(int index) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                "Start the quiz now?",
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const Text(
-                "Please note that the quiz will only have a duration of 15 minutes. Once you click 'Start', the timer will begin and you will have to complete the quiz within the given time.",
-                textAlign: TextAlign.justify,
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text(
-                    "Start",
-                    style: TextStyle(),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Start the quiz now?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => QuizQuestionsScreen(
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      "Please note that the quiz will only have a duration of 15 minutes. Once you click 'Start', the timer will begin and you will have to complete the quiz within the given time.",
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Start",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (content) => QuizQuestionsScreen(
                                   user: widget.user,
                                   index: index,
                                   quizList: quizList,
-                                )));
-                  },
-                ),
-                TextButton(
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   void _onLogin() {
@@ -311,29 +362,60 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
         } else {
           _timer.cancel();
           // Show the dialog that the time is up
-          showDialog(
+          showModalBottomSheet(
             context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                'Time is up!',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const Text(
-                  'Your score won\'t be saved. You can do the quiz again.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Exit'),
+            isScrollControlled: true,
+            isDismissible: false,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Container(
+                    color: const Color(0xFFF4F4F4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            'Time is up!',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                          child: Text(
+                            'Your score won\'t be saved. You can do the quiz again.',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        const Divider(
+                          height: 2,
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Exit'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ],
-            ),
+              );
+            },
           );
         }
       });
@@ -360,30 +442,68 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        bool confirm = await showDialog(
+        bool? confirm = await showModalBottomSheet<bool>(
           context: context,
-          barrierDismissible: false,
-          builder: (context) => AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            ),
-            title: const Text(
-              'Do you really want to leave?',
-              style: TextStyle(fontSize: 18, color: Colors.black),
-            ),
-            content: const Text('All progress will be lost.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Leave'),
+          isScrollControlled: true,
+          isDismissible: false,
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: Container(
+                  color: const Color(0xFFF4F4F4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          'Do you really want to leave?',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                        child: Text(
+                          'All progress will be lost.',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                      const Divider(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: const Text('Leave'),
+                            ),
+                          ),
+                          Container(
+                            width: 1,
+                            height: 48,
+                            color: Colors.grey,
+                          ),
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: const Text('Cancel'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Cancel'),
-              ),
-            ],
-          ),
+            );
+          },
         );
         return confirm ?? false;
       },
@@ -581,38 +701,79 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         _timer.cancel();
-                        showDialog(
+                        showModalBottomSheet(
                           context: context,
-                          barrierDismissible: false,
-                          builder: (context) => AlertDialog(
-                            backgroundColor: const Color(0xFFF4F4F4),
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0))),
-                            title: const Text(
-                              'Are you sure you want to submit?',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
-                            ),
-                            content: const Text(
-                                'You cannot change your answers after submitting.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  _submitQuiz(numCorrectAnswers);
-                                },
-                                child: const Text('Submit'),
+                          isScrollControlled: true,
+                          isDismissible: false,
+                          builder: (BuildContext context) {
+                            return SingleChildScrollView(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom,
+                                ),
+                                child: Container(
+                                  color: const Color(0xFFF4F4F4),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      const Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Text(
+                                          'Are you sure you want to submit?',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      const Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(16, 0, 16, 25),
+                                        child: Text(
+                                          'You cannot change your answers after submitting.',
+                                          style: TextStyle(fontSize: 15),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      const Divider(
+                                        height: 2,
+                                        color: Colors.grey,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Expanded(
+                                            child: TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                _submitQuiz(numCorrectAnswers);
+                                              },
+                                              child: const Text('Submit'),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 1,
+                                            height: 48,
+                                            color: Colors.grey,
+                                          ),
+                                          Expanded(
+                                            child: TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                startTimer();
+                                              },
+                                              child: const Text('Cancel'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  startTimer();
-                                },
-                                child: const Text('Cancel'),
-                              ),
-                            ],
-                          ),
+                            );
+                          },
                         );
                       },
                       child: const Text(
@@ -735,69 +896,221 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 && data['status'] == 'success') {
         // Show the score and review of the quiz
-        showDialog(
+        if (totalScore > 5) {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            isDismissible: false,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Container(
+                    color: const Color(0xFFF4F4F4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            'Congratulations!',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                          child: Text(
+                            'You have finished the quiz. Your score is $totalScore / ${quizquestionList.length}.',
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        const Divider(
+                          height: 2,
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => QuizReviewScreen(
+                                        quizQuestions: quizquestionList,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Review'),
+                              ),
+                            ),
+                            Container(
+                              width: 1,
+                              height: 48,
+                              color: Colors.grey,
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (content) =>
+                                          MainScreen(user: widget.user),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Exit'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        } else {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            isDismissible: false,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Container(
+                    color: const Color(0xFFF4F4F4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            'Good job!',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                          child: Text(
+                            'You have finished the quiz. Your score is $totalScore / ${quizquestionList.length}. Better luck next time!',
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        const Divider(
+                          height: 2,
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => QuizReviewScreen(
+                                        quizQuestions: quizquestionList,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Review'),
+                              ),
+                            ),
+                            Container(
+                              width: 1,
+                              height: 48,
+                              color: Colors.grey,
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (content) =>
+                                          MainScreen(user: widget.user),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Exit'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        }
+      } else {
+        showModalBottomSheet(
           context: context,
+          isScrollControlled: true,
+          isDismissible: false,
           builder: (BuildContext context) {
-            return GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () {},
-              child: AlertDialog(
-                backgroundColor: const Color(0xFFF4F4F4),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text(
-                  'Quiz score',
-                  style: TextStyle(fontSize: 18, color: Colors.black),
+            return SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                content: Text(
-                  'Your score is $totalScore / ${quizquestionList.length}',
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QuizReviewScreen(
-                          quizQuestions: quizquestionList,
+                child: Container(
+                  color: const Color(0xFFF4F4F4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          'Error!',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                    child: const Text('Review'),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                        child: Text(
+                          'An error occurred while saving your quiz score, please try again.',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                      const Divider(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) =>
-                                MainScreen(user: widget.user))),
-                    child: const Text('Exit'),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      } else {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                'Error',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const Text(
-                  'An error occurred while saving your quiz score, please try it again.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('OK'),
                 ),
-              ],
+              ),
             );
           },
         );

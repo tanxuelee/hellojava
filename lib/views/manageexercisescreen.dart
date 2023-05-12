@@ -238,7 +238,7 @@ class _SelectTopicScreenState extends State<SelectTopicScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -416,7 +416,7 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -457,97 +457,111 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
   _addExerciseListDialog() {
     exerciseTitleController.text = "";
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 350,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Add exercise?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Add exercise?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: exerciseTitleController,
+                        decoration: InputDecoration(
+                          labelText: 'Title',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                controller: exerciseTitleController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Title',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter the new title';
-                                  }
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  _addExercise();
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the new title';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              _addExercise();
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -586,99 +600,113 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
   _editExerciseListDialog(int index) {
     exerciseTitleController.text = exerciseList[index].exerciseTitle.toString();
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 350,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change title?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change title?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: exerciseTitleController,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          labelText: 'Title',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                controller: exerciseTitleController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Title',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter the new title';
-                                  }
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newtitle =
-                                      exerciseTitleController.text;
-                                  _updateTitle(newtitle, index);
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the new title';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String newtitle = exerciseTitleController.text;
+                              _updateTitle(newtitle, index);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -715,34 +743,73 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
   }
 
   _deleteExerciseListDialog(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete exercise?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this exercise?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteExercise(index);
-            },
-            child: const Text('Delete'),
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Delete exercise?',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this exercise?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteExercise(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -897,7 +964,7 @@ class _SelectTopicScreen2State extends State<SelectTopicScreen2> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1057,7 +1124,7 @@ class _SelectExerciseListScreenState extends State<SelectExerciseListScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1259,7 +1326,7 @@ class _ManageQuestionScreenState extends State<ManageQuestionScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1298,34 +1365,71 @@ class _ManageQuestionScreenState extends State<ManageQuestionScreen> {
   }
 
   _deleteExerciseQuestionDialog(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete question?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this question?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteQuestion(index);
-            },
-            child: const Text('Delete'),
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Delete question?',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this question?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteQuestion(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -1437,6 +1541,12 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              const Text(
+                                "Please complete the form below:",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 20),
                               TextFormField(
                                 controller: questionTitleController,
                                 maxLines: null,
@@ -1472,7 +1582,7 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                               TextFormField(
                                 controller: questionHintController,
                                 maxLines: null,
@@ -1508,7 +1618,7 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                               TextFormField(
                                 controller: optionAController,
                                 maxLength: 100,
@@ -1540,6 +1650,10 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter the option A of this question';
+                                  }
+                                  if (value == optionBController.text ||
+                                      value == optionCController.text) {
+                                    return 'Options cannot be the same';
                                   }
                                   return null;
                                 },
@@ -1577,6 +1691,10 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter the option B of this question';
                                   }
+                                  if (value == optionAController.text ||
+                                      value == optionCController.text) {
+                                    return 'Options cannot be the same';
+                                  }
                                   return null;
                                 },
                               ),
@@ -1612,6 +1730,10 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter the option C of this question';
+                                  }
+                                  if (value == optionAController.text ||
+                                      value == optionBController.text) {
+                                    return 'Options cannot be the same';
                                   }
                                   return null;
                                 },
@@ -1703,42 +1825,76 @@ class _AddExerciseQuestionScreenState extends State<AddExerciseQuestionScreen> {
   void _addQuestiondialog() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      showDialog(
+      showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
+        isDismissible: false,
         builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                "Add new question?",
-                style: TextStyle(fontSize: 18, color: Colors.black),
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
-              content: const Text("Are you sure want to add new question?"),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text(
-                    "Yes",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    _addQuestion();
-                  },
+              child: Container(
+                color: const Color(0xFFF4F4F4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        "Add new question?",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                      child: Text(
+                        "Are you sure want to add new question?",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: Colors.grey,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            child: const Text(
+                              "Yes",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () async {
+                              Navigator.of(context).pop();
+                              _addQuestion();
+                            },
+                          ),
+                        ),
+                        Container(
+                          width: 1,
+                          height: 48,
+                          color: Colors.grey,
+                        ),
+                        Expanded(
+                          child: TextButton(
+                            child: const Text(
+                              "No",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                TextButton(
-                  child: const Text(
-                    "No",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+              ),
             ),
           );
         },
@@ -1946,100 +2102,114 @@ class _EditExerciseQuestionScreenState
 
   void _updateQuestionDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 350,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change question?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change question?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: questionTitleController,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          labelText: 'Question',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                controller: questionTitleController,
-                                maxLines: null,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Question',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter the new question';
-                                  }
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newquestion =
-                                      questionTitleController.text;
-                                  _updateQuestion(newquestion);
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the new question';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String newquestion = questionTitleController.text;
+                              _updateQuestion(newquestion);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -2089,99 +2259,112 @@ class _EditExerciseQuestionScreenState
 
   void _updateHintDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: screenHeight / 1.2,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change hint?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change hint?",
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: questionHintController,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          labelText: 'Hint',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                controller: questionHintController,
-                                maxLines: null,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Hint',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter the new hint';
-                                  }
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newhint = questionHintController.text;
-                                  _updateHint(newhint);
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the new hint';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String newhint = questionHintController.text;
+                              _updateHint(newhint);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -2231,218 +2414,234 @@ class _EditExerciseQuestionScreenState
 
   void _updateOptionNCorrectAnsDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: screenHeight / 1.3,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change option and correct answer?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change option and correct answer?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: optionAController,
+                            maxLength: 100,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelText: 'Option A',
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              errorStyle:
+                                  const TextStyle(color: Color(0xFFAB3232)),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFF9A03F),
+                                  width: 2,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFF9A03F),
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the new option A of this question';
+                              }
+                              if (value == optionBController.text ||
+                                  value == optionCController.text) {
+                                return 'Options cannot be the same';
+                              }
+                              return null;
+                            },
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    controller: optionAController,
-                                    maxLength: 100,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      labelText: 'Option A',
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0)),
-                                      errorStyle: const TextStyle(
-                                          color: Color(0xFFAB3232)),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter the new option A of this question';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 5),
-                                  TextFormField(
-                                    controller: optionBController,
-                                    maxLength: 100,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      labelText: 'Option B',
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0)),
-                                      errorStyle: const TextStyle(
-                                          color: Color(0xFFAB3232)),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter the new option B of this question';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 5),
-                                  TextFormField(
-                                    controller: optionCController,
-                                    maxLength: 100,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      labelText: 'Option C',
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0)),
-                                      errorStyle: const TextStyle(
-                                          color: Color(0xFFAB3232)),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter the new option C of this question';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 5),
-                                  TextFormField(
-                                    controller: correctAnswerController,
-                                    maxLength: 100,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      labelText: 'Correct Answer',
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0)),
-                                      errorStyle: const TextStyle(
-                                          color: Color(0xFFAB3232)),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xFFF9A03F), width: 2),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter the new correct answer of this question';
-                                      }
-                                      if (value != optionAController.text &&
-                                          value != optionBController.text &&
-                                          value != optionCController.text) {
-                                        return 'The correct answer must match one of the options';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
+                          const SizedBox(height: 5),
+                          TextFormField(
+                            controller: optionBController,
+                            maxLength: 100,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelText: 'Option B',
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              errorStyle:
+                                  const TextStyle(color: Color(0xFFAB3232)),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
                               ),
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the new option B of this question';
+                              }
+                              if (value == optionAController.text ||
+                                  value == optionCController.text) {
+                                return 'Options cannot be the same';
+                              }
+                              return null;
+                            },
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
+                          const SizedBox(height: 5),
+                          TextFormField(
+                            controller: optionCController,
+                            maxLength: 100,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelText: 'Option C',
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              errorStyle:
+                                  const TextStyle(color: Color(0xFFAB3232)),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
                               ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String optionA = optionAController.text;
-                                  String optionB = optionBController.text;
-                                  String optionC = optionCController.text;
-                                  String correctAnswer =
-                                      correctAnswerController.text;
-                                  _changeOptionNAnswer(
-                                      optionA, optionB, optionC, correctAnswer);
-                                }
-                              },
-                            ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
                               ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
                             ),
-                          ],
-                        ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the new option C of this question';
+                              }
+                              if (value == optionAController.text ||
+                                  value == optionBController.text) {
+                                return 'Options cannot be the same';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 5),
+                          TextFormField(
+                            controller: correctAnswerController,
+                            maxLength: 100,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelText: 'Correct Answer',
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              errorStyle:
+                                  const TextStyle(color: Color(0xFFAB3232)),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                    color: Color(0xFFF9A03F), width: 2),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the new correct answer of this question';
+                              }
+                              if (value != optionAController.text &&
+                                  value != optionBController.text &&
+                                  value != optionCController.text) {
+                                return 'The correct answer must match one of the options';
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String optionA = optionAController.text;
+                              String optionB = optionBController.text;
+                              String optionC = optionCController.text;
+                              String correctAnswer =
+                                  correctAnswerController.text;
+                              _changeOptionNAnswer(
+                                  optionA, optionB, optionC, correctAnswer);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );

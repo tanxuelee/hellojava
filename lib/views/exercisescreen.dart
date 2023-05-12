@@ -158,7 +158,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   }
 
   _clickExerciseButton(int index) {
-    if (widget.user.email == "guest@gmail.com") {
+    if (widget.user.email == "guest@hellojava.com") {
       _loadOptions();
     } else {
       Navigator.push(
@@ -173,43 +173,59 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   }
 
   _loadOptions() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Center(
-              child: Text(
-                "Please login first!",
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-            ),
-            content: SizedBox(
-              height: 50,
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _onLogin();
-                },
-                child: const Text(
-                  "Login",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return Container(
+          color: const Color(0xFFF4F4F4),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "Please login first!",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0))),
-                  backgroundColor: MaterialStateProperty.all(
-                    const Color(0xFFF9A03F),
+              ),
+              const Divider(
+                height: 2,
+                color: Colors.grey,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _onLogin();
+                      },
+                      child: const Text('Login'),
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 1,
+                    height: 48,
+                    color: Colors.grey,
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          );
-        });
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _onLogin() {
@@ -688,30 +704,59 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
   }
 
   void _showHintDialog(int index) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text("Hint:",
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-              content: SingleChildScrollView(
-                  child: Text(questionList[index].hint.toString(),
-                      style:
-                          const TextStyle(fontSize: 15, color: Colors.black))),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Close'),
-                ),
-              ],
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-          );
-        });
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Hint of the question",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      questionList[index].hint.toString(),
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

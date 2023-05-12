@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                             const Text(
-                              "Remember Me",
+                              "Remember me",
                               style: TextStyle(color: Colors.white),
                             )
                           ],
@@ -210,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             const Text(
-                              "First time user? ",
+                              "Forgot your password? ",
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white),
                             ),
@@ -220,10 +220,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (content) =>
-                                            const RegisterScreen()))
+                                            const ForgotPasswordScreen()))
                               },
                               child: const Text(
-                                " Create Account",
+                                " Click here",
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -237,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             const Text(
-                              "Forgot Password? ",
+                              "New here? ",
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white),
                             ),
@@ -247,10 +247,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (content) =>
-                                            const ForgotPasswordScreen()))
+                                            const RegisterScreen()))
                               },
                               child: const Text(
-                                " Click Here",
+                                " Create an account",
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

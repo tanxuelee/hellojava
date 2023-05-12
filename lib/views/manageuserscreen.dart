@@ -195,7 +195,7 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
                                 color: Theme.of(context).primaryColor),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          columnSpacing: 30.0,
+                          columnSpacing: 20.0,
                           dividerThickness: 2.0,
                           columns: [
                             const DataColumn(
@@ -264,7 +264,7 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -303,34 +303,73 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
   }
 
   _confirmationDelete(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete user account?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this user account?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteUser(index);
-            },
-            child: const Text('Delete'),
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Delete user account?',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this user account?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteUser(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -391,20 +430,32 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
   }
 
   void _moreDetails(int index) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text("User Details:",
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-              content: SingleChildScrollView(
-                  child: Text(
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "User details",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
                       'Name: ' +
                           userList[index].name.toString() +
                           '\nEmail: ' +
@@ -413,17 +464,33 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
                           userList[index].phone.toString() +
                           '\nRegistration Date:\n' +
                           userList[index].datereg.toString(),
-                      style:
-                          const TextStyle(fontSize: 15, color: Colors.black))),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Close'),
-                ),
-              ],
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -538,7 +605,7 @@ class _SelectUserListScreenState extends State<SelectUserListScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -818,7 +885,7 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1028,7 +1095,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1066,34 +1133,73 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
   }
 
   _confirmationDelete(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete quiz score?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this quiz score?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteScore(index);
-            },
-            child: const Text('Delete'),
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Delete quiz score?',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this quiz score?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteScore(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -1272,7 +1378,7 @@ class _SelectGameListScreenState extends State<SelectGameListScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1482,7 +1588,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -1520,34 +1626,73 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
   }
 
   _confirmationDelete(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete game score?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this game score?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteScore(index);
-            },
-            child: const Text('Delete'),
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Delete game score?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this game score?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteScore(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

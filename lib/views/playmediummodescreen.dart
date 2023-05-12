@@ -121,29 +121,60 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
         } else {
           _timer.cancel();
           // Show the dialog that the time is up
-          showDialog(
+          showModalBottomSheet(
             context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                'Time is up!',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const Text(
-                  'Your score won\'t be saved. You can play the game again.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Exit'),
+            isScrollControlled: true,
+            isDismissible: false,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Container(
+                    color: const Color(0xFFF4F4F4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            'Time is up!',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                          child: Text(
+                            'Your score won\'t be saved. You can play the game again.',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        const Divider(
+                          height: 2,
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Exit'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ],
-            ),
+              );
+            },
           );
         }
       });
@@ -169,30 +200,70 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
       ignoring: showingToast,
       child: WillPopScope(
         onWillPop: () async {
-          bool confirm = await showDialog(
+          bool? confirm = await showModalBottomSheet<bool>(
             context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              ),
-              title: const Text(
-                'Do you really want to leave?',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const Text('All progress will be lost.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text('Leave'),
+            isScrollControlled: true,
+            isDismissible: false,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Container(
+                    color: const Color(0xFFF4F4F4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            'Do you really want to leave?',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                          child: Text(
+                            'All progress will be lost.',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        const Divider(
+                          height: 2,
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(true),
+                                child: const Text('Leave'),
+                              ),
+                            ),
+                            Container(
+                              width: 1,
+                              height: 48,
+                              color: Colors.grey,
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
+                                child: const Text('Cancel'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text('Cancel'),
-                ),
-              ],
-            ),
+              );
+            },
           );
           return confirm ?? false;
         },
@@ -341,103 +412,199 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 && data['status'] == 'success') {
         if (totalScore > 0) {
-          showDialog(
+          showModalBottomSheet(
             context: context,
-            barrierDismissible: false,
+            isScrollControlled: true,
+            isDismissible: false,
             builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: const Color(0xFFF4F4F4),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text(
-                  'Congratulations!',
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-                content: Text(
-                    'You have finished the game and obtained a score of $totalScore.'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LeaderboardScreen(
-                          user: widget.user,
-                        ),
+              return Container(
+                color: const Color(0xFFF4F4F4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        'Congratulations!',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    child: const Text('View Leaderboard'),
-                  ),
-                  TextButton(
-                    child: const Text('Exit'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                      child: Text(
+                        'You have finished the game and obtained a score of $totalScore.',
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: Colors.grey,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LeaderboardScreen(
+                                  user: widget.user,
+                                ),
+                              ),
+                            ),
+                            child: const Text('View Leaderboard'),
+                          ),
+                        ),
+                        Container(
+                          width: 1,
+                          height: 48,
+                          color: Colors.grey,
+                        ),
+                        Expanded(
+                          child: TextButton(
+                            child: const Text('Exit'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               );
             },
           );
         } else {
-          showDialog(
+          showModalBottomSheet(
             context: context,
-            barrierDismissible: false,
+            isScrollControlled: true,
+            isDismissible: false,
             builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: const Color(0xFFF4F4F4),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                title: const Text(
-                  'Game over!',
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-                content: Text(
-                    'You have finished the game and obtained a score of $totalScore. Better luck next time!'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LeaderboardScreen(
-                          user: widget.user,
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Container(
+                    color: const Color(0xFFF4F4F4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            'Game over!',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                          child: Text(
+                            'You have finished the game and obtained a score of $totalScore. Better luck next time!',
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        const Divider(
+                          height: 2,
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LeaderboardScreen(
+                                      user: widget.user,
+                                    ),
+                                  ),
+                                ),
+                                child: const Text('View Leaderboard'),
+                              ),
+                            ),
+                            Container(
+                              width: 1,
+                              height: 48,
+                              color: Colors.grey,
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                child: const Text('Exit'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    child: const Text('View Leaderboard'),
                   ),
-                  TextButton(
-                    child: const Text('Exit'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+                ),
               );
             },
           );
         }
       } else {
-        showDialog(
+        showModalBottomSheet(
           context: context,
-          barrierDismissible: false,
+          isScrollControlled: true,
+          isDismissible: false,
           builder: (BuildContext context) {
-            return AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                'Error',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const Text(
-                  'An error occurred while saving your game score, please try it again.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('OK'),
+            return SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-              ],
+                child: Container(
+                  color: const Color(0xFFF4F4F4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          'Error!',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                        child: Text(
+                          'An error occurred while saving your game score, please try again.',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                      const Divider(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             );
           },
         );

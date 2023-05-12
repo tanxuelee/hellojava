@@ -79,23 +79,41 @@ class _MainScreenState extends State<MainScreen> {
                   currentAccountPicture: ClipOval(
                     child: GestureDetector(
                       onTap: () {
-                        showDialog(
+                        showGeneralDialog(
                           context: context,
-                          builder: (context) => Dialog(
-                            child: Hero(
-                              tag: 'profileImage${widget.user.id}',
-                              child: CachedNetworkImage(
-                                imageUrl: CONSTANTS.server +
-                                    '/hellojava/assets/users/${widget.user.id}.jpg' +
-                                    "?v=$val",
-                                fit: BoxFit.contain,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+                          barrierDismissible:
+                              true, // Allow dismissing by tapping outside
+                          barrierLabel: MaterialLocalizations.of(context)
+                              .modalBarrierDismissLabel,
+                          pageBuilder: (BuildContext context,
+                              Animation<double> animation,
+                              Animation<double> secondaryAnimation) {
+                            return Dialog(
+                              child: Hero(
+                                tag: 'profileImage${widget.user.id}',
+                                child: CachedNetworkImage(
+                                  imageUrl: CONSTANTS.server +
+                                      '/hellojava/assets/users/${widget.user.id}.jpg' +
+                                      "?v=$val",
+                                  fit: BoxFit.contain,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
+                          transitionBuilder: (BuildContext context,
+                              Animation<double> animation,
+                              Animation<double> secondaryAnimation,
+                              Widget child) {
+                            return ScaleTransition(
+                              scale: Tween<double>(begin: 0.5, end: 1.0)
+                                  .animate(animation),
+                              child: child,
+                            );
+                          },
                         );
                       },
                       child: CachedNetworkImage(
@@ -112,7 +130,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                 ),
-                if (widget.user.email == "guest@gmail.com")
+                if (widget.user.email == "guest@hellojava.com")
                   _createDrawerItem(
                     icon: Icons.location_on_rounded,
                     text: 'User Manual',
@@ -123,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
                               builder: (content) => const UserManualScreen()));
                     },
                   ),
-                if (widget.user.email == "guest@gmail.com")
+                if (widget.user.email == "guest@hellojava.com")
                   _createDrawerItem(
                     icon: Icons.info_outline_rounded,
                     text: 'About Hello Java',
@@ -134,7 +152,7 @@ class _MainScreenState extends State<MainScreen> {
                               builder: (content) => const AboutScreen()));
                     },
                   ),
-                if (widget.user.email == "guest@gmail.com")
+                if (widget.user.email == "guest@hellojava.com")
                   _createDrawerItem(
                     icon: Icons.login,
                     text: 'Login',
@@ -145,7 +163,7 @@ class _MainScreenState extends State<MainScreen> {
                               builder: (content) => const LoginScreen()));
                     },
                   ),
-                if (widget.user.email != "guest@gmail.com")
+                if (widget.user.email != "guest@hellojava.com")
                   _createDrawerItem(
                     icon: Icons.location_on_rounded,
                     text: 'User Manual',
@@ -156,7 +174,7 @@ class _MainScreenState extends State<MainScreen> {
                               builder: (content) => const UserManualScreen()));
                     },
                   ),
-                if (widget.user.email != "guest@gmail.com")
+                if (widget.user.email != "guest@hellojava.com")
                   _createDrawerItem(
                     icon: Icons.info_outline_rounded,
                     text: 'About Hello Java',
@@ -167,7 +185,7 @@ class _MainScreenState extends State<MainScreen> {
                               builder: (content) => const AboutScreen()));
                     },
                   ),
-                if (widget.user.email != "guest@gmail.com")
+                if (widget.user.email != "guest@hellojava.com")
                   _createDrawerItem(
                     icon: Icons.logout,
                     text: 'Logout',
@@ -211,52 +229,79 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _logoutDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return Center(
-          child: SingleChildScrollView(
-            child: StatefulBuilder(
-              builder: (context, StateSetter setState) {
-                return GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {},
-                  child: AlertDialog(
-                    backgroundColor: const Color(0xFFF4F4F4),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    title: const Text(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
                       "Logout?",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    content: const Text("Are your sure want to logout?"),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text(
-                          "Yes",
-                          style: TextStyle(),
-                        ),
-                        onPressed: () async {
-                          Navigator.of(context).pop();
-                          Navigator.push(
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      "Are you sure you want to logout?",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Yes",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (content) => const MyApp()));
-                        },
-                      ),
-                      TextButton(
-                        child: const Text(
-                          "No",
-                          style: TextStyle(),
+                                  builder: (context) => const MyApp()),
+                            );
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "No",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
                       ),
                     ],
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ),
         );

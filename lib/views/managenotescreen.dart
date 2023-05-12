@@ -122,7 +122,7 @@ class _ManageNoteScreenState extends State<ManageNoteScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -316,7 +316,7 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
             timeInSecForIosWeb: 3,
             fontSize: 14,
             backgroundColor: const Color(0xFFAB3232));
-        throw SocketException("Connection timed out");
+        throw const SocketException("Connection timed out");
       },
     ).then((response) {
       var jsondata = jsonDecode(response.body);
@@ -355,34 +355,73 @@ class _ManageSubTopicScreenState extends State<ManageSubTopicScreen> {
   }
 
   _deleteSubTopicDialog(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete subtopic?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this subtopic?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteSubtopic(index);
-            },
-            child: const Text('Delete'),
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Delete subtopic?',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this subtopic?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteSubtopic(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -490,6 +529,12 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              const Text(
+                                "Please complete the form below:",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 20),
                               TextFormField(
                                 controller: subtopicTitleController,
                                 decoration: InputDecoration(
@@ -524,7 +569,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                               TextFormField(
                                 controller: subtopicDescriptionController,
                                 maxLines: null,
@@ -560,7 +605,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                               Container(
                                 decoration: const BoxDecoration(
                                   boxShadow: [
@@ -598,7 +643,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                               TextFormField(
                                 controller: youtubeLinkController,
                                 decoration: InputDecoration(
@@ -690,7 +735,7 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          color: const Color(0xFFF4FAFF),
+          color: const Color(0xFFF4F4F4),
           child: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -779,42 +824,76 @@ class _AddNoteSubtopicScreenState extends State<AddNoteSubtopicScreen> {
   void _addsubtopicdialog() {
     if (_formKey.currentState!.validate() && _image != null) {
       _formKey.currentState!.save();
-      showDialog(
+      showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
+        isDismissible: false,
         builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                "Add new subtopic?",
-                style: TextStyle(fontSize: 18, color: Colors.black),
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
-              content: const Text("Are you sure want to add new subtopic?"),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text(
-                    "Yes",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    _addSubtopic();
-                  },
+              child: Container(
+                color: const Color(0xFFF4F4F4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        "Add new subtopic?",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                      child: Text(
+                        "Are you sure want to add new subtopic?",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: Colors.grey,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            child: const Text(
+                              "Yes",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () async {
+                              Navigator.of(context).pop();
+                              _addSubtopic();
+                            },
+                          ),
+                        ),
+                        Container(
+                          width: 1,
+                          height: 48,
+                          color: Colors.grey,
+                        ),
+                        Expanded(
+                          child: TextButton(
+                            child: const Text(
+                              "No",
+                              style: TextStyle(),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                TextButton(
-                  child: const Text(
-                    "No",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+              ),
             ),
           );
         },
@@ -1039,99 +1118,112 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
 
   void _updateTitleDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 350,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change title?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change title?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: subtopicTitleController,
+                        decoration: InputDecoration(
+                          labelText: 'Title',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                controller: subtopicTitleController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Title',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter the new title';
-                                  }
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newtitle =
-                                      subtopicTitleController.text;
-                                  _updateTitle(newtitle);
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the new title';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String newtitle = subtopicTitleController.text;
+                              _updateTitle(newtitle);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -1181,100 +1273,115 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
 
   void _updateDescriptionsDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: screenHeight / 1.2,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change descriptions?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change descriptions?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: subtopicDescriptionController,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          labelText: 'Descriptions',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                controller: subtopicDescriptionController,
-                                maxLines: null,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Descriptions',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter the new descriptions';
-                                  }
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newdescription =
-                                      subtopicDescriptionController.text;
-                                  _updateDescription(newdescription);
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the new descriptions';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String newdescription =
+                                  subtopicDescriptionController.text;
+                              _updateDescription(newdescription);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -1324,108 +1431,122 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
 
   void _updateYoutubeLinkDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 350,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change youtube link?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change youtube link?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: youtubeLinkController,
+                        decoration: InputDecoration(
+                          labelText: 'Youtube Link',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                controller: youtubeLinkController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Youtube Link',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  final pattern =
-                                      r'(?:http(?:s)?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/)?([a-zA-Z0-9\-_]+)';
-                                  final regex = RegExp(pattern);
-
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter the new youtube link';
-                                  }
-
-                                  if (!regex.hasMatch(value)) {
-                                    return 'Please enter a valid youtube link';
-                                  }
-
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newyoutubelink =
-                                      youtubeLinkController.text;
-                                  _updateYoutubeLink(newyoutubelink);
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          final pattern =
+                              r'(?:http(?:s)?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/)?([a-zA-Z0-9\-_]+)';
+                          final regex = RegExp(pattern);
+
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the new youtube link';
+                          }
+
+                          if (!regex.hasMatch(value)) {
+                            return 'Please enter a valid youtube link';
+                          }
+
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String newyoutubelink =
+                                  youtubeLinkController.text;
+                              _updateYoutubeLink(newyoutubelink);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -1478,7 +1599,7 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          color: const Color(0xFFF4FAFF),
+          color: const Color(0xFFF4F4F4),
           child: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.min,

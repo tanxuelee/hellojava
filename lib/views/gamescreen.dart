@@ -167,7 +167,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _clickPlayEasyModeButton() {
-    if (widget.user.email == "guest@gmail.com") {
+    if (widget.user.email == "guest@hellojava.com") {
       _loadOptions();
     } else {
       _easyModeConfirmation();
@@ -175,99 +175,147 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   _loadOptions() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: const Color(0xFFF4F4F4),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Center(
-              child: Text(
-                "Please login first!",
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-            ),
-            content: SizedBox(
-              height: 50,
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _onLogin();
-                },
-                child: const Text(
-                  "Login",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return Container(
+          color: const Color(0xFFF4F4F4),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "Please login first!",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0))),
-                  backgroundColor: MaterialStateProperty.all(
-                    const Color(0xFFF9A03F),
+              ),
+              const Divider(
+                height: 2,
+                color: Colors.grey,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _onLogin();
+                      },
+                      child: const Text('Login'),
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 1,
+                    height: 48,
+                    color: Colors.grey,
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          );
-        });
+            ],
+          ),
+        );
+      },
+    );
   }
 
   _easyModeConfirmation() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                "Play easy mode now?",
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const SingleChildScrollView(
-                child: Text(
-                  "1. You have 10 minutes to complete five rounds." +
-                      "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
-                      "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
-                      "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              actions: [
-                TextButton(
-                  child: const Text(
-                    "Play",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => PlayEasyModeScreen(
-                                  user: widget.user,
-                                )));
-                  },
-                ),
-                TextButton(
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-          );
-        });
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Play easy mode now?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      "1. You have 10 minutes to complete five rounds." +
+                          "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
+                          "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
+                          "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Play",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (content) => PlayEasyModeScreen(
+                                  user: widget.user,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _onLogin() {
@@ -276,7 +324,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _clickPlayMediumModeButton() {
-    if (widget.user.email == "guest@gmail.com") {
+    if (widget.user.email == "guest@hellojava.com") {
       _loadOptions();
     } else {
       _mediumModeConfirmation();
@@ -284,63 +332,92 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _mediumModeConfirmation() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                "Play medium mode now?",
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const SingleChildScrollView(
-                child: Text(
-                  "1. You have 15 minutes to complete five rounds." +
-                      "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
-                      "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
-                      "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              actions: [
-                TextButton(
-                  child: const Text(
-                    "Play",
-                    style: TextStyle(),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return Container(
+          color: const Color(0xFFF4F4F4),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    "Play medium mode now?",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => PlayMediumModeScreen(
-                                  user: widget.user,
-                                )));
-                  },
                 ),
-                TextButton(
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                  child: Text(
+                    "1. You have 15 minutes to complete five rounds." +
+                        "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
+                        "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
+                        "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(fontSize: 15),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                ),
+                const Divider(
+                  height: 2,
+                  color: Colors.grey,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        child: const Text(
+                          "Play",
+                          style: TextStyle(),
+                        ),
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (content) => PlayMediumModeScreen(
+                                user: widget.user,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: 1,
+                      height: 48,
+                      color: Colors.grey,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   void _clickPlayHardModeButton() {
-    if (widget.user.email == "guest@gmail.com") {
+    if (widget.user.email == "guest@hellojava.com") {
       _loadOptions();
     } else {
       _hardModeConfirmation();
@@ -348,63 +425,95 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _hardModeConfirmation() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                "Play hard mode now?",
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const SingleChildScrollView(
-                child: Text(
-                  "1. You have 20 minutes to complete five rounds." +
-                      "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
-                      "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
-                      "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              actions: [
-                TextButton(
-                  child: const Text(
-                    "Play",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (content) => PlayHardModeScreen(
-                                  user: widget.user,
-                                )));
-                  },
-                ),
-                TextButton(
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-          );
-        });
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Play hard mode now?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      "1. You have 20 minutes to complete five rounds." +
+                          "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
+                          "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
+                          "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Play",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (content) => PlayHardModeScreen(
+                                  user: widget.user,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _clickLeaderboardButton() {
-    if (widget.user.email == "guest@gmail.com") {
+    if (widget.user.email == "guest@hellojava.com") {
       _loadOptions();
     } else {
       Navigator.push(

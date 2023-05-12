@@ -83,23 +83,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               padding: const EdgeInsets.all(10.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  showDialog(
+                                  showGeneralDialog(
                                     context: context,
-                                    builder: (context) => Dialog(
-                                      child: Hero(
-                                        tag: 'profileImage${widget.user.id}',
-                                        child: CachedNetworkImage(
-                                          imageUrl: CONSTANTS.server +
-                                              '/hellojava/assets/users/${widget.user.id}.jpg' +
-                                              "?v=$val",
-                                          fit: BoxFit.contain,
-                                          placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
+                                    barrierDismissible:
+                                        true, // Allow dismissing by tapping outside
+                                    barrierLabel:
+                                        MaterialLocalizations.of(context)
+                                            .modalBarrierDismissLabel,
+                                    pageBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation) {
+                                      return Dialog(
+                                        child: Hero(
+                                          tag: 'profileImage${widget.user.id}',
+                                          child: CachedNetworkImage(
+                                            imageUrl: CONSTANTS.server +
+                                                '/hellojava/assets/users/${widget.user.id}.jpg' +
+                                                "?v=$val",
+                                            fit: BoxFit.contain,
+                                            placeholder: (context, url) =>
+                                                const CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    const Icon(Icons.error),
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    },
+                                    transitionBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation,
+                                        Widget child) {
+                                      return ScaleTransition(
+                                        scale:
+                                            Tween<double>(begin: 0.5, end: 1.0)
+                                                .animate(animation),
+                                        child: child,
+                                      );
+                                    },
                                   );
                                 },
                                 child: ClipOval(
@@ -155,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 width: resWidth,
                 child: Column(
                   children: [
-                    if (widget.user.email == "guest@gmail.com")
+                    if (widget.user.email == "guest@hellojava.com")
                       const Divider(
                         height: 2,
                         color: Colors.grey,
@@ -163,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ListView(
                       shrinkWrap: true,
                       children: [
-                        if (widget.user.email == "guest@gmail.com")
+                        if (widget.user.email == "guest@hellojava.com")
                           Container(
                             color: Colors.white,
                             child: ListTile(
@@ -187,17 +208,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
-                        if (widget.user.email == "guest@gmail.com")
+                        if (widget.user.email == "guest@hellojava.com")
                           const Divider(
                             height: 2,
                             color: Colors.grey,
                           ),
-                        if (widget.user.email != "guest@gmail.com")
+                        if (widget.user.email != "guest@hellojava.com")
                           const Divider(
                             height: 2,
                             color: Colors.grey,
                           ),
-                        if (widget.user.email != "guest@gmail.com")
+                        if (widget.user.email != "guest@hellojava.com")
                           Container(
                             color: Colors.white,
                             child: ListTile(
@@ -223,12 +244,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
-                        if (widget.user.email != "guest@gmail.com")
+                        if (widget.user.email != "guest@hellojava.com")
                           const Divider(
                             height: 2,
                             color: Colors.grey,
                           ),
-                        if (widget.user.email != "guest@gmail.com")
+                        if (widget.user.email != "guest@hellojava.com")
                           Container(
                             color: Colors.white,
                             child: ListTile(
@@ -254,12 +275,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
-                        if (widget.user.email != "guest@gmail.com")
+                        if (widget.user.email != "guest@hellojava.com")
                           const Divider(
                             height: 2,
                             color: Colors.grey,
                           ),
-                        if (widget.user.email != "guest@gmail.com")
+                        if (widget.user.email != "guest@hellojava.com")
                           Container(
                             color: Colors.white,
                             child: ListTile(
@@ -279,7 +300,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: const Color(0xFFF9A03F)),
                             ),
                           ),
-                        if (widget.user.email != "guest@gmail.com")
+                        if (widget.user.email != "guest@hellojava.com")
                           const Divider(
                             height: 2,
                             color: Colors.grey,
@@ -297,53 +318,79 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _logoutDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return Center(
-          child: SingleChildScrollView(
-            child: StatefulBuilder(
-              builder: (context, StateSetter setState) {
-                return GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {},
-                  child: AlertDialog(
-                    backgroundColor: const Color(0xFFF4F4F4),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    title: const Text(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
                       "Logout?",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    content: const Text("Are your sure want to logout?"),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text(
-                          "Yes",
-                          style: TextStyle(),
-                        ),
-                        onPressed: () async {
-                          Navigator.of(context).pop();
-                          Navigator.push(
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      "Are you sure you want to logout?",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Yes",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (content) => const MyApp()));
-                        },
-                      ),
-                      TextButton(
-                        child: const Text(
-                          "No",
-                          style: TextStyle(),
+                                  builder: (context) => const MyApp()),
+                            );
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "No",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
                       ),
                     ],
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ),
         );
@@ -523,68 +570,81 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _updateNameDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 350,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change name?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
-                          ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                maxLength: 35,
-                                controller: nameController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Name',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
+            return SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: Container(
+                  color: const Color(0xFFF4F4F4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          "Change name?",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                        child: Form(
+                          key: _formKey,
+                          child: TextFormField(
+                            maxLength: 35,
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelText: 'Name',
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              errorStyle:
+                                  const TextStyle(color: Color(0xFFAB3232)),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFF9A03F),
+                                  width: 2,
                                 ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your new name';
-                                  }
-                                  return null;
-                                },
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFF9A03F),
+                                  width: 2,
+                                ),
                               ),
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your new name';
+                              }
+                              return null;
+                            },
                           ),
-                          actions: <Widget>[
-                            TextButton(
+                        ),
+                      ),
+                      const Divider(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: TextButton(
                               child: const Text(
                                 "Confirm",
                                 style: TextStyle(),
@@ -597,7 +657,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 }
                               },
                             ),
-                            TextButton(
+                          ),
+                          Container(
+                            width: 1,
+                            height: 48,
+                            color: Colors.grey,
+                          ),
+                          Expanded(
+                            child: TextButton(
                               child: const Text(
                                 "Cancel",
                                 style: TextStyle(),
@@ -607,12 +674,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 _formKey.currentState!.reset();
                               },
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             );
           },
@@ -665,106 +732,120 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _updatePhoneDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, StateSetter setState) {
-            return Center(
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 350,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change phone number?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Change phone number?",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        maxLength: 11,
+                        controller: phoneController,
+                        keyboardType: TextInputType.numberWithOptions(),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: InputDecoration(
+                          labelText: 'Phone Number',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
                           ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                maxLength: 11,
-                                controller: phoneController,
-                                keyboardType:
-                                    const TextInputType.numberWithOptions(),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                decoration: InputDecoration(
-                                  labelText: 'Phone Number',
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  errorStyle:
-                                      const TextStyle(color: Color(0xFFAB3232)),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xFFF9A03F), width: 2),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your new phone number';
-                                  }
-                                  if (value.length < 10) {
-                                    return 'Must be at least 10 digits';
-                                  }
-                                  return null;
-                                },
-                              ),
+                          errorStyle: const TextStyle(color: Color(0xFFAB3232)),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context).pop();
-                                  String newphone = phoneController.text;
-                                  _updatePhone(newphone);
-                                }
-                              },
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF9A03F),
+                              width: 2,
                             ),
-                            TextButton(
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your new phone number';
+                          }
+                          if (value.length < 10) {
+                            return 'Must be at least 10 digits';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Confirm",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop();
+                              String newphone = phoneController.text;
+                              _updatePhone(newphone);
+                            }
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _formKey.currentState!.reset();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            );
-          },
+            ),
+          ),
         );
       },
     );
@@ -814,144 +895,147 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _changePasswordDialog() {
     final _formKey = GlobalKey<FormState>();
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
+      isScrollControlled: true,
+      isDismissible: false,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: screenHeight / 1.3,
-                    child: SingleChildScrollView(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {},
-                        child: AlertDialog(
-                          backgroundColor: const Color(0xFFF4F4F4),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          title: const Text(
-                            "Change password?",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
-                          ),
-                          content: SingleChildScrollView(
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  const Text(
-                                      "Password must be at least 6 characters"),
-                                  const SizedBox(height: 10),
-                                  TextFormField(
-                                    controller: oldpasswordController,
-                                    obscureText: oldpasswordVisible,
-                                    decoration: InputDecoration(
-                                        labelText: 'Old Password',
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        errorStyle: const TextStyle(
-                                            color: Color(0xFFAB3232)),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6.0),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFFF9A03F),
-                                              width: 2),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6.0),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFFF9A03F),
-                                              width: 2),
-                                        ),
-                                        suffixIcon: IconButton(
-                                          icon: Icon(
-                                            oldpasswordVisible
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              oldpasswordVisible =
-                                                  !oldpasswordVisible;
-                                            });
-                                          },
-                                        )),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your old password';
-                                      }
-                                      if (value.length < 6) {
-                                        return "Password must be at least 6 characters";
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 10),
-                                  TextFormField(
-                                    controller: newpasswordController,
-                                    obscureText: newpasswordVisible,
-                                    decoration: InputDecoration(
-                                        labelText: 'New Password',
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        errorStyle: const TextStyle(
-                                            color: Color(0xFFAB3232)),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6.0),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFFF9A03F),
-                                              width: 2),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6.0),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFFF9A03F),
-                                              width: 2),
-                                        ),
-                                        suffixIcon: IconButton(
-                                          icon: Icon(
-                                            newpasswordVisible
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              newpasswordVisible =
-                                                  !newpasswordVisible;
-                                            });
-                                          },
-                                        )),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your new password';
-                                      }
-                                      if (value.length < 6) {
-                                        return "Password must be at least 6 characters";
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
+            return SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: Container(
+                  color: const Color(0xFFF4F4F4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          'Change password?',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              const Text(
+                                "You are unable to change the password if it contains less than 6 characters",
+                                style: TextStyle(fontSize: 15),
+                                textAlign: TextAlign.center,
                               ),
-                            ),
+                              const SizedBox(height: 20),
+                              TextFormField(
+                                controller: oldpasswordController,
+                                obscureText: oldpasswordVisible,
+                                decoration: InputDecoration(
+                                    labelText: 'Old Password',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    errorStyle: const TextStyle(
+                                        color: Color(0xFFAB3232)),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        oldpasswordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          oldpasswordVisible =
+                                              !oldpasswordVisible;
+                                        });
+                                      },
+                                    )),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your old password';
+                                  }
+                                  if (value.length < 6) {
+                                    return "Password must be at least 6 characters";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              TextFormField(
+                                controller: newpasswordController,
+                                obscureText: newpasswordVisible,
+                                decoration: InputDecoration(
+                                    labelText: 'New Password',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    errorStyle: const TextStyle(
+                                        color: Color(0xFFAB3232)),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFFF9A03F), width: 2),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        newpasswordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          newpasswordVisible =
+                                              !newpasswordVisible;
+                                        });
+                                      },
+                                    )),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your new password';
+                                  }
+                                  if (value.length < 6) {
+                                    return "Password must be at least 6 characters";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
                           ),
-                          actions: <Widget>[
-                            TextButton(
+                        ),
+                      ),
+                      const Divider(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: TextButton(
                               child: const Text(
                                 "Confirm",
                                 style: TextStyle(),
@@ -968,7 +1052,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 _formKey.currentState!.reset();
                               },
                             ),
-                            TextButton(
+                          ),
+                          Container(
+                            width: 1,
+                            height: 48,
+                            color: Colors.grey,
+                          ),
+                          Expanded(
+                            child: TextButton(
                               child: const Text(
                                 "Cancel",
                                 style: TextStyle(),
@@ -978,12 +1069,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 _formKey.currentState!.reset();
                               },
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             );
           },
@@ -1054,7 +1145,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          color: const Color(0xFFF4FAFF),
+          color: const Color(0xFFF4F4F4),
           child: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -1651,34 +1742,73 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
   }
 
   _confirmationDelete(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete quiz score?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this quiz score?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteScore(index);
-            },
-            child: const Text('Delete'),
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Delete quiz score?',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this quiz score?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteScore(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -2098,34 +2228,73 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
   }
 
   _confirmationDelete(int index) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFFF4F4F4),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        title: const Text(
-          'Delete game score?',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-        content: const Text('Are you sure want to delete this game score?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _deleteScore(index);
-            },
-            child: const Text('Delete'),
+      isScrollControlled: true,
+      isDismissible: false,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              color: const Color(0xFFF4F4F4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Delete game score?',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                    child: Text(
+                      'Are you sure want to delete this game score?',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const Divider(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _deleteScore(index);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 48,
+                        color: Colors.grey,
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

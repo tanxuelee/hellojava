@@ -358,7 +358,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   const Text(
-                                    "Already register? ",
+                                    "Have an account? ",
                                     style: TextStyle(
                                         fontSize: 16, color: Colors.white),
                                   ),
@@ -396,7 +396,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          color: const Color(0xFFF4FAFF),
+          color: const Color(0xFFF4F4F4),
           child: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -485,40 +485,63 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void _registerUserdialog() {
     if (_formKey.currentState!.validate() && _image != null) {
       _formKey.currentState!.save();
-      showDialog(
+      showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
+        isDismissible: false,
         builder: (BuildContext context) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: AlertDialog(
-              backgroundColor: const Color(0xFFF4F4F4),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              title: const Text(
-                "Register new account",
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-              content: const Text("Are you sure want to register new account?"),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text(
-                    "Yes",
-                    style: TextStyle(),
+          return Container(
+            color: const Color(0xFFF4F4F4),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    "Register new account",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    _registerUser();
-                  },
                 ),
-                TextButton(
-                  child: const Text(
-                    "No",
-                    style: TextStyle(),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
+                  child: Text(
+                    "Are you sure want to register a new account?",
+                    style: TextStyle(fontSize: 15),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                ),
+                const Divider(
+                  height: 2,
+                  color: Colors.grey,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        child: const Text(
+                          "Yes",
+                          style: TextStyle(),
+                        ),
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          _registerUser();
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: 1,
+                      height: 48,
+                      color: Colors.grey,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('No'),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
