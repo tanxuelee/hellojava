@@ -60,9 +60,9 @@ class MySplashScreenState extends State<MySplashScreen> {
     super.initState();
     User user = User(
         id: '0',
-        name: 'Guest',
+        name: 'Guest Mode',
         email: 'guest@hellojava.com',
-        phone: '0123456789',
+        phone: '0',
         datereg: '0',
         verified: '0');
     Timer(

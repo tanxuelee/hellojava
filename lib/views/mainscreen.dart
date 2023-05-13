@@ -75,7 +75,10 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 UserAccountsDrawerHeader(
                   accountName: Text(widget.user.name.toString()),
-                  accountEmail: Text(widget.user.email.toString()),
+                  accountEmail:
+                      widget.user.email.toString() != 'guest@hellojava.com'
+                          ? Text(widget.user.email.toString())
+                          : Text(""),
                   currentAccountPicture: ClipOval(
                     child: GestureDetector(
                       onTap: () {

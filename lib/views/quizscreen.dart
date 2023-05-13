@@ -957,13 +957,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                             Expanded(
                               child: TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (content) =>
-                                          MainScreen(user: widget.user),
-                                    ),
-                                  );
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
                                 },
                                 child: const Text('Exit'),
                               ),
@@ -1038,13 +1033,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                             Expanded(
                               child: TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (content) =>
-                                          MainScreen(user: widget.user),
-                                    ),
-                                  );
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
                                 },
                                 child: const Text('Exit'),
                               ),

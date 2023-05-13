@@ -156,8 +156,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Text(" " + widget.user.email.toString()),
-                                  Text(" " + widget.user.phone.toString()),
+                                  if (widget.user.email !=
+                                      "guest@hellojava.com")
+                                    Text(" " + widget.user.email.toString()),
+                                  if (widget.user.email !=
+                                      "guest@hellojava.com")
+                                    Text(" " + widget.user.phone.toString()),
                                 ],
                               ),
                             ),
