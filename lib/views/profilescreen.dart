@@ -671,7 +671,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
+                                nameController.text =
+                                    widget.user.name.toString();
                               },
                             ),
                           ),
@@ -836,7 +837,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            phoneController.text = widget.user.phone.toString();
                           },
                         ),
                       ),
@@ -895,6 +896,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _changePasswordDialog() {
     final _formKey = GlobalKey<FormState>();
+    bool isOldPasswordValid = true;
+    bool isNewPasswordValid = true;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -927,7 +930,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           child: Column(
                             children: [
                               const Text(
-                                "You are unable to change the password if it contains less than 6 characters",
+                                "Password must be at least 6 characters",
                                 style: TextStyle(fontSize: 15),
                                 textAlign: TextAlign.center,
                               ),
@@ -972,8 +975,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     return 'Please enter your old password';
                                   }
                                   if (value.length < 6) {
+                                    isOldPasswordValid = false;
                                     return "Password must be at least 6 characters";
                                   }
+                                  isOldPasswordValid = true;
                                   return null;
                                 },
                               ),
@@ -1018,8 +1023,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     return 'Please enter your new password';
                                   }
                                   if (value.length < 6) {
+                                    isNewPasswordValid = false;
                                     return "Password must be at least 6 characters";
                                   }
+                                  if (value == oldpasswordController.text) {
+                                    isNewPasswordValid = false;
+                                    return 'The new password is same as the old password';
+                                  }
+                                  isNewPasswordValid = true;
                                   return null;
                                 },
                               ),
@@ -1048,8 +1059,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   String newpassword =
                                       newpasswordController.text;
                                   _changePassword(oldpassword, newpassword);
+                                } else {
+                                  if (!isOldPasswordValid) {
+                                    oldpasswordController.clear();
+                                  }
+                                  if (!isNewPasswordValid) {
+                                    newpasswordController.clear();
+                                  }
                                 }
-                                _formKey.currentState!.reset();
+                                oldpasswordController.clear();
+                                newpasswordController.clear();
                               },
                             ),
                           ),
@@ -1066,7 +1085,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                _formKey.currentState!.reset();
+                                oldpasswordController.clear();
+                                newpasswordController.clear();
                               },
                             ),
                           ),

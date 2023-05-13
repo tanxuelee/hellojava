@@ -1811,7 +1811,9 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            questionTitleController.text = widget
+                                .quizquestionList.questionTitle
+                                .toString();
                           },
                         ),
                       ),
@@ -2087,7 +2089,15 @@ class _EditQuizQuestionScreenState extends State<EditQuizQuestionScreen> {
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            optionAController.text =
+                                widget.quizquestionList.optionA.toString();
+                            optionBController.text =
+                                widget.quizquestionList.optionB.toString();
+                            optionCController.text =
+                                widget.quizquestionList.optionC.toString();
+                            correctAnswerController.text = widget
+                                .quizquestionList.correctAnswer
+                                .toString();
                           },
                         ),
                       ),

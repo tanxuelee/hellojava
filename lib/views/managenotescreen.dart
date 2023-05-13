@@ -1214,7 +1214,8 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            subtopicTitleController.text =
+                                widget.topicList.subtopicTitle.toString();
                           },
                         ),
                       ),
@@ -1372,7 +1373,8 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            subtopicDescriptionController.text =
+                                widget.topicList.subtopicDescription.toString();
                           },
                         ),
                       ),
@@ -1537,7 +1539,8 @@ class _EditSubtopicScreenState extends State<EditSubtopicScreen> {
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            youtubeLinkController.text =
+                                widget.topicList.subtopicVideoLink.toString();
                           },
                         ),
                       ),

@@ -2200,7 +2200,8 @@ class _EditExerciseQuestionScreenState
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            questionTitleController.text =
+                                widget.questionList.questionTitle.toString();
                           },
                         ),
                       ),
@@ -2355,7 +2356,8 @@ class _EditExerciseQuestionScreenState
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            questionHintController.text =
+                                widget.questionList.hint.toString();
                           },
                         ),
                       ),
@@ -2632,7 +2634,14 @@ class _EditExerciseQuestionScreenState
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
-                            _formKey.currentState!.reset();
+                            optionAController.text =
+                                widget.questionList.optionA.toString();
+                            optionBController.text =
+                                widget.questionList.optionB.toString();
+                            optionCController.text =
+                                widget.questionList.optionC.toString();
+                            correctAnswerController.text =
+                                widget.questionList.correctAnswer.toString();
                           },
                         ),
                       ),
