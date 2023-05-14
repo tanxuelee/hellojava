@@ -153,15 +153,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Text(
                                     widget.user.name.toString(),
                                     style: const TextStyle(
-                                        fontSize: 17,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   if (widget.user.email !=
                                       "guest@hellojava.com")
-                                    Text(" " + widget.user.email.toString()),
+                                    Text(
+                                      " " + widget.user.email.toString(),
+                                      style: const TextStyle(fontSize: 13),
+                                    ),
                                   if (widget.user.email !=
                                       "guest@hellojava.com")
-                                    Text(" " + widget.user.phone.toString()),
+                                    Text(
+                                      " " + widget.user.phone.toString(),
+                                      style: const TextStyle(fontSize: 13),
+                                    ),
                                 ],
                               ),
                             ),
