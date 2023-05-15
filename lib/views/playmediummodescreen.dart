@@ -825,12 +825,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             gameList.add(Game.fromJson(v));
           });
         } else {
-          titlecenter = "No data available for this game";
+          titlecenter = "No data available today for this game";
           gameList.clear();
         }
         setState(() {});
       } else {
-        titlecenter = "No data available for this game";
+        titlecenter = "No data available today for this game";
         gameList.clear();
         setState(() {});
       }
