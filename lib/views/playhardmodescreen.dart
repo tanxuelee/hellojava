@@ -370,7 +370,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                                 style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF4F646F)),
+                                    color: Color(0xFFC58917)),
                               ),
                             ),
                           ],

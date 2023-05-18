@@ -78,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                   accountEmail:
                       widget.user.email.toString() != 'guest@hellojava.com'
                           ? Text(widget.user.email.toString())
-                          : Text(""),
+                          : const Text(""),
                   currentAccountPicture: ClipOval(
                     child: GestureDetector(
                       onTap: () {
@@ -325,6 +325,14 @@ class _UserManualScreenState extends State<UserManualScreen> {
   int _currentPage = 0;
   final _controller = PageController(initialPage: 0);
 
+  final List<IconData> _functionIcons = [
+    Icons.code,
+    Icons.flag,
+    Icons.timer,
+    Icons.swap_vert_circle,
+    Icons.person,
+  ];
+
   final List<String> _functionNames = [
     'Note',
     'Exercise',
@@ -334,11 +342,11 @@ class _UserManualScreenState extends State<UserManualScreen> {
   ];
 
   final List<String> _functionDescriptions = [
-    'You can read the notes with or without logging in to the account. There are several subtopics available for every main topic for Java. For every subtopic, there are descriptions, image and video available to help you understand the topic better.',
-    'You need to login to your account in order to do the exercises. You can choose a main topic from the list and the system will display several exercises related to the selected topic. You can view a hint that will provide some guidance for every question. After answering each question, the system will show whether your answer is correct or not. The system will also keep track of the number of questions that you have answered correctly. If you leave the session, your progress will be lost.',
-    'You need to login to your account in order to so the quizzes. Each quiz has a duration of 15 minutes. Once you start the quiz, a timer will appear on the screen to show you how much time is left. You can answer each question by selecting one of the options provided. If you want to change your answer, you can click on the "Clear" button for that question and select a different option. Once you have answered all the questions, you can submit the quiz. After you submit the quiz, you can view your score and review the quiz to see which questions you got right or wrong. The correct answers will be provided. If you leave the quiz without submitting or if the time is up, your progress will be lost.',
-    'To play the game, you need to login first. After logging in, you can select the game mode you want to play. You will be presented with a set of keywords that you need to rearrange in the correct order. To rearrange the keywords, long press on a keyword and drag it to the desired position. There are three game modes available: Easy, Medium, and Hard. Each mode has 5 rounds of the game, and each round will have a different duration of time and number of keywords that need to be rearranged. After each round, the system will show you whether your answer was correct or not. You can view your score and the leaderboard to see the top five of the day who have scored at least 1 mark for the selected game mode. At the main screen of the game, you also can view the leaderboard for every game mode. If you leave the game without finishing or the time runs out, your progress will be lost.',
-    'To access your personal information, you need to log in using your registered email address and password. Once you have logged in, you can view your personal information such as your name, email, phone number and profile picture. You can also edit your profile information except for your email address. You can view your own quiz and game scores. To logout from your account, click on the "Logout" button. This will log you out and take you back to the guest mode screen.'
+    'You can read the notes with or without logging in to the account. There are several subtopics available for every main topic for Java. For every subtopic, there are descriptions, image and video available to help you understand better.',
+    'To access the exercises, log in to your account. Choose a main topic and the system will display related exercises. Hints are available for each question. the system will verify correctness after each question. Progress is lost if you leave.',
+    'To take the quizzes, log in and complete each quiz within 15 minutes using the timer. Modify answers using the "Clear" button. Submit the quiz to review your score, correct answers, and quiz content. Progress is lost if you leave or time out.',
+    'To play the game, log in and choose Easy, Medium, or Hard mode. The system will verify correctness after each round. Check the leaderboard for the daily top five. Progress is lost if you leave or time out.',
+    'To access your personal info, log in with your registered email and password. After logging in, view/edit your profile (excluding email). Check/delete your quiz and game scores. Click "Logout" to log out and return to guest mode.'
   ];
 
   @override
@@ -375,19 +383,33 @@ class _UserManualScreenState extends State<UserManualScreen> {
                         children: [
                           Container(
                             padding: const EdgeInsets.all(15),
-                            width: double.infinity,
+                            width: 140,
                             decoration: const BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(30)),
                               color: Color(0xFFF9A03F),
                             ),
-                            child: Text(
-                              _functionNames[index],
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
+                            child: Column(
+                              children: [
+                                Icon(
+                                  _functionIcons[
+                                      index], // Use the corresponding icon for the function
+                                  size: 40,
+                                  color: Colors.white,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ), // Add some spacing between the icon and the text
+                                Text(
+                                  _functionNames[index],
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -538,7 +560,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   child: Image.asset('assets/images/logo.png')),
               const SizedBox(height: 20),
               const Text(
-                'Hello Java is a mobile application designed to help beginners learn the theory of Java programming language. Our app provides a user-friendly interface and comprehensive learning materials to guide you through the fundamental concepts of Java. Hello Java offers various features such as notes, exercises, quizzes, and engaging games to make your learning experience enjoyable and interactive.',
+                'Hello Java is a beginner-friendly app that teaches Java programming theory with comprehensive materials and interactive features, creating an enjoyable learning experience.',
                 style: TextStyle(
                   fontSize: 15,
                   color: Color(0xFFF4FAFF),
@@ -547,7 +569,7 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               const SizedBox(height: 20),
               const Text(
-                'For any queries or feedback, please feel free to reach out to us at the email below: adminhellojava@moneymoney12345.com',
+                'For inquiries or feedback, email us at: adminhellojava@moneymoney12345.com',
                 style: TextStyle(
                   fontSize: 15,
                   color: Color(0xFFF4FAFF),

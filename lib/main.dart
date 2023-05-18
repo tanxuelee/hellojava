@@ -66,7 +66,7 @@ class MySplashScreenState extends State<MySplashScreen> {
         datereg: '0',
         verified: '0');
     Timer(
-        const Duration(seconds: 3),
+        const Duration(seconds: 5),
         () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (content) => MainScreen(user: user))));
   }
