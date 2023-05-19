@@ -359,7 +359,7 @@ class _UserManualScreenState extends State<UserManualScreen> {
       resWidth = screenWidth * 0.75;
     }
     return Scaffold(
-      backgroundColor: const Color(0xFFF4FAFF),
+      // backgroundColor: const Color(0xFFF4FAFF),
       appBar: AppBar(
           title: const Text(
         'User Manual',

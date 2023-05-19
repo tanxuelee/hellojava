@@ -267,7 +267,7 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
           return confirm ?? false;
         },
         child: Scaffold(
-          backgroundColor: const Color(0xFFF4FAFF),
+          backgroundColor: const Color(0xFFF4F4F4),
           appBar: AppBar(
             title: Text(
               'Easy (Time Left: ${(_timeRemaining ~/ 60).toString().padLeft(2, '0')}:${(_timeRemaining % 60).toString().padLeft(2, '0')})',
@@ -352,7 +352,7 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
                                 title: Text(
                                   '${index + 1}.     ${easyjavaKeywords[index]}',
                                 ),
-                                tileColor: const Color(0xFFF4FAFF),
+                                tileColor: const Color(0xFFF4F4F4),
                               ),
                             ),
                           );

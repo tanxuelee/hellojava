@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(32, 25, 32, 25),
+                    padding: const EdgeInsets.fromLTRB(32, 20, 32, 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 2),
                         Row(
                           children: [
                             Checkbox(
@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 2),
                         Container(
                           alignment: Alignment.center,
                           child: SizedBox(
@@ -232,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 3),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

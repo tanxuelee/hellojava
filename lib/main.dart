@@ -95,7 +95,7 @@ class MySplashScreenState extends State<MySplashScreen> {
             children: const [
               SpinKitFadingCircle(
                 size: 48,
-                color: Color(0xFF4F646F),
+                color: Color(0xFFF4FAFF),
               ),
             ],
           ),

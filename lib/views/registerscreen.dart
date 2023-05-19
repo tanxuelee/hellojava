@@ -58,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(32, 25, 32, 25),
+                    padding: const EdgeInsets.fromLTRB(32, 20, 32, 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -67,13 +67,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: screenHeight / 4,
                             width: screenWidth,
                             child: Image.asset('assets/images/logo.png')),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         const Text(
                           "Your information must be true to avoid any issues with account verification",
                           style: TextStyle(fontSize: 16, color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         Card(
                           child: GestureDetector(
                             onTap: () => {_takePictureDialog()},

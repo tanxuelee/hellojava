@@ -322,7 +322,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
           return confirm ?? false;
         },
         child: Scaffold(
-          backgroundColor: const Color(0xFFF4FAFF),
+          backgroundColor: const Color(0xFFF4F4F4),
           appBar: AppBar(
             title: Text(
               'Hard (Time Left: ${(_timeRemaining ~/ 60).toString().padLeft(2, '0')}:${(_timeRemaining % 60).toString().padLeft(2, '0')})',
@@ -407,7 +407,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                                 title: Text(
                                   '${index + 1}.     ${hardjavaKeywords[index]}',
                                 ),
-                                tileColor: const Color(0xFFF4FAFF),
+                                tileColor: const Color(0xFFF4F4F4),
                               ),
                             ),
                           );

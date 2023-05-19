@@ -162,7 +162,7 @@ class _ManageQuizListScreenState extends State<ManageQuizListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Manage Note Topic',
+          'Manage Quiz List',
           style: TextStyle(
             fontSize: 17,
           ),

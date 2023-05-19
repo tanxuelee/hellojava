@@ -268,7 +268,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
           return confirm ?? false;
         },
         child: Scaffold(
-          backgroundColor: const Color(0xFFF4FAFF),
+          backgroundColor: const Color(0xFFF4F4F4),
           appBar: AppBar(
             title: Text(
               'Medium (Time Left: ${(_timeRemaining ~/ 60).toString().padLeft(2, '0')}:${(_timeRemaining % 60).toString().padLeft(2, '0')})',
@@ -353,7 +353,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                                 title: Text(
                                   '${index + 1}.     ${mediumJavaKeywords[index]}',
                                 ),
-                                tileColor: const Color(0xFFF4FAFF),
+                                tileColor: const Color(0xFFF4F4F4),
                               ),
                             ),
                           );
