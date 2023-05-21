@@ -80,27 +80,33 @@ class MySplashScreenState extends State<MySplashScreen> {
     } else {
       resWidth = screenWidth * 0.75;
     }
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/splash.png'),
-                    fit: BoxFit.cover))),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 380, 0, 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              SpinKitFadingCircle(
-                size: 48,
-                color: Color(0xFFF4FAFF),
-              ),
-            ],
+    return Container(
+      color: const Color(0xFF4F646F),
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            child: Image.asset(
+              'assets/images/logo.png',
+              width: 200,
+              height: 200,
+            ),
           ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 400, 0, 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                SpinKitFadingCircle(
+                  size: 48,
+                  color: Color(0xFFF4FAFF),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
