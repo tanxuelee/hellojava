@@ -41,7 +41,7 @@ class _ManageExerciseScreenState extends State<ManageExerciseScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +172,7 @@ class _SelectTopicScreenState extends State<SelectTopicScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,7 +332,7 @@ class _ManageExerciseListScreenState extends State<ManageExerciseListScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -901,7 +901,7 @@ class _SelectTopicScreen2State extends State<SelectTopicScreen2> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1055,7 +1055,7 @@ class _SelectExerciseListScreenState extends State<SelectExerciseListScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1222,7 +1222,7 @@ class _ManageQuestionScreenState extends State<ManageQuestionScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -2003,7 +2003,7 @@ class _EditExerciseQuestionScreenState
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

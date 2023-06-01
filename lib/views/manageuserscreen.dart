@@ -45,7 +45,7 @@ class _ManageUserScreenState extends State<ManageUserScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +180,7 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,7 +195,7 @@ class _ManageUserAccountScreenState extends State<ManageUserAccountScreen> {
                                 color: Theme.of(context).primaryColor),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          columnSpacing: 20.0,
+                          columnSpacing: 40.0,
                           dividerThickness: 2.0,
                           columns: [
                             const DataColumn(
@@ -541,7 +541,7 @@ class _SelectUserListScreenState extends State<SelectUserListScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -683,7 +683,7 @@ class _SelectScoreCategoryScreenState extends State<SelectScoreCategoryScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -821,7 +821,7 @@ class _SelectQuizListScreenState extends State<SelectQuizListScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -977,7 +977,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1313,7 +1313,7 @@ class _SelectGameListScreenState extends State<SelectGameListScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1470,7 +1470,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -49,7 +49,7 @@ class _NoteScreenState extends State<NoteScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,7 +233,7 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -413,7 +413,7 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(18),
+              padding: const EdgeInsets.all(20),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

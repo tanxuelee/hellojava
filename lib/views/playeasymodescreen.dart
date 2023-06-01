@@ -277,7 +277,7 @@ class _PlayEasyModeScreenState extends State<PlayEasyModeScreen> {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: IgnorePointer(
               ignoring: showingToast,
               child: Column(
@@ -661,7 +661,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

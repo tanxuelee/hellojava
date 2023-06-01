@@ -60,7 +60,7 @@ class MySplashScreenState extends State<MySplashScreen> {
     super.initState();
     User user = User(
         id: '0',
-        name: 'Guest Mode',
+        name: 'Guest',
         email: 'guest@hellojava.com',
         phone: '0',
         datereg: '0',
@@ -86,7 +86,7 @@ class MySplashScreenState extends State<MySplashScreen> {
         alignment: Alignment.topCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
             child: Image.asset(
               'assets/images/logo.png',
               width: 200,
@@ -94,7 +94,7 @@ class MySplashScreenState extends State<MySplashScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 400, 0, 10),
+            padding: const EdgeInsets.fromLTRB(0, 550, 0, 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [

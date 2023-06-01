@@ -49,7 +49,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -533,7 +533,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold)))
             : Padding(
-                padding: const EdgeInsets.all(15),
+                padding: const EdgeInsets.all(20),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

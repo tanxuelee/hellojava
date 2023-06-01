@@ -37,7 +37,7 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +134,7 @@ class _GameScreenState extends State<GameScreen> {
         child: GestureDetector(
           onTap: _clickLeaderboardButton,
           child: Container(
-            height: 45,
+            height: 55,
             color: const Color(0xFF4F646F),
             child: Center(
               child: Row(
@@ -572,7 +572,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -729,7 +729,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -67,7 +67,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

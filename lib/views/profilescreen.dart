@@ -59,12 +59,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             SingleChildScrollView(
               child: SizedBox(
-                height: screenHeight / 3.2,
+                height: screenHeight / 4,
                 child: SizedBox(
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -74,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -153,20 +153,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Text(
                                     widget.user.name.toString(),
                                     style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   if (widget.user.email !=
                                       "guest@hellojava.com")
                                     Text(
                                       " " + widget.user.email.toString(),
-                                      style: const TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 14),
                                     ),
                                   if (widget.user.email !=
                                       "guest@hellojava.com")
                                     Text(
                                       " " + widget.user.phone.toString(),
-                                      style: const TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 14),
                                     ),
                                 ],
                               ),
@@ -455,7 +455,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1335,7 +1335,7 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1460,7 +1460,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1616,7 +1616,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1945,7 +1945,7 @@ class _GameListScreenState extends State<GameListScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -2102,7 +2102,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)))
           : Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
