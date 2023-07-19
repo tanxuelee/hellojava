@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text(
           'Login',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -175,7 +175,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const Text(
                               "Remember me",
-                              style: TextStyle(color: Colors.white),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             )
                           ],
                         ),
@@ -189,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 "Login",
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onPressed: _loginUser,
                               style: ButtonStyle(
@@ -212,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const Text(
                               "Forgot your password? ",
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
+                                  TextStyle(fontSize: 17, color: Colors.white),
                             ),
                             GestureDetector(
                               onTap: () => {
@@ -225,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 " Click here",
                                 style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFF7D488)),
                               ),
@@ -239,7 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const Text(
                               "New here? ",
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
+                                  TextStyle(fontSize: 17, color: Colors.white),
                             ),
                             GestureDetector(
                               onTap: () => {
@@ -252,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 " Create an account",
                                 style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFF7D488)),
                               ),

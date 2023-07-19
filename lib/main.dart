@@ -89,12 +89,12 @@ class MySplashScreenState extends State<MySplashScreen> {
             padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
             child: Image.asset(
               'assets/images/logo.png',
-              width: 200,
-              height: 200,
+              width: 250,
+              height: 250,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 550, 0, 10),
+            padding: const EdgeInsets.fromLTRB(0, 550, 0, 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [

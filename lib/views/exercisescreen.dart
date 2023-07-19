@@ -64,7 +64,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                         "Java Exercise",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 17,
+                          fontSize: 20,
                         ),
                       ),
                     ],
@@ -86,7 +86,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                                     title: Text(
                                       topicList[index].topicTitle.toString(),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -187,7 +187,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 padding: EdgeInsets.all(16.0),
                 child: Text(
                   "Please login first!",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const Divider(
@@ -203,7 +203,10 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                         Navigator.pop(context);
                         _onLogin();
                       },
-                      child: const Text('Login'),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   ),
                   Container(
@@ -216,7 +219,10 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Cancel'),
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   ),
                 ],
@@ -275,7 +281,7 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
         title: Text(
           widget.topicList[widget.index].topicTitle.toString(),
           style: const TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -302,7 +308,7 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
                         "Exercise List",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 20,
                         ),
                       ),
                     ],
@@ -337,7 +343,7 @@ class _SubExerciseScreenState extends State<SubExerciseScreen> {
                                           .exerciseTitle
                                           .toString(),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -456,7 +462,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
         title: Text(
           widget.exerciseList[widget.index].exerciseTitle.toString(),
           style: const TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -487,7 +493,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                                   Text(
                                     'Question ${index + 1} / ${questionList.length}',
                                     style: const TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.bold,
                                         color: Color(0xFF4F646F)),
                                     textAlign: TextAlign.center,
@@ -506,7 +512,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                               Text(
                                 questionList[index].questionTitle.toString(),
                                 style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                    fontSize: 17, fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 10),
@@ -526,7 +532,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                                           questionList[index].optionA, index),
                                   child: Text(
                                     questionList[index].optionA.toString(),
-                                    style: const TextStyle(fontSize: 13),
+                                    style: const TextStyle(fontSize: 15),
                                     textAlign: TextAlign.center,
                                   ),
                                   style: ElevatedButton.styleFrom(
@@ -552,7 +558,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                                           questionList[index].optionB, index),
                                   child: Text(
                                     questionList[index].optionB.toString(),
-                                    style: const TextStyle(fontSize: 13),
+                                    style: const TextStyle(fontSize: 15),
                                     textAlign: TextAlign.center,
                                   ),
                                   style: ElevatedButton.styleFrom(
@@ -578,7 +584,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                                           questionList[index].optionC, index),
                                   child: Text(
                                     questionList[index].optionC.toString(),
-                                    style: const TextStyle(fontSize: 13),
+                                    style: const TextStyle(fontSize: 15),
                                     textAlign: TextAlign.center,
                                   ),
                                   style: ElevatedButton.styleFrom(
@@ -607,7 +613,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
               Text(
                 'You answered ${numCorrectAnswers} out of ${questionList.length} questions correctly.',
                 style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFDEE7E7)),
                 textAlign: TextAlign.center,
@@ -647,6 +653,9 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
           extractdata['exercisequestion'].forEach((v) {
             questionList.add(Question.fromJson(v));
           });
+
+          // Shuffle the questionList
+          questionList.shuffle();
         } else {
           titlecenter = "No question available for this exercise";
           questionList.clear();
@@ -724,14 +733,14 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                     child: Text(
                       "Hint of the question",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
                     child: Text(
                       questionList[index].hint.toString(),
-                      style: const TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -746,7 +755,8 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('Close'),
+                          child: const Text('Close',
+                              style: TextStyle(fontSize: 15)),
                         ),
                       ),
                     ],

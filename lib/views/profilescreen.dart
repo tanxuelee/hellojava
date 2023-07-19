@@ -153,20 +153,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Text(
                                     widget.user.name.toString(),
                                     style: const TextStyle(
-                                        fontSize: 17,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   if (widget.user.email !=
                                       "guest@hellojava.com")
                                     Text(
                                       " " + widget.user.email.toString(),
-                                      style: const TextStyle(fontSize: 14),
+                                      style: const TextStyle(fontSize: 15),
                                     ),
                                   if (widget.user.email !=
                                       "guest@hellojava.com")
                                     Text(
                                       " " + widget.user.phone.toString(),
-                                      style: const TextStyle(fontSize: 14),
+                                      style: const TextStyle(fontSize: 15),
                                     ),
                                 ],
                               ),
@@ -201,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               leading: const Icon(Icons.login),
                               title: const Text("Login",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
@@ -235,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               leading: const Icon(Icons.edit),
                               title: const Text("Edit Profile",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
@@ -266,7 +266,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               leading: const Icon(Icons.scoreboard),
                               title: const Text("View Score",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
@@ -297,7 +297,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               leading: const Icon(Icons.logout),
                               title: const Text("Logout",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.bold)),
                               trailing: IconButton(
                                   onPressed: () {
@@ -348,14 +348,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Text(
                       "Logout?",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                     child: Text(
                       "Are you sure you want to logout?",
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -369,7 +369,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: TextButton(
                           child: const Text(
                             "Yes",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () async {
                             Navigator.of(context).pop();
@@ -390,7 +390,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: TextButton(
                           child: const Text(
                             "No",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -450,7 +450,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         title: const Text(
           'Edit Profile',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -474,7 +474,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           title: const Text(
                             'Change Name',
                             style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -500,7 +500,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           title: const Text(
                             'Change Phone Number',
                             style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -526,7 +526,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           title: const Text(
                             'Change Password',
                             style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -552,7 +552,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           title: const Text(
                             'Change Profile Picture',
                             style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -602,7 +602,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: Text(
                           "Change name?",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -657,7 +657,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: TextButton(
                               child: const Text(
                                 "Confirm",
-                                style: TextStyle(),
+                                style: TextStyle(fontSize: 15),
                               ),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
@@ -677,7 +677,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: TextButton(
                               child: const Text(
                                 "Cancel",
-                                style: TextStyle(),
+                                style: TextStyle(fontSize: 15),
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
@@ -763,7 +763,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: Text(
                       "Change phone number?",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
@@ -823,7 +823,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: TextButton(
                           child: const Text(
                             "Confirm",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -843,7 +843,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: TextButton(
                           child: const Text(
                             "Cancel",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -930,7 +930,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: Text(
                           'Change password?',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -941,7 +941,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             children: [
                               const Text(
                                 "Password must be at least 6 characters",
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 17),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 20),
@@ -1059,7 +1059,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: TextButton(
                               child: const Text(
                                 "Confirm",
-                                style: TextStyle(),
+                                style: TextStyle(fontSize: 15),
                               ),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
@@ -1091,7 +1091,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: TextButton(
                               child: const Text(
                                 "Cancel",
-                                style: TextStyle(),
+                                style: TextStyle(fontSize: 15),
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
@@ -1184,7 +1184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   leading: const Icon(Icons.photo_library),
                   title: const Text(
                     'Import photo from the gallery',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 17),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -1199,7 +1199,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   leading: const Icon(Icons.camera_alt),
                   title: const Text(
                     'Take photo using the camera',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 17),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -1330,7 +1330,7 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
         title: const Text(
           'View Score',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -1354,7 +1354,7 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
                           title: const Text(
                             'Quiz Score',
                             style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -1385,7 +1385,7 @@ class _ViewScoreScreenState extends State<ViewScoreScreen> {
                           title: const Text(
                             'Game Score',
                             style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -1450,7 +1450,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
         title: const Text(
           'Score for',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -1490,7 +1490,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                     title: Text(
                                       quizList[index].quizTitle.toString(),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -1606,7 +1606,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
         title: Text(
           widget.quizList[widget.index].quizTitle.toString(),
           style: const TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -1638,7 +1638,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                               label: Text(
                                 'No.',
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -1648,7 +1648,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                                 label: Text(
                               'Date Time',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -1657,7 +1657,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                                 label: Text(
                               'Score',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -1792,14 +1792,14 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                     child: Text(
                       'Delete quiz score?',
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                     child: Text(
                       'Are you sure want to delete this quiz score?',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -1815,7 +1815,10 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                             Navigator.of(context).pop();
                             _deleteScore(index);
                           },
-                          child: const Text('Delete'),
+                          child: const Text(
+                            'Delete',
+                            style: TextStyle(fontSize: 15),
+                          ),
                         ),
                       ),
                       Container(
@@ -1828,7 +1831,10 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text('Cancel'),
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(fontSize: 15),
+                          ),
                         ),
                       ),
                     ],
@@ -1935,7 +1941,7 @@ class _GameListScreenState extends State<GameListScreen> {
         title: const Text(
           'Score for',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -1976,7 +1982,7 @@ class _GameListScreenState extends State<GameListScreen> {
                                     title: Text(
                                       gameList[index].gameMode.toString(),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -2092,7 +2098,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
         title: Text(
           widget.gameList[widget.index].gameMode.toString(),
           style: const TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -2124,7 +2130,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                               label: Text(
                                 'No.',
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -2134,7 +2140,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                                 label: Text(
                               'Date Time',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -2143,7 +2149,7 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                                 label: Text(
                               'Score',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -2278,14 +2284,14 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                     child: Text(
                       'Delete game score?',
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                     child: Text(
                       'Are you sure want to delete this game score?',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -2301,7 +2307,10 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                             Navigator.of(context).pop();
                             _deleteScore(index);
                           },
-                          child: const Text('Delete'),
+                          child: const Text(
+                            'Delete',
+                            style: TextStyle(fontSize: 15),
+                          ),
                         ),
                       ),
                       Container(
@@ -2314,7 +2323,10 @@ class _GameScoreScreenState extends State<GameScoreScreen> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text('Cancel'),
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(fontSize: 15),
+                          ),
                         ),
                       ),
                     ],

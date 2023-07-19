@@ -51,7 +51,7 @@ class _GameScreenState extends State<GameScreen> {
                     "Drag and Drop Game",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 17,
+                      fontSize: 20,
                     ),
                   ),
                 ],
@@ -60,7 +60,7 @@ class _GameScreenState extends State<GameScreen> {
               const Text(
                 "How to play: Long press on the keywords, drag and drop them into the correct order.",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 17,
                 ),
               ),
               const SizedBox(height: 5),
@@ -71,13 +71,13 @@ class _GameScreenState extends State<GameScreen> {
                   title: const Text(
                     'Easy Mode',
                     style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                   subtitle: const Text(
                     'Has five keywords',
-                    style: TextStyle(color: Color(0xFF4F646F)),
+                    style: TextStyle(color: Color(0xFF4F646F), fontSize: 15),
                   ),
                   trailing: const Icon(Icons.arrow_right,
                       size: 30, color: Color(0xFFF9A03F)),
@@ -92,13 +92,13 @@ class _GameScreenState extends State<GameScreen> {
                   title: const Text(
                     'Medium Mode',
                     style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                   subtitle: const Text(
                     'Has seven keywords',
-                    style: TextStyle(color: Color(0xFF4F646F)),
+                    style: TextStyle(color: Color(0xFF4F646F), fontSize: 15),
                   ),
                   trailing: const Icon(Icons.arrow_right,
                       size: 30, color: Color(0xFFF9A03F)),
@@ -113,13 +113,13 @@ class _GameScreenState extends State<GameScreen> {
                   title: const Text(
                     'Hard Mode',
                     style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                   subtitle: const Text(
                     'Has ten keywords',
-                    style: TextStyle(color: Color(0xFF4F646F)),
+                    style: TextStyle(color: Color(0xFF4F646F), fontSize: 15),
                   ),
                   trailing: const Icon(Icons.arrow_right,
                       size: 30, color: Color(0xFFF9A03F)),
@@ -148,7 +148,7 @@ class _GameScreenState extends State<GameScreen> {
                   Text(
                     "View Leaderboard",
                     style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFFDEE7E7)),
                   ),
@@ -189,7 +189,7 @@ class _GameScreenState extends State<GameScreen> {
                 padding: EdgeInsets.all(16.0),
                 child: Text(
                   "Please login first!",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const Divider(
@@ -205,7 +205,10 @@ class _GameScreenState extends State<GameScreen> {
                         Navigator.pop(context);
                         _onLogin();
                       },
-                      child: const Text('Login'),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   ),
                   Container(
@@ -218,7 +221,10 @@ class _GameScreenState extends State<GameScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Cancel'),
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   ),
                 ],
@@ -251,18 +257,18 @@ class _GameScreenState extends State<GameScreen> {
                     child: Text(
                       "Play easy mode now?",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                     child: Text(
-                      "1. You have 10 minutes to complete five rounds." +
+                      "1. You have 15 minutes to complete five rounds." +
                           "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
                           "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
                           "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
                       textAlign: TextAlign.justify,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -276,7 +282,7 @@ class _GameScreenState extends State<GameScreen> {
                         child: TextButton(
                           child: const Text(
                             "Play",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () async {
                             Navigator.of(context).pop();
@@ -300,7 +306,7 @@ class _GameScreenState extends State<GameScreen> {
                         child: TextButton(
                           child: const Text(
                             "Cancel",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -350,18 +356,18 @@ class _GameScreenState extends State<GameScreen> {
                   padding: EdgeInsets.all(16.0),
                   child: Text(
                     "Play medium mode now?",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                   child: Text(
-                    "1. You have 15 minutes to complete five rounds." +
+                    "1. You have 20 minutes to complete five rounds." +
                         "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
                         "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
                         "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
                     textAlign: TextAlign.justify,
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 17),
                   ),
                 ),
                 const Divider(
@@ -375,7 +381,7 @@ class _GameScreenState extends State<GameScreen> {
                       child: TextButton(
                         child: const Text(
                           "Play",
-                          style: TextStyle(),
+                          style: TextStyle(fontSize: 15),
                         ),
                         onPressed: () async {
                           Navigator.of(context).pop();
@@ -399,7 +405,7 @@ class _GameScreenState extends State<GameScreen> {
                       child: TextButton(
                         child: const Text(
                           "Cancel",
-                          style: TextStyle(),
+                          style: TextStyle(fontSize: 15),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -445,18 +451,18 @@ class _GameScreenState extends State<GameScreen> {
                     child: Text(
                       "Play hard mode now?",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                     child: Text(
-                      "1. You have 20 minutes to complete five rounds." +
+                      "1. You have 30 minutes to complete five rounds." +
                           "\n\n2. If you rearrange correctly, you will get points that increases by one for each correct answer.\n(Example: 1+2+3)" +
                           "\n\n3. If you get it wrong, you lose one point and the sequence of points starts over at one." +
                           "\n\n4. If the time runs out, your score will not be saved and you can play the game again.",
                       textAlign: TextAlign.justify,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -470,7 +476,7 @@ class _GameScreenState extends State<GameScreen> {
                         child: TextButton(
                           child: const Text(
                             "Play",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () async {
                             Navigator.of(context).pop();
@@ -494,7 +500,7 @@ class _GameScreenState extends State<GameScreen> {
                         child: TextButton(
                           child: const Text(
                             "Cancel",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -562,7 +568,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         title: const Text(
           'View Leaderboard',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -603,7 +609,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                     title: Text(
                                       gameList[index].gameMode.toString(),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -719,7 +725,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
         title: Text(
           widget.gameList[widget.index].gameMode.toString(),
           style: const TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -744,7 +750,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                         Text(
                           'Top Five of the Day',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -772,7 +778,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                               label: Text(
                                 'No.',
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -782,7 +788,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                                 label: Text(
                               'Players',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -791,7 +797,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                                 label: Text(
                               'Score',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -817,7 +823,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                                     child: Text(
                                       (index + 1).toString(),
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: index < 3
                                             ? FontWeight.bold
@@ -829,7 +835,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                                   DataCell(Text(
                                     gameList[index].name.toString(),
                                     style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 15,
                                       color: Colors.black,
                                       fontWeight: index < 3
                                           ? FontWeight.bold
@@ -841,7 +847,7 @@ class _GameLeaderboardScreenState extends State<GameLeaderboardScreen> {
                                     child: Text(
                                       gameList[index].totalScore.toString(),
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: index < 3
                                             ? FontWeight.bold

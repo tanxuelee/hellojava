@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -62,7 +63,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         "Java Quiz",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 17,
+                          fontSize: 20,
                         ),
                       ),
                     ],
@@ -84,7 +85,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                     title: Text(
                                       quizList[index].quizTitle.toString(),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -178,7 +179,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 padding: EdgeInsets.all(16.0),
                 child: Text(
                   "Please login first!",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const Divider(
@@ -194,7 +195,10 @@ class _QuizScreenState extends State<QuizScreen> {
                         Navigator.pop(context);
                         _onLogin();
                       },
-                      child: const Text('Login'),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   ),
                   Container(
@@ -207,7 +211,10 @@ class _QuizScreenState extends State<QuizScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Cancel'),
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   ),
                 ],
@@ -240,7 +247,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     child: Text(
                       "Start the quiz now?",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Padding(
@@ -248,7 +255,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     child: Text(
                       "Please note that the quiz will only have a duration of 15 minutes. Once you click 'Start', the timer will begin and you will have to complete the quiz within the given time.",
                       textAlign: TextAlign.justify,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -262,7 +269,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         child: TextButton(
                           child: const Text(
                             "Start",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () async {
                             Navigator.of(context).pop();
@@ -288,7 +295,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         child: TextButton(
                           child: const Text(
                             "Cancel",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -382,14 +389,14 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                           child: Text(
                             'Time is up!',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'Your score won\'t be saved. You can do the quiz again.',
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -405,7 +412,10 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Exit'),
+                                child: const Text(
+                                  'Exit',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                           ],
@@ -462,14 +472,14 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                         child: Text(
                           'Do you really want to leave?',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                         child: Text(
                           'All progress will be lost.',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 17),
                         ),
                       ),
                       const Divider(
@@ -482,7 +492,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                           Expanded(
                             child: TextButton(
                               onPressed: () => Navigator.of(context).pop(true),
-                              child: const Text('Leave'),
+                              child: const Text('Leave',
+                                  style: TextStyle(fontSize: 15)),
                             ),
                           ),
                           Container(
@@ -493,7 +504,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                           Expanded(
                             child: TextButton(
                               onPressed: () => Navigator.of(context).pop(false),
-                              child: const Text('Cancel'),
+                              child: const Text('Cancel',
+                                  style: TextStyle(fontSize: 15)),
                             ),
                           ),
                         ],
@@ -514,14 +526,14 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
               Text(
                 widget.quizList[widget.index].quizTitle.toString(),
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 20,
                 ),
               ),
               const SizedBox(width: 10),
               Text(
                 '(Time Left: ${(_timeRemaining ~/ 60).toString().padLeft(2, '0')}:${(_timeRemaining % 60).toString().padLeft(2, '0')})',
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 20,
                 ),
               ),
             ],
@@ -550,7 +562,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                 Text(
                                   'Question ${index + 1} / ${quizquestionList.length}',
                                   style: const TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFF4F646F)),
                                   textAlign: TextAlign.center,
@@ -561,7 +573,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                       .questionTitle
                                       .toString(),
                                   style: const TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 ),
@@ -587,7 +599,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                       quizquestionList[index]
                                           .optionA
                                           .toString(),
-                                      style: const TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 15),
                                       textAlign: TextAlign.center,
                                     ),
                                     style: ElevatedButton.styleFrom(
@@ -618,7 +630,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                       quizquestionList[index]
                                           .optionB
                                           .toString(),
-                                      style: const TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 15),
                                       textAlign: TextAlign.center,
                                     ),
                                     style: ElevatedButton.styleFrom(
@@ -649,7 +661,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                       quizquestionList[index]
                                           .optionC
                                           .toString(),
-                                      style: const TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 15),
                                       textAlign: TextAlign.center,
                                     ),
                                     style: ElevatedButton.styleFrom(
@@ -674,7 +686,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                     child: const Text(
                                       "Clear",
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 17,
                                           fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center,
                                     ),
@@ -722,7 +734,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                         child: Text(
                                           'Are you sure you want to submit?',
                                           style: TextStyle(
-                                              fontSize: 18,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
@@ -731,7 +743,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                             EdgeInsets.fromLTRB(16, 0, 16, 25),
                                         child: Text(
                                           'You cannot change your answers after submitting.',
-                                          style: TextStyle(fontSize: 15),
+                                          style: TextStyle(fontSize: 17),
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
@@ -749,7 +761,9 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                                 Navigator.of(context).pop();
                                                 _submitQuiz(numCorrectAnswers);
                                               },
-                                              child: const Text('Submit'),
+                                              child: const Text('Submit',
+                                                  style:
+                                                      TextStyle(fontSize: 15)),
                                             ),
                                           ),
                                           Container(
@@ -763,7 +777,9 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                                 Navigator.of(context).pop();
                                                 startTimer();
                                               },
-                                              child: const Text('Cancel'),
+                                              child: const Text('Cancel',
+                                                  style:
+                                                      TextStyle(fontSize: 15)),
                                             ),
                                           ),
                                         ],
@@ -779,7 +795,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                       child: const Text(
                         'Submit',
                         style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                            fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -818,6 +834,11 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
           extractdata['quizquestion'].forEach((v) {
             quizquestionList.add(QuizQuestion.fromJson(v));
           });
+
+          // Shuffle the quiz questions
+          List<QuizQuestion> shuffledList = List.from(quizquestionList);
+          shuffledList.shuffle(Random());
+          quizquestionList = shuffledList;
         } else {
           titlecenter = "No question available for this quiz";
           quizquestionList.clear();
@@ -917,14 +938,14 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                           child: Text(
                             'Congratulations!',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'You have finished the quiz. Your score is $totalScore / ${quizquestionList.length}.',
-                            style: const TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -946,7 +967,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                     ),
                                   );
                                 },
-                                child: const Text('Review'),
+                                child: const Text('Review',
+                                    style: TextStyle(fontSize: 15)),
                               ),
                             ),
                             Container(
@@ -960,7 +982,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Exit'),
+                                child: const Text('Exit',
+                                    style: TextStyle(fontSize: 15)),
                               ),
                             ),
                           ],
@@ -993,14 +1016,14 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                           child: Text(
                             'Good job!',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'You have finished the quiz. Your score is $totalScore / ${quizquestionList.length}. Better luck next time!',
-                            style: const TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -1022,7 +1045,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                     ),
                                   );
                                 },
-                                child: const Text('Review'),
+                                child: const Text('Review',
+                                    style: TextStyle(fontSize: 15)),
                               ),
                             ),
                             Container(
@@ -1036,7 +1060,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Exit'),
+                                child: const Text('Exit',
+                                    style: TextStyle(fontSize: 15)),
                               ),
                             ),
                           ],
@@ -1070,14 +1095,14 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                         child: Text(
                           'Error!',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                         child: Text(
                           'An error occurred while saving your quiz score, please try again.',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 17),
                         ),
                       ),
                       const Divider(
@@ -1092,7 +1117,8 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('OK'),
+                              child: const Text('OK',
+                                  style: TextStyle(fontSize: 15)),
                             ),
                           ),
                         ],
@@ -1132,7 +1158,7 @@ class QuizReviewScreen extends StatelessWidget {
         title: const Text(
           "Quiz Review",
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -1156,7 +1182,7 @@ class QuizReviewScreen extends StatelessWidget {
                       Text(
                         'Question ${index + 1} / $numQuestions',
                         style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF4F646F)),
                       ),
@@ -1169,7 +1195,7 @@ class QuizReviewScreen extends StatelessWidget {
                   Text(
                     "${question.questionTitle}",
                     style: const TextStyle(
-                      fontSize: 15,
+                      fontSize: 17,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -1179,7 +1205,7 @@ class QuizReviewScreen extends StatelessWidget {
                         ? "${question.getSelectedOption()}"
                         : "${question.getSelectedOption()}",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 16,
                       color: question.isCorrect
                           ? const Color.fromARGB(255, 36, 96, 38)
                           : const Color.fromARGB(255, 199, 33, 21),
@@ -1194,7 +1220,7 @@ class QuizReviewScreen extends StatelessWidget {
                       child: Text(
                         "Correct answer: ${question.correctAnswer}",
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -1214,7 +1240,7 @@ class QuizReviewScreen extends StatelessWidget {
             child: Text(
               "Your score is $numCorrectAnswers / $numQuestions",
               style: const TextStyle(
-                fontSize: 15,
+                fontSize: 17,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),

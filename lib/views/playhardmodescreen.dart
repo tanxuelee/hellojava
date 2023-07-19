@@ -93,7 +93,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
   bool isCorrectOrder = false;
   int score = 0;
   late Timer _timer;
-  int _timeRemaining = 1200; // 20 minutes in seconds
+  int _timeRemaining = 1800; // 30 minutes in seconds
   bool showingToast = false;
 
   void initState() {
@@ -195,14 +195,14 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                           child: Text(
                             'Time is up!',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'Your score won\'t be saved. You can play the game again.',
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -218,7 +218,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Exit'),
+                                child: const Text(
+                                  'Exit',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                           ],
@@ -274,14 +277,14 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                           child: Text(
                             'Do you really want to leave?',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'All progress will be lost.',
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -295,7 +298,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                               child: TextButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(true),
-                                child: const Text('Leave'),
+                                child: const Text(
+                                  'Leave',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                             Container(
@@ -307,7 +313,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                               child: TextButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(false),
-                                child: const Text('Cancel'),
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                           ],
@@ -327,7 +336,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
             title: Text(
               'Hard (Time Left: ${(_timeRemaining ~/ 60).toString().padLeft(2, '0')}:${(_timeRemaining % 60).toString().padLeft(2, '0')})',
               style: const TextStyle(
-                fontSize: 17,
+                fontSize: 20,
               ),
             ),
           ),
@@ -358,7 +367,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                                 'Round ${currentListIndex + 1} / ${hardkeywordLists.length}',
                                 textAlign: TextAlign.left,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFF4F646F)),
                               ),
@@ -368,7 +377,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                                 'Total score: $totalScore',
                                 textAlign: TextAlign.right,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFC58917)),
                               ),
@@ -381,7 +390,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                   const SizedBox(height: 10),
                   const Text(
                     'Rearrange the ten keywords below by dragging them into the correct order',
-                    style: TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 10),
@@ -406,6 +415,7 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                               child: ListTile(
                                 title: Text(
                                   '${index + 1}.     ${hardjavaKeywords[index]}',
+                                  style: const TextStyle(fontSize: 17),
                                 ),
                                 tileColor: const Color(0xFFF4F4F4),
                               ),
@@ -423,12 +433,12 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                         alignment: Alignment.center,
                         child: SizedBox(
                           width: screenWidth,
-                          height: 40,
+                          height: 50,
                           child: ElevatedButton(
                             child: const Text(
                               "Check Order",
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             onPressed: _checkOrder,
                             style: ButtonStyle(
@@ -480,14 +490,14 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                       child: Text(
                         'Congratulations!',
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
                       child: Text(
                         'You have finished the game and obtained a score of $totalScore.',
-                        style: const TextStyle(fontSize: 15),
+                        style: const TextStyle(fontSize: 17),
                       ),
                     ),
                     const Divider(
@@ -507,7 +517,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                                 ),
                               ),
                             ),
-                            child: const Text('View Leaderboard'),
+                            child: const Text(
+                              'View Leaderboard',
+                              style: TextStyle(fontSize: 15),
+                            ),
                           ),
                         ),
                         Container(
@@ -517,7 +530,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                         ),
                         Expanded(
                           child: TextButton(
-                            child: const Text('Exit'),
+                            child: const Text(
+                              'Exit',
+                              style: TextStyle(fontSize: 15),
+                            ),
                             onPressed: () {
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();
@@ -552,14 +568,14 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                           child: Text(
                             'Game over!',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'You have finished the game and obtained a score of $totalScore. Better luck next time!',
-                            style: const TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -579,7 +595,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                                     ),
                                   ),
                                 ),
-                                child: const Text('View Leaderboard'),
+                                child: const Text(
+                                  'View Leaderboard',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                             Container(
@@ -589,7 +608,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                             ),
                             Expanded(
                               child: TextButton(
-                                child: const Text('Exit'),
+                                child: const Text(
+                                  'Exit',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
@@ -627,14 +649,14 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                         child: Text(
                           'Error!',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                         child: Text(
                           'An error occurred while saving your game score, please try again.',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 17),
                         ),
                       ),
                       const Divider(
@@ -649,7 +671,10 @@ class _PlayHardModeScreenState extends State<PlayHardModeScreen> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('OK'),
+                              child: const Text(
+                                'OK',
+                                style: TextStyle(fontSize: 15),
+                              ),
                             ),
                           ),
                         ],
@@ -706,7 +731,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         title: const Text(
           "Hard Mode",
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -731,7 +756,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                         Text(
                           'Top Five of the Day',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -759,7 +784,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                               label: Text(
                                 'No.',
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -769,7 +794,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                 label: Text(
                               'Players',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -778,7 +803,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                 label: Text(
                               'Score',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -804,7 +829,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                     child: Text(
                                       (index + 1).toString(),
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: index < 3
                                             ? FontWeight.bold
@@ -816,7 +841,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                   DataCell(Text(
                                     gameList[index].name.toString(),
                                     style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 15,
                                       color: Colors.black,
                                       fontWeight: index < 3
                                           ? FontWeight.bold
@@ -828,7 +853,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                     child: Text(
                                       gameList[index].totalScore.toString(),
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: index < 3
                                             ? FontWeight.bold

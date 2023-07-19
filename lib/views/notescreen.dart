@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class _NoteScreenState extends State<NoteScreen> {
                         "Java Note",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 17,
+                          fontSize: 20,
                         ),
                       ),
                     ],
@@ -107,7 +108,7 @@ class _NoteScreenState extends State<NoteScreen> {
                               Text(
                                 topicList[index].topicTitle.toString(),
                                 style: const TextStyle(
-                                    fontSize: 11, color: Colors.black),
+                                    fontSize: 13, color: Colors.black),
                               ),
                             ],
                           ),
@@ -223,7 +224,7 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
         title: Text(
           widget.topicList[widget.index].topicTitle.toString(),
           style: const TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -250,7 +251,7 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
                         "Subtopic List",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 20,
                         ),
                       ),
                     ],
@@ -282,7 +283,7 @@ class _SubNoteScreenState extends State<SubNoteScreen> {
                                     title: Text(
                                       topicList[index].subtopicTitle.toString(),
                                       style: const TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -403,7 +404,7 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
         title: const Text(
           'Note Details',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -432,7 +433,7 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                             widget.topicList[widget.index].subtopicTitle
                                 .toString(),
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 22, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -440,6 +441,9 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                         Text(
                           topicList[index].subtopicDescription.toString(),
                           textAlign: TextAlign.justify,
+                          style: const TextStyle(
+                            fontSize: 15,
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -491,9 +495,11 @@ class _SubNoteDetailsScreenState extends State<SubNoteDetailsScreen> {
                         ),
                         const SizedBox(height: 30),
                         const Text(
-                          'You may learn more information through the video below:',
-                          textAlign: TextAlign.justify,
-                        ),
+                            'You may learn more information through the video below:',
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 15,
+                            )),
                         const SizedBox(height: 10),
                         YoutubePlayer(
                           controller: _controller,

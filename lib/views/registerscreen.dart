@@ -44,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         title: const Text(
           'User Registration',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(height: 10),
                         const Text(
                           "Your information must be true to avoid any issues with account verification",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: TextStyle(fontSize: 17, color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 10),
@@ -335,7 +335,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     child: const Text(
                                       "Register Now",
                                       style: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     onPressed: _registerUserdialog,
@@ -360,7 +360,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   const Text(
                                     "Have an account? ",
                                     style: TextStyle(
-                                        fontSize: 16, color: Colors.white),
+                                        fontSize: 17, color: Colors.white),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -369,7 +369,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     child: const Text(
                                       " Login here",
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 17,
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xFFF7D488)),
                                     ),
@@ -405,7 +405,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   leading: const Icon(Icons.photo_library),
                   title: const Text(
                     'Import photo from the gallery',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 17),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -420,7 +420,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   leading: const Icon(Icons.camera_alt),
                   title: const Text(
                     'Take photo using the camera',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 17),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -499,14 +499,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: EdgeInsets.all(16.0),
                   child: Text(
                     "Register new account",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                   child: Text(
                     "Are you sure want to register a new account?",
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 17),
                   ),
                 ),
                 const Divider(
@@ -520,7 +520,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: TextButton(
                         child: const Text(
                           "Yes",
-                          style: TextStyle(),
+                          style: TextStyle(fontSize: 15),
                         ),
                         onPressed: () async {
                           Navigator.of(context).pop();
@@ -538,7 +538,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text('No'),
+                        child: const Text(
+                          'No',
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ),
                     ),
                   ],

@@ -30,7 +30,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         title: const Text(
           'Forgot Password',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -43,7 +43,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               'Please enter your email address to get your temporary password',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 17,
               ),
             ),
             const SizedBox(height: 15.0),
@@ -95,7 +95,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       child: const Text(
                         "Reset Password",
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       style: ButtonStyle(
                         shape:
@@ -134,7 +134,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               SnackBar(
                 content: Text(
                   data['message'],
-                  style: TextStyle(color: Color(0xFF4F646F)),
+                  style: TextStyle(color: Color(0xFF4F646F), fontSize: 15),
                   textAlign: TextAlign.center,
                 ),
                 duration: Duration(seconds: 2),
@@ -150,7 +150,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               SnackBar(
                 content: Text(
                   data['message'],
-                  style: TextStyle(color: Color(0xFFF4FAFF)),
+                  style: TextStyle(color: Color(0xFFF4FAFF), fontSize: 15),
                   textAlign: TextAlign.center,
                 ),
                 duration: Duration(seconds: 2),

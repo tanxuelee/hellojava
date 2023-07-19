@@ -54,17 +54,42 @@ class _MainScreenState extends State<MainScreen> {
           title: const Text(
             'Hello Java',
             style: TextStyle(
-              fontSize: 17,
+              fontSize: 20,
             ),
           ),
           bottom: const TabBar(
             isScrollable: true,
             tabs: <Widget>[
-              Tab(text: 'Note'),
-              Tab(text: 'Exercise'),
-              Tab(text: 'Quiz'),
-              Tab(text: 'Game'),
-              Tab(text: 'Profile')
+              Tab(
+                child: Text(
+                  'Note',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Exercise',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Quiz',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Game',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Profile',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
             ],
           ),
         ),
@@ -74,10 +99,16 @@ class _MainScreenState extends State<MainScreen> {
             child: ListView(
               children: [
                 UserAccountsDrawerHeader(
-                  accountName: Text(widget.user.name.toString()),
+                  accountName: Text(
+                    widget.user.name.toString(),
+                    style: const TextStyle(fontSize: 15),
+                  ),
                   accountEmail:
                       widget.user.email.toString() != 'guest@hellojava.com'
-                          ? Text(widget.user.email.toString())
+                          ? Text(
+                              widget.user.email.toString(),
+                              style: const TextStyle(fontSize: 15),
+                            )
                           : const Text(""),
                   currentAccountPicture: ClipOval(
                     child: GestureDetector(
@@ -222,8 +253,13 @@ class _MainScreenState extends State<MainScreen> {
         children: <Widget>[
           Icon(icon),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(text),
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
           )
         ],
       ),
@@ -252,14 +288,14 @@ class _MainScreenState extends State<MainScreen> {
                     child: Text(
                       "Logout?",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                     child: Text(
                       "Are you sure you want to logout?",
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                   const Divider(
@@ -273,7 +309,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: TextButton(
                           child: const Text(
                             "Yes",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () async {
                             Navigator.of(context).pop();
@@ -294,7 +330,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: TextButton(
                           child: const Text(
                             "No",
-                            style: TextStyle(),
+                            style: TextStyle(fontSize: 15),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -364,7 +400,7 @@ class _UserManualScreenState extends State<UserManualScreen> {
           title: const Text(
         'User Manual',
         style: TextStyle(
-          fontSize: 17,
+          fontSize: 20,
         ),
       )),
       body: Padding(
@@ -423,7 +459,7 @@ class _UserManualScreenState extends State<UserManualScreen> {
                                       _functionDescriptions[index],
                                       textAlign: TextAlign.justify,
                                       style: const TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 17,
                                       ),
                                     ),
                                   ),
@@ -460,7 +496,8 @@ class _UserManualScreenState extends State<UserManualScreen> {
                             const SnackBar(
                               content: Text(
                                 "No more pages before this page",
-                                style: TextStyle(color: Color(0xFFF4FAFF)),
+                                style: TextStyle(
+                                    color: Color(0xFFF4FAFF), fontSize: 15),
                                 textAlign: TextAlign.center,
                               ),
                               duration: Duration(seconds: 2),
@@ -496,7 +533,8 @@ class _UserManualScreenState extends State<UserManualScreen> {
                             const SnackBar(
                               content: Text(
                                 "No more pages after this page",
-                                style: TextStyle(color: Color(0xFFF4FAFF)),
+                                style: TextStyle(
+                                    color: Color(0xFFF4FAFF), fontSize: 15),
                                 textAlign: TextAlign.center,
                               ),
                               duration: Duration(seconds: 2),
@@ -545,7 +583,7 @@ class _AboutScreenState extends State<AboutScreen> {
         title: const Text(
           'About Hello Java',
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -562,7 +600,7 @@ class _AboutScreenState extends State<AboutScreen> {
               const Text(
                 'Hello Java is a beginner-friendly app that teaches Java programming theory with comprehensive materials and interactive features, creating an enjoyable learning experience.',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 17,
                   color: Color(0xFFF4FAFF),
                 ),
                 textAlign: TextAlign.justify,
@@ -571,7 +609,7 @@ class _AboutScreenState extends State<AboutScreen> {
               const Text(
                 'For inquiries or feedback, email us at: adminhellojava@moneymoney12345.com',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 17,
                   color: Color(0xFFF4FAFF),
                 ),
                 textAlign: TextAlign.left,

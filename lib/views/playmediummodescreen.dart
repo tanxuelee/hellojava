@@ -38,7 +38,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
   bool isCorrectOrder = false;
   int score = 0;
   late Timer _timer;
-  int _timeRemaining = 900; // 15 minutes in seconds
+  int _timeRemaining = 1200; // 20 minutes in seconds
   bool showingToast = false;
 
   void initState() {
@@ -141,14 +141,14 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                           child: Text(
                             'Time is up!',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'Your score won\'t be saved. You can play the game again.',
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -164,7 +164,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Exit'),
+                                child: const Text(
+                                  'Exit',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                           ],
@@ -220,14 +223,14 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                           child: Text(
                             'Do you really want to leave?',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'All progress will be lost.',
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -241,7 +244,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                               child: TextButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(true),
-                                child: const Text('Leave'),
+                                child: const Text(
+                                  'Leave',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                             Container(
@@ -253,7 +259,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                               child: TextButton(
                                 onPressed: () =>
                                     Navigator.of(context).pop(false),
-                                child: const Text('Cancel'),
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                           ],
@@ -273,7 +282,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
             title: Text(
               'Medium (Time Left: ${(_timeRemaining ~/ 60).toString().padLeft(2, '0')}:${(_timeRemaining % 60).toString().padLeft(2, '0')})',
               style: const TextStyle(
-                fontSize: 17,
+                fontSize: 20,
               ),
             ),
           ),
@@ -304,7 +313,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                                 'Round ${currentListIndex + 1} / ${mediumKeywordLists.length}',
                                 textAlign: TextAlign.left,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFF4F646F)),
                               ),
@@ -314,7 +323,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                                 'Total score: $totalScore',
                                 textAlign: TextAlign.right,
                                 style: const TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFC58917)),
                               ),
@@ -327,7 +336,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                   const SizedBox(height: 10),
                   const Text(
                     'Rearrange the seven keywords below by dragging them into the correct order',
-                    style: TextStyle(fontSize: 17),
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 10),
@@ -352,6 +361,7 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                               child: ListTile(
                                 title: Text(
                                   '${index + 1}.     ${mediumJavaKeywords[index]}',
+                                  style: const TextStyle(fontSize: 17),
                                 ),
                                 tileColor: const Color(0xFFF4F4F4),
                               ),
@@ -369,12 +379,12 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                         alignment: Alignment.center,
                         child: SizedBox(
                           width: screenWidth,
-                          height: 40,
+                          height: 50,
                           child: ElevatedButton(
                             child: const Text(
                               "Check Order",
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             onPressed: _checkOrder,
                             style: ButtonStyle(
@@ -427,14 +437,14 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                       child: Text(
                         'Congratulations!',
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
                       child: Text(
                         'You have finished the game and obtained a score of $totalScore.',
-                        style: const TextStyle(fontSize: 15),
+                        style: const TextStyle(fontSize: 17),
                       ),
                     ),
                     const Divider(
@@ -454,7 +464,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                                 ),
                               ),
                             ),
-                            child: const Text('View Leaderboard'),
+                            child: const Text(
+                              'View Leaderboard',
+                              style: TextStyle(fontSize: 15),
+                            ),
                           ),
                         ),
                         Container(
@@ -464,7 +477,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                         ),
                         Expanded(
                           child: TextButton(
-                            child: const Text('Exit'),
+                            child: const Text(
+                              'Exit',
+                              style: TextStyle(fontSize: 15),
+                            ),
                             onPressed: () {
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();
@@ -499,14 +515,14 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                           child: Text(
                             'Game over!',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 25),
                           child: Text(
                             'You have finished the game and obtained a score of $totalScore. Better luck next time!',
-                            style: const TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 17),
                           ),
                         ),
                         const Divider(
@@ -526,7 +542,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                                     ),
                                   ),
                                 ),
-                                child: const Text('View Leaderboard'),
+                                child: const Text(
+                                  'View Leaderboard',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ),
                             Container(
@@ -536,7 +555,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                             ),
                             Expanded(
                               child: TextButton(
-                                child: const Text('Exit'),
+                                child: const Text(
+                                  'Exit',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).pop();
@@ -574,14 +596,14 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                         child: Text(
                           'Error!',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 25),
                         child: Text(
                           'An error occurred while saving your game score, please try again.',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 17),
                         ),
                       ),
                       const Divider(
@@ -596,7 +618,10 @@ class _PlayMediumModeScreenState extends State<PlayMediumModeScreen> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('OK'),
+                              child: const Text(
+                                'OK',
+                                style: TextStyle(fontSize: 15),
+                              ),
                             ),
                           ),
                         ],
@@ -653,7 +678,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         title: const Text(
           "Medium Mode",
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
           ),
         ),
       ),
@@ -678,7 +703,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                         Text(
                           'Top Five of the Day',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -706,7 +731,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                               label: Text(
                                 'No.',
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -716,7 +741,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                 label: Text(
                               'Players',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -725,7 +750,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                 label: Text(
                               'Score',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
@@ -751,7 +776,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                     child: Text(
                                       (index + 1).toString(),
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: index < 3
                                             ? FontWeight.bold
@@ -763,7 +788,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                   DataCell(Text(
                                     gameList[index].name.toString(),
                                     style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 15,
                                       color: Colors.black,
                                       fontWeight: index < 3
                                           ? FontWeight.bold
@@ -775,7 +800,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                     child: Text(
                                       gameList[index].totalScore.toString(),
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: index < 3
                                             ? FontWeight.bold
